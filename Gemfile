@@ -49,6 +49,8 @@ gem 'pundit'
 
 gem 'rails-i18n', '~> 7.0.0'
 
+gem 'cssbundling-rails'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

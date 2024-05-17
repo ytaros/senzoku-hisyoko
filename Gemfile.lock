@@ -73,6 +73,8 @@ GEM
     builder (3.2.4)
     concurrent-ruby (1.2.3)
     crass (1.0.6)
+    cssbundling-rails (1.4.0)
+      railties (>= 6.0.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -263,6 +265,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  cssbundling-rails
   debug
   factory_bot_rails
   html2slim
