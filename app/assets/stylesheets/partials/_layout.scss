@@ -1,0 +1,22 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  height: 50px;
+  position: relative;
+  z-index: 1;
+  background-color:#000066;
+  color: white;
+}
+
+main {
+  padding: 50px 0;
+  min-height: calc(100vh - 50px);
+}
+
+.offcanvas {
+  background-color: rgba(3, 28, 104, 0.845);
+  color: white;
+}
