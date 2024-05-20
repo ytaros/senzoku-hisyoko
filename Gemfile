@@ -53,6 +53,8 @@ gem 'rails-i18n', '~> 7.0.0'
 
 gem 'cssbundling-rails'
 
+gem 'bcrypt', '~> 3.1.7'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
