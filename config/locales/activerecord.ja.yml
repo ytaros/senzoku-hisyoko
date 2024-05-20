@@ -1,4 +1,16 @@
 ja:
   activerecord:
     models:
+      admin: 管理者
     attributes:
+      admins:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+    errors:
+      models:
+        admin:
+          attributes:
+            password_confirmation:
+              confirmation: "パスワードが一致しません"
