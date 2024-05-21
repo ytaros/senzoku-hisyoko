@@ -7,7 +7,7 @@ RSpec.describe HomePolicy, type: :policy do
 
   subject { described_class }
 
-  permissions :home? do
+  permissions :index? do
     it{ expect(subject).to permit(admin) }
   end
 end
