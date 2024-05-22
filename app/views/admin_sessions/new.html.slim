@@ -5,12 +5,10 @@
 
 .row
   .col-md-6.offset-md-3
-    = form_with(url: admin_login_path, scope: :admin_session, local: true) do |f|
+    = simple_form_for :admin_session, url: admin_login_path, method: :post, wrapper: false do |f|
       .mb-3
-        = f.label :login_id, class: 'form-label'
-        = f.text_field :login_id, class: 'form-control', required: true
+        = f.input :login_id, label: t('.login_id'), input_html: { class: 'form-control' }
       .mb-3
-        = f.label :password, class: 'form-label'
-        = f.password_field :password, class: 'form-control', required: true
+        = f.input :password, label: t('.password'), input_html: { class: 'form-control' }
 
-      = f.submit t('.login'), class: "btn btn-primary w-100"
+      = f.button :submit, t('.login'), class: 'btn btn-primary w-100'
