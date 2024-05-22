@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 HomePolicy = Struct.new(:user, :home) do
-  def home?
+  def index?
     true
   end
 end
