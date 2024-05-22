@@ -13,7 +13,7 @@ class AdminSessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:danger] = t('login_failed')
-      render 'new', status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
