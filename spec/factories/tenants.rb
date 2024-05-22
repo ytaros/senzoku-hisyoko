@@ -3,7 +3,7 @@
 # Table name: tenants
 #
 #  id         :integer          not null, primary key
-#  industry   :integer          default(1), not null
+#  industry   :integer          default("standing_bar"), not null
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
