@@ -3,9 +3,9 @@ ja:
     models:
       admin: 管理者
     attributes:
-      admins:
+      admin:
         name: 名前
-        email: メールアドレス
+        login_id: ログインID
         password: パスワード
         password_confirmation: パスワード確認
     errors:
@@ -13,4 +13,4 @@ ja:
         admin:
           attributes:
             password_confirmation:
-              confirmation: "パスワードが一致しません"
+              confirmation: パスワードが一致しません

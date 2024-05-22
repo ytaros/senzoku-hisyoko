@@ -1,2 +1,6 @@
 ja:
-  app_name: "専属ひしょ子ちゃん"
+  app_name: 専属ひしょ子ちゃん
+
+  login_success: ログインに成功しました
+  login_failed: ログインに失敗しました
+  logout_success: ログアウトしました

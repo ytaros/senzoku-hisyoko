@@ -1,4 +1,14 @@
 ja:
+  shared:
+    header:
+      login: ログイン
+      logout: ログアウト
   homes:
     index:
-      title: "ホーム画面"
+      title: ホーム画面
+  admin_sessions:
+    new:
+      title: 管理者ログイン
+      login: ログイン
+      login_id: ログインID
+      password: パスワード
