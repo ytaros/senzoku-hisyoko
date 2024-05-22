@@ -18,4 +18,8 @@ class TenantPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def permitted_attributes
+    [:name, :industry]
+  end
 end
