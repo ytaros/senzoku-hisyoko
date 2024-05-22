@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: admins
+#
+#  id              :integer          not null, primary key
+#  name            :string           not null
+#  password_digest :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  login_id        :string           not null
+#
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
