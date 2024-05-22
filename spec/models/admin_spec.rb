@@ -96,5 +96,9 @@ RSpec.describe Admin, type: :model do
     describe '#admin?' do
       it { expect(admin.admin?).to be_truthy }
     end
+
+    describe '#common?' do
+      it { expect(admin.common?).to be_falsey }
+    end
   end
 end
