@@ -1,0 +1,16 @@
+- provide :title, t('.title')
+
+.text-center
+  h1 = t('.title')
+
+.row
+  .col-md-6.offset-md-3
+    = form_with(url: admin_login_path, scope: :admin_session, local: true) do |f|
+      .mb-3
+        = f.label :login_id, class: 'form-label'
+        = f.text_field :login_id, class: 'form-control', required: true
+      .mb-3
+        = f.label :password, class: 'form-label'
+        = f.password_field :password, class: 'form-control', required: true
+
+      = f.submit t('.login'), class: "btn btn-primary w-100"
