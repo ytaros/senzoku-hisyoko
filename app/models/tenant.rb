@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tenants
@@ -10,7 +12,7 @@
 #
 class Tenant < ApplicationRecord
   enum industry: {
-  standing_bar: 1
+    standing_bar: 1
   }
 
   validates :name, presence: true, uniqueness: true

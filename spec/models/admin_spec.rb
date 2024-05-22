@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: admins
@@ -44,7 +46,6 @@ RSpec.describe Admin, type: :model do
         before do
           admin.login_id = nil
           admin.valid?
-
         end
         context 'with login_id is nil' do
           it { expect(admin.errors.messages[:login_id]).to include('を入力してください') }

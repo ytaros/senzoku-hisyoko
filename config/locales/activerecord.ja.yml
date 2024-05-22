@@ -2,12 +2,16 @@ ja:
   activerecord:
     models:
       admin: 管理者
+      tenant: テナント
     attributes:
       admin:
         name: 名前
         login_id: ログインID
         password: パスワード
         password_confirmation: パスワード確認
+      tenant:
+        name: 店舗名
+        industry: 業種
     errors:
       models:
         admin:
