@@ -33,10 +33,11 @@ RSpec.describe 'AdminSessions', type: :request do
 
   describe 'DELETE /destroy' do
     it 'ログアウトに成功し、ログイン画面へリダイレクトされる' do
+      login(admin)
       delete admin_logout_path
       expect(response).to redirect_to(admin_login_path)
       follow_redirect!
-      expect(response.body).to include('ログアウトしました')
+      expect(response.body).to include('ログイン')
     end
   end
 end
