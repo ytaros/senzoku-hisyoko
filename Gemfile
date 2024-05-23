@@ -55,8 +55,8 @@ gem 'cssbundling-rails'
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'simple_form'
 gem 'enum_help'
+gem 'simple_form'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

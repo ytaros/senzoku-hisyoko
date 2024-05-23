@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LoginSupport
   def login(user)
     if user.is_a?(Admin)

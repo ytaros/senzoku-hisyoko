@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Tenants', type: :request do
-
-  let(:valid_attributes) { { name: 'サンプル', industry: 'standing_bar'} }
-  let(:invalid_attributes) { { name: ' ', industry: 'standing_bar'} }
+  let(:valid_attributes) { { name: 'サンプル', industry: 'standing_bar' } }
+  let(:invalid_attributes) { { name: ' ', industry: 'standing_bar' } }
 
   before { login(user) }
 
@@ -80,10 +79,10 @@ RSpec.describe 'Tenants', type: :request do
       subject(:action) { patch tenant_path(tenant), params: { tenant: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { { name: 'サンプル'} }
+        let(:attributes) { { name: 'サンプル' } }
 
         it 'テナントが更新される' do
-          expect{ action }.to change { tenant.reload.name }.from(tenant.name).to(attributes[:name])
+          expect { action }.to change { tenant.reload.name }.from(tenant.name).to(attributes[:name])
           expect(response).to redirect_to(tenants_path)
           follow_redirect!
           expect(response.body).to include('テナント一覧')
