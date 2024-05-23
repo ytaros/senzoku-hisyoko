@@ -1,2 +1,10 @@
-h1 Tenants#edit
-p Find me in app/views/tenants/edit.html.slim
+- provide :title, "#{Tenant.model_name.human}#{t('edit')}"
+
+.container
+  .text-center
+    h1 = "#{Tenant.model_name.human}#{t('edit')}"
+  
+  .card
+    .card-body
+      = render 'form', tenant: @tenant
+  = link_to t('back'), tenants_path, class: 'btn btn-outline-secondary mt-2'

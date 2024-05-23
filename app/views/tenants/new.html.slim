@@ -1,2 +1,10 @@
-h1 Tenants#new
-p Find me in app/views/tenants/new.html.slim
+- provide :title, "#{Tenant.model_name.human}#{t('new')}"
+
+.container
+  .text-center
+    h1 = "#{Tenant.model_name.human}#{t('new')}"
+  
+  .card
+    .card-body
+      = render 'form', tenant: @tenant
+  = link_to t('back'), tenants_path, class: 'btn btn-outline-secondary mt-2'
