@@ -8,24 +8,26 @@ class TenantsController < ApplicationController
     @tenants = Tenant.all
   end
 
-  def new; end
+  def new
+    @tenant = Tenant.new
+  end
 
   def show; end
 
   def create
     @tenant = Tenant.new(permitted_attributes(Tenant))
     if @tenant.save
-      flash[:success] = '成功'
+      flash[:success] = "#{Tenant.model_name.human}#{t('create_success')}"
       redirect_to tenants_path
     else
-      flash.now[:danger] = '失敗'
+      flash.now[:danger] = "#{Tenant.model_name.human}#{t('create_failed')}"
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     @tenant.destroy
-    flash[:success] = '成功'
+    flash[:success] = "#{Tenant.model_name.human}#{t('delete_success')}"
     redirect_to tenants_path
   end
 
@@ -33,10 +35,10 @@ class TenantsController < ApplicationController
 
   def update
     if @tenant.update(permitted_attributes(Tenant))
-      flash[:success] = '成功'
+      flash[:success] = "#{Tenant.model_name.human}#{t('update_success')}"
       redirect_to tenants_path
     else
-      flash.now[:danger] = '失敗'
+      flash.now[:danger] = "#{Tenant.model_name.human}#{t('update_failed')}"
       render :edit, status: :unprocessable_entity
     end
   end

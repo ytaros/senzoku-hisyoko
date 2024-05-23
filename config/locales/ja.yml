@@ -1,6 +1,26 @@
 ja:
   app_name: 専属ひしょ子ちゃん
 
+  action: アクション
+  index: 一覧
+  new: 新規作成
+  create: 作成
+  edit: 編集
+  update: 更新
+  show: 詳細
+  delete: 削除
+  back_to_list: 一覧に戻る
+  back_to_show: 詳細に戻る
+  back_to_home: ホームに戻る
+
+  ask_delete: 削除しますか？
+
+  create_success: を新規登録しました
+  create_failed: の新規登録に失敗しました
+  update_success: を更新しました
+  update_failed: の更新に失敗しました
+  delete_success: を削除しました
+  delete_failed: の削除に失敗しました
   login_success: ログインに成功しました
   login_failed: ログインに失敗しました
-  logout_success: ログアウトしました
+  logout_success: ログアウトに成功しました
