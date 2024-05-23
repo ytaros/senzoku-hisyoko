@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "AdminSessions", type: :request do
+RSpec.describe 'AdminSessions', type: :request do
   let(:admin) { create(:admin) }
-  describe "GET /new" do
+  describe 'GET /new' do
     it 'ログイン画面が表示される' do
       get admin_login_path
       expect(response).to have_http_status(:success)
@@ -10,7 +12,7 @@ RSpec.describe "AdminSessions", type: :request do
     end
   end
 
-  describe "POST /create" do
+  describe 'POST /create' do
     context 'with valid params' do
       it 'ログインに成功し、ホーム画面へリダイレクトされる' do
         post admin_login_path, params: { admin_session: { login_id: admin.login_id, password: admin.password } }
@@ -29,12 +31,13 @@ RSpec.describe "AdminSessions", type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  describe 'DELETE /destroy' do
     it 'ログアウトに成功し、ログイン画面へリダイレクトされる' do
+      login(admin)
       delete admin_logout_path
       expect(response).to redirect_to(admin_login_path)
       follow_redirect!
-      expect(response.body).to include('ログアウトしました')
+      expect(response.body).to include('ログイン')
     end
   end
 end

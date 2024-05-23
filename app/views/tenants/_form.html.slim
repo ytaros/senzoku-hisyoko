@@ -1,0 +1,12 @@
+= simple_form_for(@tenant, url: @tenant.persisted? ? tenant_path(@tenant) : tenants_path, method: @tenant.persisted? ? :patch : :post) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    .mt-2
+      = f.input :name, input_html: { class: 'form-control' }
+    .mt-2
+      = f.input :industry, as: :select, collection: Tenant.industries_i18n.invert, input_html: { class: 'form-control' }
+  .form-actions
+    .text-end.mt-3
+      = f.button :submit, class: 'btn btn-primary'
