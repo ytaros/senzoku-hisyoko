@@ -12,3 +12,6 @@ ja:
       login: ログイン
       login_id: ログインID
       password: パスワード
+  users:
+    form:
+      select_tenant: 店舗を選択してください

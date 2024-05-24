@@ -9,12 +9,12 @@ ja:
   update: 更新
   show: 詳細
   delete: 削除
-  back_to_list: 一覧に戻る
-  back_to_show: 詳細に戻る
-  back_to_home: ホームに戻る
+  home: ホーム
+  management: 管理
+  data_entry: 入力
 
+  back_to: "%{action}に戻る"
   ask_delete: 削除しますか？
-
   create_success: を新規登録しました
   create_failed: の新規登録に失敗しました
   update_success: を更新しました
