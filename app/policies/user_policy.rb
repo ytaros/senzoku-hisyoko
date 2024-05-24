@@ -19,6 +19,10 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user.id == record.id
   end
 
+  def permitted_attributes
+    [:name, :email, :password, :password_confirmation]
+  end
+
   class Scope < Scope
     def resolve
       user.admin? ? scope.all : scope.where(user_id: user.id)
