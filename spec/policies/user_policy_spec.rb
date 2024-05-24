@@ -24,4 +24,13 @@ RSpec.describe UserPolicy, type: :policy do
     it { expect(described_class).to permit(admin) }
     it { expect(described_class).to permit(user) }
   end
+
+  permissions :scope do
+    let(:tenant) { create(:tenant) }
+    let(:user) { create(:user, tenant:) }
+    let(:other_user) { create(:user, tenant:) }
+
+    it { expect(UserPolicy::Scope.new(admin, User).resolve).to contain_exactly(user, other_user) }
+    it { expect(UserPolicy::Scope.new(admin, User).resolve).to contain_exactly(user) }
+  end
 end
