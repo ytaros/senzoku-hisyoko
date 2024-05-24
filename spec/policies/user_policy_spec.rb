@@ -26,8 +26,8 @@ RSpec.describe UserPolicy, type: :policy do
   end
 
   permissions :permitted_attributes do
-    it { expect(described_class.new(admin, User).permitted_attributes).to contain_exactly(:name, :email, :password, :password_confirmation) }
-    it { expect(described_class.new(user, User).permitted_attributes).to contain_exactly(:name, :email, :password, :password_confirmation) }
+    it { expect(described_class.new(admin, User).permitted_attributes).to contain_exactly(:name, :login_id, :tenant_id, :password, :password_confirmation) }
+    it { expect(described_class.new(user, User).permitted_attributes).to contain_exactly(:name, :login_id, :password, :tenant_id, :password_confirmation) }
   end
 
   permissions :scope do
