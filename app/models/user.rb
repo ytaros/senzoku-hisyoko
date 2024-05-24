@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -19,4 +21,16 @@
 #  tenant_id  (tenant_id => tenants.id)
 #
 class User < ApplicationRecord
+  has_secure_password
+
+  belongs_to :tenant
+
+  validates :name, presence: true, length: { maximum: 10 }
+  validates :login_id, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 8 }, confirmation: true # 正規表現でパスワードの強度をチェックする
+  validates :tenant_id, presence: true
+
+  def admin?
+    false
+  end
 end
