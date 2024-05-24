@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -20,6 +22,9 @@
 #
 FactoryBot.define do
   factory :user do
-    
+    name { 'サンプル' }
+    login_id { SecureRandom.alphanumeric(8)  }
+    password { 'password' }
+    tenant
   end
 end
