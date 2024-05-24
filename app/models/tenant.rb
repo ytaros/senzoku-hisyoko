@@ -14,6 +14,7 @@ class Tenant < ApplicationRecord
   enum industry: {
     standing_bar: 1
   }
+  has_many :users, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :industry, presence: true
