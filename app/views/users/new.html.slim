@@ -1,0 +1,11 @@
+- provide :title, "#{User.model_name.human}#{t('new')}"
+
+.container
+  .text-center
+    h1 = "#{User.model_name.human}#{t('new')}"
+
+  .card
+    .card-body
+      = render 'form', tenant: @user
+
+  = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
