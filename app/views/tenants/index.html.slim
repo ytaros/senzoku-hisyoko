@@ -22,3 +22,5 @@
               td = t("enums.tenant.industry.#{tenant.industry}")
               td
                 = link_to t('show'), tenant_path(tenant), class: 'btn btn-primary btn-sm'
+
+  = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
