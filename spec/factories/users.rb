@@ -24,7 +24,7 @@
 FactoryBot.define do
   factory :user do
     name { 'サンプル' }
-    login_id { SecureRandom.alphanumeric(8)  }
+    login_id { SecureRandom.alphanumeric(8) }
     password { 'password' }
     tenant
   end

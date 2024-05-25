@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Homes', type: :request do
-
   before { login(user) }
 
   describe 'with admin ' do

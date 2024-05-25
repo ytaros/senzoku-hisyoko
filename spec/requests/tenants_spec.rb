@@ -169,7 +169,7 @@ RSpec.describe 'Tenants', type: :request do
       let(:attributes) { { name: 'サンプル' } }
 
       it 'ホーム画面にリダイレクトする' do
-        expect { action }.not_to change { tenant.reload.name }
+        expect { action }.not_to(change { tenant.reload.name })
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end
@@ -181,7 +181,7 @@ RSpec.describe 'Tenants', type: :request do
 
       it 'テナントが削除される' do
         expect { action }.not_to change(Tenant, :count)
-expect(response).to redirect_to root_path
+        expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end
     end

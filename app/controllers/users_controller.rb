@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show ,:edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :user_authorize
 
   def index
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
       flash[:success] = "#{User.model_name.human}#{t('create_success')}"
       redirect_to current_user&.admin? ? users_path : root_path
     else
-      Rails.logger.info "#{@user.errors.full_messages}"
+      Rails.logger.info @user.errors.full_messages.to_s
       flash.now[:danger] = "#{User.model_name.human}#{t('create_failed')}"
       render :new, status: :unprocessable_entity
     end

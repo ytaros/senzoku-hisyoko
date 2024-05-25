@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   def index?
     user.admin?
@@ -20,11 +22,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def permitted_attributes_for_create
-    [:name, :login_id, :tenant_id, :password, :password_confirmation]
+    %i[name login_id tenant_id password password_confirmation]
   end
 
   def permitted_attributes_for_update
-    [:name, :login_id, :password, :password_confirmation]
+    %i[name login_id password password_confirmation]
   end
 
   class Scope < Scope

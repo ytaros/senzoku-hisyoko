@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:tenant) { create(:tenant) }
-  let(:valid_attributes) { { name: 'サンプル', login_id: '12345678', password: 'password', password_confirmation: 'password' ,tenant_id: tenant.id} }
+  let(:valid_attributes) { { name: 'サンプル', login_id: '12345678', password: 'password', password_confirmation: 'password', tenant_id: tenant.id } }
   let(:invalid_attributes) { { name: ' ', industry: 'standing_bar' } }
 
   describe 'with admin ' do
@@ -75,7 +77,7 @@ RSpec.describe 'Users', type: :request do
       subject(:action) { patch user_path(user_a), params: { user: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { {name: 'テスト', password: 'password', password_confirmation: 'password'} }
+        let(:attributes) { { name: 'テスト', password: 'password', password_confirmation: 'password' } }
 
         it 'ユーザー情報の更新に成功する' do
           expect { action }.to change { user_a.reload.name }.from(user_a.name).to('テスト')
@@ -86,10 +88,10 @@ RSpec.describe 'Users', type: :request do
       end
 
       context 'with invalid attribute' do
-        let(:attributes) { { name: ''} }
+        let(:attributes) { { name: '' } }
 
         it 'ユーザー情報の更新に失敗する' do
-          expect { action }.not_to change { user_a.reload.name }
+          expect { action }.not_to(change { user_a.reload.name })
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.body).to include('ユーザーの更新に失敗しました')
         end
@@ -178,7 +180,7 @@ RSpec.describe 'Users', type: :request do
         subject(:action) { patch user_path(user), params: { user: attributes } }
 
         context 'with valid attribute' do
-          let(:attributes) { {name: 'テスト', password: 'password', password_confirmation: 'password'} }
+          let(:attributes) { { name: 'テスト', password: 'password', password_confirmation: 'password' } }
 
           it 'ユーザー情報の更新に成功する' do
             expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
@@ -188,11 +190,11 @@ RSpec.describe 'Users', type: :request do
           end
         end
 
-      context 'with invalid attribute' do
-        let(:attributes) { { name: ''} }
+        context 'with invalid attribute' do
+          let(:attributes) { { name: '' } }
 
           it 'ユーザー情報の更新に失敗する' do
-            expect { action }.not_to change { user.reload.name }
+            expect { action }.not_to(change { user.reload.name })
             expect(response).to have_http_status(:unprocessable_entity)
             expect(response.body).to include('ユーザーの更新に失敗しました')
           end

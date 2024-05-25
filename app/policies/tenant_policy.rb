@@ -22,6 +22,6 @@ class TenantPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:name, :industry]
+    %i[name industry]
   end
 end

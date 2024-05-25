@@ -105,7 +105,7 @@ RSpec.describe User, type: :model do
           it { expect(user.errors.messages[:password_confirmation]).to include('とパスワードの入力が一致しません') }
         end
       end
-      #正規表現のバリデーションを調べて追加する
+      # 正規表現のバリデーションを調べて追加する
     end
 
     describe 'tenant_id' do
