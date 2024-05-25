@@ -12,7 +12,7 @@
 #
 FactoryBot.define do
   factory :tenant do
-    name { 'sample' }
+    name { |n| "sample#{n}" }
     industry { 'standing_bar' }
   end
 end

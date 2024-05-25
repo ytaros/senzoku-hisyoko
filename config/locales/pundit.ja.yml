@@ -1,6 +1,3 @@
 ja:
   pundit:
     default: 操作権限がありません
-    post_policy:
-      update?: "You cannot edit this post!"
-      create?: "You cannot create posts!"

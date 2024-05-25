@@ -23,9 +23,13 @@ class UserPolicy < ApplicationPolicy
     [:name, :login_id, :tenant_id, :password, :password_confirmation]
   end
 
+  def update_permitted_attributes
+    [:name, :login_id, :password, :password_confirmation]
+  end
+
   class Scope < Scope
     def resolve
-      user.admin? ? scope.all : scope.where(user_id: user.id)
+      user.admin? ? scope.all : scope.where(id: user.id)
     end
   end
 end

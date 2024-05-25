@@ -3,7 +3,7 @@ ja:
     models:
       admin: 管理者
       tenant: テナント
-      user: ユーザ
+      user: ユーザー
     attributes:
       admin:
         name: 名前
