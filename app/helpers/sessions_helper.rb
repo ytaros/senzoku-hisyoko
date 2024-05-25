@@ -7,37 +7,32 @@ module SessionsHelper
   end
 
   def current_user
-    return @current_user if defined?(@current_user)
+    user_class_name = session[:user_class_name] || cookies.signed[:user_class_name]
+    user_id = session[:user_id] || cookies.signed[:user_id]
 
-    user_class_name = session[:user_class_name]
-    user_id = session[:user_id]
-    return unless user_class_name && user_id
-
-    case user_class_name
-    when 'Admin'
-      @current_user ||= Admin.find_by(id: session[:user_id])
-    when 'User'
-      if (user_id = cookies.signed[:user_id])
-        user = User.find_by(id: user_id)
-        if user&.authenticated?(cookies[:remember_token])
-          log_in user
-          @current_user = user
-        end
+    if user_class_name && user_id
+      @current_user ||= find_user(user_class_name, user_id)
+      if !session[:user_id] && @current_user&.authenticated?(:remember, cookies[:remember_token])
+        login @current_user
       end
     end
+    @current_user
   end
+
 
   # ユーザーとトークンを紐づけ（remember_digestカラムにトークンをハッシュ化して保存）CookieにユーザーIDとトークンを入れる
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent.signed[:user_class_name] = user.class.name
     cookies.permanent[:remember_token] = user.remember_token
   end
 
   # セッションの破棄とCookieの削除
   def forget(user)
-    user.forget
+    user.forget if user.class.name == 'User'
     cookies.delete(:user_id)
+    cookies.delete(:user_class_name)
     cookies.delete(:remember_token)
   end
 
@@ -52,5 +47,15 @@ module SessionsHelper
     session.delete(:user_id)
     session.delete(:user_class_name)
     @current_user = nil
+  end
+
+  private
+
+  def find_user(user_class_name, user_id)
+    if user_class_name == 'Admin'
+      Admin.find_by(id: user_id)
+    else
+      User.find_by(id: user_id)
+    end
   end
 end
