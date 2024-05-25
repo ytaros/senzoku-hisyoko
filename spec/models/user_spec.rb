@@ -7,6 +7,7 @@
 #  id              :integer          not null, primary key
 #  name            :string           not null
 #  password_digest :string           not null
+#  remember_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_id        :string           not null
