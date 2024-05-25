@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(permitted_attributes(User))
     if @user.save
       flash[:success] = "#{User.model_name.human}#{t('create_success')}"
-      redirect_to users_path
+      redirect_to current_user&.admin? ? users_path : root_path
     else
       Rails.logger.info "#{@user.errors.full_messages}"
       flash.now[:danger] = "#{User.model_name.human}#{t('create_failed')}"
@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update(permitted_attributes(User))
-      flash[:success] = "#{User.model_name.human}#{t('updated_success')}"
-      redirect_to users_path
+    if @user.update(permitted_attributes(@user))
+      flash[:success] = "#{User.model_name.human}#{t('update_success')}"
+      redirect_to current_user&.admin? ? users_path : root_path
     else
-      flash.now[:danger] = "#{User.model_name.human}#{t('updated_failed')}"
+      flash.now[:danger] = "#{User.model_name.human}#{t('update_failed')}"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = "#{User.model_name.human}#{t('delete_success')}"
-    redirect_to users_path
+    redirect_to current_user&.admin? ? users_path : root_path
   end
 
   private
@@ -49,6 +49,6 @@ class UsersController < ApplicationController
   end
 
   def user_authorize
-    authorize User || @user
+    authorize @user || User
   end
 end

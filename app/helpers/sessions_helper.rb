@@ -11,7 +11,11 @@ module SessionsHelper
     user_id = session[:user_id]
     return unless (klass_name = user_class_name) && user_id
 
-    @current_user ||= Admin.find_by(id: session[:user_id]) if klass_name == 'Admin'
+    if klass_name == 'Admin'
+      @current_user ||= Admin.find_by(id: session[:user_id])
+    else
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
   end
 
   # ユーザーがログインしていればtrue、その他ならfalse

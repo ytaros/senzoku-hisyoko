@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:tenant) { create(:tenant) }
-  let(:valid_attributes) { { name: 'サンプル', login_id: '12345678', password: 'password', password_confirmation: 'password' ,tenant:} }
+  let(:valid_attributes) { { name: 'サンプル', login_id: '12345678', password: 'password', password_confirmation: 'password' ,tenant_id: tenant.id} }
   let(:invalid_attributes) { { name: ' ', industry: 'standing_bar' } }
 
   describe 'with admin ' do
@@ -51,11 +51,10 @@ RSpec.describe 'Users', type: :request do
         let(:attributes) { valid_attributes }
 
         it 'ユーザー新規登録に成功する' do
-          binding.break
           expect { action }.to change(User, :count).by(1)
-          expect(response).to redirect_to users_paths
+          expect(response).to redirect_to users_path
           follow_redirect!
-          expect(response.body).to include('ユーザー詳細')
+          expect(response.body).to include('ユーザー一覧')
         end
       end
 
@@ -71,16 +70,18 @@ RSpec.describe 'Users', type: :request do
     end
 
     describe 'GET /update' do
-      subject(:action) { patch user_path(user), params: { user: attributes } }
+      let!(:user_a) { create(:user, name: 'サンプル') }
+
+      subject(:action) { patch user_path(user_a), params: { user: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { {name: 'テスト'} }
+        let(:attributes) { {name: 'テスト', password: 'password', password_confirmation: 'password'} }
 
         it 'ユーザー情報の更新に成功する' do
-          expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
+          expect { action }.to change { user_a.reload.name }.from(user_a.name).to('テスト')
           expect(response).to redirect_to users_path
           follow_redirect!
-          expect(response.body).to include('ユーザー詳細')
+          expect(response.body).to include('ユーザー一覧')
         end
       end
 
@@ -88,7 +89,7 @@ RSpec.describe 'Users', type: :request do
         let(:attributes) { { name: ''} }
 
         it 'ユーザー情報の更新に失敗する' do
-          expect { action }.not_to change { user.reload.name }
+          expect { action }.not_to change { user_a.reload.name }
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.body).to include('ユーザーの更新に失敗しました')
         end
@@ -99,9 +100,10 @@ RSpec.describe 'Users', type: :request do
       let!(:user_a) { create(:user) }
 
       subject(:action) { delete user_path(user_a) }
-      it 'returns http success' do
+      it 'ユーザーが削除され、一覧に戻る' do
         expect { action }.to change(User, :count).by(-1)
         expect(response).to redirect_to(users_path)
+        follow_redirect!
         expect(response.body).to include('ユーザー一覧')
       end
     end
@@ -125,9 +127,9 @@ RSpec.describe 'Users', type: :request do
 
           it 'ユーザー新規登録に成功する' do
             expect { action }.to change(User, :count).by(1)
-            expect(response).to redirect_to users_path
+            expect(response).to redirect_to root_path
             follow_redirect!
-            expect(response.body).to include('ユーザー詳細')
+            expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
           end
         end
 
@@ -176,7 +178,7 @@ RSpec.describe 'Users', type: :request do
         subject(:action) { patch user_path(user), params: { user: attributes } }
 
         context 'with valid attribute' do
-          let(:attributes) { {name: 'テスト'} }
+          let(:attributes) { {name: 'テスト', password: 'password', password_confirmation: 'password'} }
 
           it 'ユーザー情報の更新に成功する' do
             expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
@@ -199,10 +201,11 @@ RSpec.describe 'Users', type: :request do
 
       describe 'GET /destroy' do
         subject(:action) { delete user_path(user) }
-        it 'returns http success' do
+        it ' ユーザーが削除され、ホーム画面へ遷移する' do
           expect { action }.to change(User, :count).by(-1)
           expect(response).to redirect_to root_path
-          expect(response.body).to include('ユーザー一覧')
+          follow_redirect!
+          expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
         end
       end
     end

@@ -28,7 +28,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 10 }
   validates :login_id, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 }, confirmation: true # 正規表現でパスワードの強度をチェックする
-  validates :tenant_id, presence: true
+  validates :tenant_id, presence: true, on: :create
 
   def admin?
     false

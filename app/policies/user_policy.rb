@@ -19,11 +19,11 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user.id == record.id
   end
 
-  def permitted_attributes
+  def permitted_attributes_for_create
     [:name, :login_id, :tenant_id, :password, :password_confirmation]
   end
 
-  def update_permitted_attributes
+  def permitted_attributes_for_update
     [:name, :login_id, :password, :password_confirmation]
   end
 

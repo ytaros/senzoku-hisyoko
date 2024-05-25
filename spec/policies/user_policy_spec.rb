@@ -25,14 +25,14 @@ RSpec.describe UserPolicy, type: :policy do
     it { expect(described_class).to permit(user) }
   end
 
-  permissions :permitted_attributes do
-    it { expect(described_class.new(admin, User).permitted_attributes).to contain_exactly(:name, :login_id, :tenant_id, :password, :password_confirmation) }
-    it { expect(described_class.new(user, User).permitted_attributes).to contain_exactly(:name, :login_id, :tenant_id, :password, :password_confirmation) }
+  permissions :permitted_attributes_for_create do
+    it { expect(described_class.new(admin, User).permitted_attributes_for_create).to contain_exactly(:name, :login_id, :tenant_id, :password, :password_confirmation) }
+    it { expect(described_class.new(user, User).permitted_attributes_for_create).to contain_exactly(:name, :login_id, :tenant_id, :password, :password_confirmation) }
   end
 
-  permissions :update_permitted_attributes do
-    it { expect(described_class.new(admin, User).update_permitted_attributes).to contain_exactly(:name, :login_id, :password, :password_confirmation) }
-    it { expect(described_class.new(user, User).update_permitted_attributes).to contain_exactly(:name, :login_id, :password, :password_confirmation) }
+  permissions :permitted_attributes_for_update do
+    it { expect(described_class.new(admin, User).permitted_attributes_for_update).to contain_exactly(:name, :login_id, :password, :password_confirmation) }
+    it { expect(described_class.new(user, User).permitted_attributes_for_update).to contain_exactly(:name, :login_id, :password, :password_confirmation) }
   end
 
   permissions :scope do
