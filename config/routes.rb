@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete '/admin_logout',  to: 'admin_sessions#destroy'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
 
   resources :tenants
   resources :users

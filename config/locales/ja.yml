@@ -12,6 +12,8 @@ ja:
   home: ホーム
   management: 管理
   data_entry: 入力
+  login: ログイン
+  logout: ログアウト
 
   back_to: "%{action}に戻る"
   ask_delete: 削除しますか？
