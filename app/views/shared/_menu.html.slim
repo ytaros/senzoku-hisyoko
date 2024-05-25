@@ -1,6 +1,6 @@
 .mt-3.ms-2
   i.fa-regular.fa-face-smile.fa-fw.me-3
-  = link_to "#{User.model_name.human}#{t('show')}", user_path(:user), class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+  = link_to "#{User.model_name.human}#{t('show')}", user_path(current_user), class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-wine-bottle.fa-fw.me-3
   = link_to 'メニュー管理', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
@@ -15,4 +15,4 @@
   = link_to '財務情報', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-right-from-bracket.fa-fw.me-3
-  = link_to t('.logout'), admin_logout_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover', data: { turbo_method: :delete }
+  = link_to t('logout'), logout_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover', data: { turbo_method: :delete }

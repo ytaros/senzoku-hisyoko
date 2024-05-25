@@ -15,4 +15,4 @@ div.offcanvas.offcanvas-start tabindex='-1' id='offcanvasExample' aria-labelledb
         = link_to "#{User.model_name.human}#{t('new')}", new_user_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
       .mt-3.ms-2
         i.fa-solid.fa-right-to-bracket.fa-fw.me-3
-        = link_to t('.login'), admin_login_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+        = link_to t('login'), login_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
