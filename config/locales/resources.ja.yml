@@ -1,14 +1,19 @@
 ja:
   shared:
     header:
-      login: ログイン
-      logout: ログアウト
   homes:
     index:
       title: ホーム画面
   admin_sessions:
     new:
       title: 管理者ログイン
-      login: ログイン
       login_id: ログインID
       password: パスワード
+  users:
+    form:
+      select_tenant: 店舗を選択してください
+  sessions:
+    new:
+      login_id: ログインID
+      password: パスワード
+      remember_me: ログイン状態を保持する

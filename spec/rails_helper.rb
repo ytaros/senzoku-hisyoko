@@ -67,5 +67,4 @@ RSpec.configure do |config|
   # FactoryBotのメソッドをinclude
   config.include FactoryBot::Syntax::Methods
   config.include LoginSupport
-
 end

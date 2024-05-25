@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Tenants', type: :request do
-
-  let(:valid_attributes) { { name: 'サンプル', industry: 'standing_bar'} }
-  let(:invalid_attributes) { { name: ' ', industry: 'standing_bar'} }
+  let(:valid_attributes) { { name: 'サンプル', industry: 'standing_bar' } }
+  let(:invalid_attributes) { { name: ' ', industry: 'standing_bar' } }
 
   before { login(user) }
 
@@ -20,6 +19,16 @@ RSpec.describe 'Tenants', type: :request do
       end
     end
 
+    describe 'GET /show' do
+      let!(:tenant) { create(:tenant) }
+
+      it 'テナント詳細画面に遷移する' do
+        get tenant_path(tenant)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('テナント詳細')
+      end
+    end
+
     describe 'GET /new' do
       it 'テナント新規登録画面に遷移する' do
         get new_tenant_path
@@ -28,7 +37,7 @@ RSpec.describe 'Tenants', type: :request do
       end
     end
 
-    describe 'GET /create' do
+    describe 'POST /create' do
       subject(:action) { post tenants_path, params: { tenant: attributes } }
 
       context 'with valid attribute' do
@@ -36,7 +45,7 @@ RSpec.describe 'Tenants', type: :request do
 
         it 'テナントが作成される' do
           expect { action }.to change(Tenant, :count).by(1)
-          expect(response).to redirect_to(tenants_path)
+          expect(response).to redirect_to tenants_path
           follow_redirect!
           expect(response.body).to include('テナント一覧')
         end
@@ -53,18 +62,6 @@ RSpec.describe 'Tenants', type: :request do
       end
     end
 
-    describe 'GET /destroy' do
-      let!(:tenant) { create(:tenant) }
-      subject(:action) { delete tenant_path(tenant) }
-
-      it 'テナントが削除される' do
-        expect { action }.to change(Tenant, :count).by(-1)
-        expect(response).to redirect_to(tenants_path)
-        follow_redirect!
-        expect(response.body).to include('テナント一覧')
-      end
-    end
-
     describe 'GET /edit' do
       let(:tenant) { create(:tenant) }
 
@@ -75,16 +72,17 @@ RSpec.describe 'Tenants', type: :request do
       end
     end
 
-    describe 'GET /update' do
+    describe 'PATCH/update' do
       let(:tenant) { create(:tenant) }
+
       subject(:action) { patch tenant_path(tenant), params: { tenant: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { { name: 'サンプル'} }
+        let(:attributes) { { name: 'サンプル' } }
 
         it 'テナントが更新される' do
-          expect{ action }.to change { tenant.reload.name }.from(tenant.name).to(attributes[:name])
-          expect(response).to redirect_to(tenants_path)
+          expect { action }.to change { tenant.reload.name }.from(tenant.name).to(attributes[:name])
+          expect(response).to redirect_to tenants_path
           follow_redirect!
           expect(response.body).to include('テナント一覧')
         end
@@ -98,6 +96,93 @@ RSpec.describe 'Tenants', type: :request do
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.body).to include('テナントの更新に失敗しました')
         end
+      end
+    end
+
+    describe 'DELETE /destroy' do
+      let!(:tenant) { create(:tenant) }
+      subject(:action) { delete tenant_path(tenant) }
+
+      it 'テナントが削除される' do
+        expect { action }.to change(Tenant, :count).by(-1)
+        expect(response).to redirect_to tenants_path
+        follow_redirect!
+        expect(response.body).to include('テナント一覧')
+      end
+    end
+  end
+
+  describe 'with user ' do
+    let(:user) { create(:user) }
+
+    describe 'GET /index' do
+      it 'ホーム画面にリダイレクトする' do
+        get tenants_path
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'GET /new' do
+      it 'ホーム画面にリダイレクトする' do
+        get new_tenant_path
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'GET /show' do
+      let!(:tenant) { create(:tenant) }
+
+      it 'ホーム画面にリダイレクトする' do
+        get new_tenant_path
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'POST /create' do
+      subject(:action) { post tenants_path, params: { tenant: valid_attributes } }
+
+      it 'ホーム画面にリダイレクトする' do
+        expect { action }.not_to change(Tenant, :count)
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'GET /edit' do
+      let(:tenant) { create(:tenant) }
+
+      it 'ホーム画面にリダイレクトする' do
+        get edit_tenant_path(tenant)
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'PATCH /update' do
+      let!(:tenant) { create(:tenant) }
+
+      subject(:action) { patch tenant_path(tenant), params: { tenant: attributes } }
+
+      let(:attributes) { { name: 'サンプル' } }
+
+      it 'ホーム画面にリダイレクトする' do
+        expect { action }.not_to(change { tenant.reload.name })
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
+
+    describe 'DELETE /destroy' do
+      let!(:tenant) { create(:tenant) }
+      subject(:action) { delete tenant_path(tenant) }
+
+      it 'テナントが削除される' do
+        expect { action }.not_to change(Tenant, :count)
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
       end
     end
   end

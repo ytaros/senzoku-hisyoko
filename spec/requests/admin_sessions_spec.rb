@@ -16,7 +16,7 @@ RSpec.describe 'AdminSessions', type: :request do
     context 'with valid params' do
       it 'ログインに成功し、ホーム画面へリダイレクトされる' do
         post admin_login_path, params: { admin_session: { login_id: admin.login_id, password: admin.password } }
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to root_path
         follow_redirect!
         expect(response.body).to include('ホーム画面')
       end
@@ -35,7 +35,7 @@ RSpec.describe 'AdminSessions', type: :request do
     it 'ログアウトに成功し、ログイン画面へリダイレクトされる' do
       login(admin)
       delete admin_logout_path
-      expect(response).to redirect_to(admin_login_path)
+      expect(response).to redirect_to admin_login_path
       follow_redirect!
       expect(response.body).to include('ログイン')
     end

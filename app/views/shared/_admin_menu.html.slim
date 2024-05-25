@@ -1,0 +1,9 @@
+.mt-3.ms-2
+  i.fa-solid.fa-shop.fa-fw.me-3
+  = link_to "#{Tenant.model_name.human}#{t('management')}", tenants_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+.mt-3.ms-2
+  i.fa-regular.fa-face-smile.fa-fw.me-3
+  = link_to "#{User.model_name.human}#{t('management')}", users_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+.mt-3.ms-2
+  i.fa-solid.fa-right-from-bracket.fa-fw.me-3
+  = link_to t('logout'), admin_logout_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover', data: { turbo_method: :delete }

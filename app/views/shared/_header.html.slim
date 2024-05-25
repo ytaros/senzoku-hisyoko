@@ -5,30 +5,14 @@ div.offcanvas.offcanvas-start tabindex='-1' id='offcanvasExample' aria-labelledb
     h5.offcanvas-title id='offcanvasExampleLabel' #{t('app_name')}
     button.btn-close.text-reset type='button' data-bs-dismiss='offcanvas' aria-label='Close'
   .offcanvas-body
-    .mt-3.ms-2
-      i.fa-solid.fa-shop.fa-fw.me-3
-      = link_to 'テナント管理', tenants_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-regular.fa-face-smile.fa-fw.me-3
-      = link_to 'ユーザー管理', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-wine-bottle.fa-fw.me-3
-      = link_to 'メニュー管理', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-dollar-sign.fa-fw.me-3
-      = link_to '伝票入力', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-calculator.fa-fw.me-3
-      = link_to '経費入力', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-chart-pie.fa-fw.me-3
-      = link_to '財務情報', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-right-from-bracket.fa-fw.me-3
-      = link_to t('.logout'), admin_logout_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover', data: { turbo_method: :delete }
-    .mt-3.ms-2
-      i.fa-solid.fa-user-plus.fa-fw.me-3
-      = link_to '新規登録', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
-    .mt-3.ms-2
-      i.fa-solid.fa-right-to-bracket.fa-fw.me-3
-      = link_to t('.login'), admin_login_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+    - if current_user&.admin?
+      = render 'shared/admin_menu'
+    - elsif current_user.is_a?(User)
+      = render 'shared/menu'
+    - else
+      .mt-3.ms-2
+        i.fa-solid.fa-user-plus.fa-fw.me-3
+        = link_to "#{User.model_name.human}#{t('new')}", new_user_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+      .mt-3.ms-2
+        i.fa-solid.fa-right-to-bracket.fa-fw.me-3
+        = link_to t('login'), login_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'

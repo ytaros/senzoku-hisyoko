@@ -3,6 +3,7 @@ ja:
     models:
       admin: 管理者
       tenant: テナント
+      user: ユーザー
     attributes:
       admin:
         name: 名前
@@ -12,6 +13,11 @@ ja:
       tenant:
         name: 店舗名
         industry: 業種
+      user:
+        name: 名前
+        login_id: ログインID
+        password: パスワード
+        password_confirmation: パスワード確認
     errors:
       models:
         admin:
