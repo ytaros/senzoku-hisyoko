@@ -23,6 +23,6 @@ class Admin < ApplicationRecord
   end
 
   def common?
-    true
+    false
   end
 end
