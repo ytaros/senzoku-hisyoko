@@ -127,7 +127,7 @@ RSpec.describe User, type: :model do
     end
 
     describe 'common?' do
-      it { expect(user.common?).to be_truthy}
+      it { expect(user.common?).to be_truthy }
     end
   end
 end

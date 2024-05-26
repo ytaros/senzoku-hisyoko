@@ -19,7 +19,6 @@ module SessionsHelper
     @current_user
   end
 
-
   # ユーザーとトークンを紐づけ（remember_digestカラムにトークンをハッシュ化して保存）CookieにユーザーIDとトークンを入れる
   def remember(user)
     user.remember
@@ -30,7 +29,7 @@ module SessionsHelper
 
   # セッションの破棄とCookieの削除
   def forget(user)
-    user.forget if user.class.name == 'User'
+    user.forget if user.instance_of?(User)
     cookies.delete(:user_id)
     cookies.delete(:user_class_name)
     cookies.delete(:remember_token)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MenuPolicy < ApplicationPolicy
   def index?
     user.admin? || user.common?

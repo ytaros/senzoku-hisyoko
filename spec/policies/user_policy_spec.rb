@@ -13,7 +13,7 @@ RSpec.describe UserPolicy, type: :policy do
     it { expect(described_class).not_to permit(user) }
   end
 
-  permissions :show?, :update?do
+  permissions :show?, :update? do
     let(:tenant) { create(:tenant) }
     let(:user) { create(:user, tenant:) }
     let(:other_user) { create(:user, tenant:) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Menus', type: :request do
@@ -6,7 +8,6 @@ RSpec.describe 'Menus', type: :request do
   let(:invalid_attributes) { { category: ' ', genre: 'food', price: 1000, tenant_id: tenant.id } }
 
   before { login(user) }
-
 
   describe 'with admin' do
     let(:user) { create(:admin) }
@@ -41,7 +42,7 @@ RSpec.describe 'Menus', type: :request do
       let(:attributes) { valid_attributes }
 
       it 'ホーム画面にリダイレクトする' do
-        expect{ action }.not_to change(Menu, :count)
+        expect { action }.not_to change(Menu, :count)
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end
@@ -59,7 +60,7 @@ RSpec.describe 'Menus', type: :request do
 
     describe 'PATCH /update' do
       let(:menu) { create(:menu) }
-      let(:attributes) { {category: 'テスト'} }
+      let(:attributes) { { category: 'テスト' } }
 
       subject(:action) { patch menu_path(menu), params: { menu: attributes } }
 
@@ -75,7 +76,7 @@ RSpec.describe 'Menus', type: :request do
       subject(:action) { delete menu_path(menu) }
 
       it 'ホーム画面にリダイレクトする' do
-        expect{ action }.not_to change(Menu, :count)
+        expect { action }.not_to change(Menu, :count)
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end

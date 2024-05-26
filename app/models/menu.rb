@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: menus
@@ -21,7 +23,7 @@
 class Menu < ApplicationRecord
   enum genre: {
     food: 0,
-    drink: 1,
+    drink: 1
   }
 
   belongs_to :tenant
@@ -30,5 +32,4 @@ class Menu < ApplicationRecord
   validates :genre, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :tenant_id, presence: true
-
 end

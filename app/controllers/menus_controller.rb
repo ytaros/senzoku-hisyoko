@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
   before_action :authorize_menu
@@ -7,8 +9,7 @@ class MenusController < ApplicationController
     @drink_menus = policy_scope(Menu).where(genre: :drink).order(price: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @menu = current_tenant.menus.new
@@ -25,8 +26,7 @@ class MenusController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @menu.update(permitted_attributes(@menu))

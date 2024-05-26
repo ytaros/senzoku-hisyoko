@@ -58,5 +58,8 @@ Style/ClassMethods:
 Style/IfUnlessModifier:
   Enabled: false
 
-Style/ArraySyntax:
+Style/HashSyntax:
+  Enabled: false
+
+Style/SymbolArray:
   Enabled: false

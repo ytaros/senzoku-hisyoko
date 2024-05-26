@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: menus
@@ -122,4 +124,3 @@ RSpec.describe Menu, type: :model do
     end
   end
 end
-
