@@ -1,0 +1,11 @@
+- provide :title, "#{Menu.model_name.human}#{t('new')}"
+
+.container
+  .text-center
+    h1 = "#{Menu.model_name.human}#{t('new')}"
+
+  .card
+    .card-body
+      = render 'form', tenant: @menu
+
+  = link_to t('back_to', action: t('index')), menus_path, class: 'btn btn-outline-secondary mt-2'

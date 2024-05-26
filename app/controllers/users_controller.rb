@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :logged_in_user, only: [:new, :create]
   before_action :user_authorize
 
   def index
@@ -17,8 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(permitted_attributes(User))
     if @user.save
+      log_in @user
       flash[:success] = "#{User.model_name.human}#{t('create_success')}"
-      redirect_to current_user&.admin? ? users_path : root_path
+      redirect_to root_path
     else
       Rails.logger.info @user.errors.full_messages.to_s
       flash.now[:danger] = "#{User.model_name.human}#{t('create_failed')}"
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = "#{User.model_name.human}#{t('delete_success')}"
-    redirect_to current_user&.admin? ? users_path : root_path
+    redirect_to users_path
   end
 
   private

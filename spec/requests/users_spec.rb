@@ -16,15 +16,15 @@ RSpec.describe 'Users', type: :request do
       it 'ユーザー一覧画面に遷移する' do
         get users_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('ユーザー一覧')
+        expect(response.body).to include 'ユーザー一覧'
       end
     end
 
     describe 'GET /new' do
-      it 'ユーザー新規作成画面へ遷移する' do
+      it 'ホーム画面へリダイレクト' do
         get new_user_path
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include('ユーザー新規作成')
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
       end
     end
 
@@ -46,32 +46,21 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-    describe 'GET /create' do
+    describe 'POST /create' do
       subject(:action) { post users_path, params: { user: attributes } }
 
       context 'with valid attribute' do
         let(:attributes) { valid_attributes }
 
-        it 'ユーザー新規登録に成功する' do
-          expect { action }.to change(User, :count).by(1)
-          expect(response).to redirect_to users_path
-          follow_redirect!
-          expect(response.body).to include('ユーザー一覧')
-        end
-      end
-
-      context 'with invalid attribute' do
-        let(:attributes) { invalid_attributes }
-
-        it 'ユーザー新規登録に失敗する' do
-          expect { subject }.to change(User, :count).by(0)
-          expect(response).to have_http_status(:unprocessable_entity)
-          expect(response.body).to include('ユーザーの新規登録に失敗しました')
+        it 'ホーム画面へリダイレクト' do
+          expect { action }.not_to change(User, :count)
+          expect(response).to redirect_to root_path
+          expect(flash[:danger]).to include '操作権限がありません'
         end
       end
     end
 
-    describe 'GET /update' do
+    describe 'PARCH /update' do
       let!(:user_a) { create(:user, name: 'サンプル') }
 
       subject(:action) { patch user_path(user_a), params: { user: attributes } }
@@ -98,7 +87,7 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-    describe 'GET /destroy' do
+    describe 'DELETE /destroy' do
       let!(:user_a) { create(:user) }
 
       subject(:action) { delete user_path(user_a) }
@@ -117,11 +106,11 @@ RSpec.describe 'Users', type: :request do
         it 'ユーザー新規作成画面へ遷移する' do
           get new_user_path
           expect(response).to have_http_status(:success)
-          expect(response.body).to include('ユーザー新規作成')
+          expect(response.body).to include('ユーザー新規登録')
         end
       end
 
-      describe 'GET /create' do
+      describe 'POST /create' do
         subject(:action) { post users_path, params: { user: attributes } }
 
         context 'with valid attribute' do
@@ -129,6 +118,9 @@ RSpec.describe 'Users', type: :request do
 
           it 'ユーザー新規登録に成功する' do
             expect { action }.to change(User, :count).by(1)
+            user = User.find_by(login_id: valid_attributes[:login_id])
+            expect(user).not_to be_nil
+            expect(session[:user_id]).to eq(user.id)
             expect(response).to redirect_to root_path
             follow_redirect!
             expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
@@ -141,7 +133,7 @@ RSpec.describe 'Users', type: :request do
           it 'ユーザー新規登録に失敗する' do
             expect { subject }.to change(User, :count).by(0)
             expect(response).to have_http_status(:unprocessable_entity)
-            expect(response.body).to include('ユーザーの新規登録に失敗しました')
+            expect(response.body).to include('ユーザーの登録に失敗しました')
           end
         end
       end
@@ -161,6 +153,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       describe 'GET /show' do
+        let(:user) { create(:user) }
         it 'ユーザー詳細画面へ遷移する' do
           get user_path(user)
           expect(response).to have_http_status(:success)
@@ -169,6 +162,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       describe 'GET /edit' do
+        let(:user) { create(:user) }
         it 'ユーザー編集画面へ遷移する' do
           get edit_user_path(user)
           expect(response).to have_http_status(:success)
@@ -176,7 +170,7 @@ RSpec.describe 'Users', type: :request do
         end
       end
 
-      describe 'GET /update' do
+      describe 'PATCH /update' do
         subject(:action) { patch user_path(user), params: { user: attributes } }
 
         context 'with valid attribute' do
@@ -203,11 +197,11 @@ RSpec.describe 'Users', type: :request do
 
       describe 'GET /destroy' do
         subject(:action) { delete user_path(user) }
-        it ' ユーザーが削除され、ホーム画面へ遷移する' do
-          expect { action }.to change(User, :count).by(-1)
+
+        it 'ホーム画面へリダイレクト' do
+          expect { action }.not_to change(User, :count)
           expect(response).to redirect_to root_path
-          follow_redirect!
-          expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
+          expect(flash[:danger]).to include '操作権限がありません'
         end
       end
     end

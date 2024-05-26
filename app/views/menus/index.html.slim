@@ -1,0 +1,55 @@
+- provide :title, "#{Menu.model_name.human}#{t('index')}"
+
+.container
+  .text-center
+    h1 = "#{Menu.model_name.human}#{t('index')}"
+  - if policy(Menu).create?
+    = link_to t('.menu_register'), new_menu_path, class: 'btn btn-primary mb-2 btn-lg w-25'
+
+  .card.mb-3
+    .card-body
+      h3 = t('.food_menu')
+      table.table
+        thead
+          tr
+            th(scope="col") = Menu.human_attribute_name(:tenant_id)
+            th(scope="col") = Menu.human_attribute_name(:genre)
+            th(scope="col") = Menu.human_attribute_name(:category)
+            th(scope="col") = Menu.human_attribute_name(:price)
+            - if current_user.common?
+              th(scope="col") = t('action')
+        tbody
+          - @food_menus.each do |menu|
+            tr
+              td = menu.tenant.name
+              td = menu.genre_i18n
+              td = menu.category
+              td = menu.price
+              - if policy(menu).create?
+                td
+                  = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
+
+  .card.mb-3.mt-5
+    .card-body
+      h3 = t('.drink_menu')
+      table.table
+        thead
+          tr
+            th(scope="col") = Menu.human_attribute_name(:tenant_id)
+            th(scope="col") = Menu.human_attribute_name(:genre)
+            th(scope="col") = Menu.human_attribute_name(:category)
+            th(scope="col") = Menu.human_attribute_name(:price)
+            - if current_user.common?
+              th(scope="col") = t('action')
+        tbody
+          - @drink_menus.each do |menu|
+            tr
+              td = menu.tenant.name
+              td = menu.genre_i18n
+              td = menu.category
+              td = menu.price
+              - if policy(menu).create?
+                td
+                  = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
+
+  = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'

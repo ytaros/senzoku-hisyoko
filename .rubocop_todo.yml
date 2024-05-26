@@ -51,3 +51,15 @@ Style/IfUnlessModifier:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 198
+
+Style/ClassMethods:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false

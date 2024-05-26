@@ -123,7 +123,11 @@ RSpec.describe User, type: :model do
 
   describe 'Instance methods' do
     describe 'admin?' do
-      it { expect(user.admin?).to eq false }
+      it { expect(user.admin?).to be_falsey }
+    end
+
+    describe 'common?' do
+      it { expect(user.common?).to be_truthy }
     end
   end
 end

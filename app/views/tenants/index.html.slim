@@ -19,7 +19,7 @@
             tr
               td = tenant.id
               td = tenant.name
-              td = t("enums.tenant.industry.#{tenant.industry}")
+              td = tenant.industry_i18n
               td
                 = link_to t('show'), tenant_path(tenant), class: 'btn btn-primary btn-sm'
 

@@ -12,6 +12,7 @@
         dt.col-3 = Tenant.human_attribute_name(:name)
         dd.col-9 = @tenant.name
         dt.col-3 = Tenant.human_attribute_name(:industry)
+        dd.col-9 = @tenant.industry
       .d-flex
         = link_to t('edit'), edit_tenant_path(@tenant), class: 'btn btn-primary ms-auto me-2'
         = link_to t('delete'), tenant_path(@tenant), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') }

@@ -20,7 +20,7 @@ RSpec.describe 'Tenants', type: :request do
     end
 
     describe 'GET /show' do
-      let!(:tenant) { create(:tenant) }
+      let(:tenant) { create(:tenant) }
 
       it 'テナント詳細画面に遷移する' do
         get tenant_path(tenant)
@@ -33,7 +33,7 @@ RSpec.describe 'Tenants', type: :request do
       it 'テナント新規登録画面に遷移する' do
         get new_tenant_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('テナント新規作成')
+        expect(response.body).to include('テナント新規登録')
       end
     end
 
@@ -57,7 +57,7 @@ RSpec.describe 'Tenants', type: :request do
         it 'テナントが作成されない' do
           expect { subject }.to change(Tenant, :count).by(0)
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(response.body).to include('テナントの新規登録に失敗しました')
+          expect(response.body).to include('テナントの登録に失敗しました')
         end
       end
     end
@@ -132,10 +132,10 @@ RSpec.describe 'Tenants', type: :request do
     end
 
     describe 'GET /show' do
-      let!(:tenant) { create(:tenant) }
+      let(:tenant) { create(:tenant) }
 
       it 'ホーム画面にリダイレクトする' do
-        get new_tenant_path
+        get tenant_path(tenant)
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end

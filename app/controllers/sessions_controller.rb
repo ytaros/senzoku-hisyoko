@@ -2,8 +2,11 @@
 
 class SessionsController < ApplicationController
   skip_after_action :verify_authorized
+  skip_before_action :logged_in_user
 
-  def new; end
+  def new
+    redirect_to root_path if logged_in?
+  end
 
   def create
     user = User.find_by(login_id: params[:session][:login_id])

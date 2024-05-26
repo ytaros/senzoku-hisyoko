@@ -102,11 +102,15 @@ RSpec.describe Admin, type: :model do
     end
   end
 
-  describe 'Instance methods' do
+  describe '#Instance methods' do
     let(:admin) { build(:admin) }
 
     describe '#admin?' do
       it { expect(admin.admin?).to be_truthy }
+    end
+
+    describe '#common?' do
+      it { expect(admin.common?).to be_falsey }
     end
   end
 end

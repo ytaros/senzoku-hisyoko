@@ -1,0 +1,22 @@
+- provide :title, "#{Menu.model_name.human}#{t('show')}"
+
+.container
+  .text-center
+    h1 = "#{Menu.model_name.human}#{t('show')}"
+
+  .card
+    .card-body
+      dl.row
+        dt.col-3 = Menu.human_attribute_name(:id)
+        dd.col-9 = @menu.id
+        dt.col-3 = Menu.human_attribute_name(:genre)
+        dd.col-9 = @menu.genre_i18n
+        dt.col-3 = Menu.human_attribute_name(:category)
+        dd.col-9 = @menu.category
+        dt.col-3 = Menu.human_attribute_name(:price)
+        dd.col-9 = @menu.price
+      .d-flex
+        = link_to t('edit'), edit_menu_path(@menu), class: 'btn btn-primary ms-auto me-2'
+        = link_to t('delete'), menu_path(@menu), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') }
+
+  = link_to t('back_to', action: t('index')), menus_path, class: 'btn btn-outline-secondary mt-2'

@@ -13,7 +13,7 @@ RSpec.describe UserPolicy, type: :policy do
     it { expect(described_class).not_to permit(user) }
   end
 
-  permissions :show?, :update?, :destroy? do
+  permissions :show?, :update? do
     let(:tenant) { create(:tenant) }
     let(:user) { create(:user, tenant:) }
     let(:other_user) { create(:user, tenant:) }
@@ -23,8 +23,15 @@ RSpec.describe UserPolicy, type: :policy do
   end
 
   permissions :create? do
+    let(:guest_user) { nil }
+    it { expect(described_class).to permit(guest_user) }
+    it { expect(described_class).not_to permit(admin) }
+    it { expect(described_class).not_to permit(user) }
+  end
+
+  permissions :destroy? do
     it { expect(described_class).to permit(admin) }
-    it { expect(described_class).to permit(user) }
+    it { expect(described_class).not_to permit(user) }
   end
 
   permissions :permitted_attributes_for_create do

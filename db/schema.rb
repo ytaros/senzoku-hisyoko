@@ -12,13 +12,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_240_523_221_418) do
+ActiveRecord::Schema[7.0].define(version: 20_240_525_140_410) do
   create_table 'admins', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'login_id', null: false
     t.string 'password_digest', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+  end
+
+  create_table 'menus', force: :cascade do |t|
+    t.string 'category', null: false
+    t.integer 'price', null: false
+    t.integer 'genre', null: false
+    t.integer 'tenant_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['tenant_id'], name: 'index_menus_on_tenant_id'
   end
 
   create_table 'tenants', force: :cascade do |t|
@@ -39,5 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 20_240_523_221_418) do
     t.index ['tenant_id'], name: 'index_users_on_tenant_id'
   end
 
+  add_foreign_key 'menus', 'tenants'
   add_foreign_key 'users', 'tenants'
 end

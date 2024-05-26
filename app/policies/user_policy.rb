@@ -6,19 +6,19 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.id == record.id
+    user.admin? || (user.common? && user.id == record.id)
   end
 
   def create?
-    true
+    user.nil?
   end
 
   def update?
-    user.admin? || user.id == record.id
+    user.admin? || (user.common? && user.id == record.id)
   end
 
   def destroy?
-    user.admin? || user.id == record.id
+    user.admin?
   end
 
   def permitted_attributes_for_create

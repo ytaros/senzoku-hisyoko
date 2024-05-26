@@ -3,7 +3,32 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions', type: :request do
-  describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
+  describe 'GET /new' do
+    it 'ログイン画面が表示される' do
+      get login_path
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('ログイン')
+    end
+  end
+
+  describe 'POST /create' do
+    let(:user) { create(:user) }
+    it 'ログインに成功し、ホーム画面へリダイレクトされる' do
+      post login_path, params: { session: { login_id: user.login_id, password: user.password } }
+      expect(response).to redirect_to root_path
+      follow_redirect!
+      expect(response.body).to include('ホーム画面')
+    end
+  end
+
+  describe 'DELETE /destroy' do
+    let(:user) { create(:user) }
+    it 'ログアウトに成功し、ログイン画面へリダイレクトされる' do
+      login(user)
+      delete logout_path
+      expect(response).to redirect_to login_path
+      follow_redirect!
+      expect(response.body).to include('ログイン')
+    end
   end
 end

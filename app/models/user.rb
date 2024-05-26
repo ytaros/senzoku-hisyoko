@@ -37,6 +37,10 @@ class User < ApplicationRecord
     false
   end
 
+  def common?
+    true
+  end
+
   # 渡された文字列のハッシュ値を返す
   def self.digest(string)
     cost = if ActiveModel::SecurePassword.min_cost
@@ -44,7 +48,7 @@ class User < ApplicationRecord
            else
              BCrypt::Engine.cost
            end
-    BCrypt::Password.create(string, cost:)
+    BCrypt::Password.create(string, cost: cost)
   end
 
   # ランダムなトークンを返す
@@ -66,6 +70,8 @@ class User < ApplicationRecord
 
   # ユーザーの記憶ダイジェストをnilにする
   def forget
+    return unless remember_digest
+
     update_attribute(:remember_digest, nil)
   end
 end
