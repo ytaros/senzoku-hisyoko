@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  category   :string           not null
-#  ganre      :integer          not null
+#  genre      :integer          not null
 #  price      :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -19,7 +19,7 @@
 #  tenant_id  (tenant_id => tenants.id)
 #
 class Menu < ApplicationRecord
-  enum ganre: {
+  enum genre: {
     food: 0,
     drink: 1,
   }
@@ -27,7 +27,7 @@ class Menu < ApplicationRecord
   belongs_to :tenant
 
   validates :category, presence: true, length: { maximum: 20 }
-  validates :ganre, presence: true
+  validates :genre, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :tenant_id, presence: true
 

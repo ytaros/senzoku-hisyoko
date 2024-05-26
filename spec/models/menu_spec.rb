@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  category   :string           not null
-#  ganre      :integer          not null
+#  genre      :integer          not null
 #  price      :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -95,15 +95,15 @@ RSpec.describe Menu, type: :model do
       end
     end
 
-    describe 'ganre' do
+    describe 'genre' do
       describe 'presence' do
         before do
-          menu.ganre = nil
+          menu.genre = nil
           menu.valid?
         end
 
-        context 'with ganre is nil' do
-          it { expect(menu.errors.messages[:ganre]).to include('を入力してください') }
+        context 'with genre is nil' do
+          it { expect(menu.errors.messages[:genre]).to include('を入力してください') }
         end
       end
     end

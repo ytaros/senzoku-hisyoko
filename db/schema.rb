@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_25_140410) do
   create_table "menus", force: :cascade do |t|
     t.string "category", null: false
     t.integer "price", null: false
-    t.integer "ganre", null: false
+    t.integer "genre", null: false
     t.integer "tenant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

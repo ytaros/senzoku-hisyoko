@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  category   :string           not null
-#  ganre      :integer          not null
+#  genre      :integer          not null
 #  price      :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -22,7 +22,7 @@ FactoryBot.define do
   factory :menu do
     category { 'food' }
     price { 1000 }
-    ganre { 0 }
+    genre { 0 }
     tenant
   end
 end
