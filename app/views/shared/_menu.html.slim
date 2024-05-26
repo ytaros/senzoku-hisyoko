@@ -3,7 +3,7 @@
   = link_to "#{User.model_name.human}#{t('show')}", user_path(current_user), class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-wine-bottle.fa-fw.me-3
-  = link_to 'メニュー管理', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+  = link_to "#{Menu.model_name.human}#{t('management')}", menus_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-dollar-sign.fa-fw.me-3
   = link_to '伝票入力', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
