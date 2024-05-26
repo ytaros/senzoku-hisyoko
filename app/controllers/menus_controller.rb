@@ -5,8 +5,9 @@ class MenusController < ApplicationController
   before_action :authorize_menu
 
   def index
-    @food_menus = policy_scope(Menu).where(genre: :food).order(price: :desc)
-    @drink_menus = policy_scope(Menu).where(genre: :drink).order(price: :desc)
+    menus = policy_scope(Menu).where(genre: [:food, :drink]).order(price: :desc)
+    @food_menus = menus.select { |menu| menu.genre == 'food' }
+    @drink_menus = menus.select { |menu| menu.genre == 'drink' }
   end
 
   def show; end
