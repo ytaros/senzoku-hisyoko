@@ -4,6 +4,7 @@ ja:
       admin: 管理者
       tenant: テナント
       user: ユーザー
+      menu: メニュー
     attributes:
       admin:
         name: 名前
@@ -18,6 +19,10 @@ ja:
         login_id: ログインID
         password: パスワード
         password_confirmation: パスワード確認
+      menu:
+        name: メニュー名
+        genre: ジャンル
+        price: 価格
     errors:
       models:
         admin:

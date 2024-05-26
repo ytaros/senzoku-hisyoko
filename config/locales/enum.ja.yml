@@ -3,3 +3,7 @@ ja:
     tenant:
       industry:
         standing_bar: 立ち呑み
+    menu:
+      genre:
+        food: フード
+        drink: ドリンク
