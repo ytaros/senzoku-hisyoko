@@ -49,6 +49,10 @@ module SessionsHelper
     @current_user = nil
   end
 
+  def current_tenant
+    @current_tenant ||= current_user.tenant if current_user
+  end
+
   private
 
   def find_user(user_class_name, user_id)
