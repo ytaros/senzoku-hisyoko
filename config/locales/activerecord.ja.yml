@@ -20,9 +20,10 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
       menu:
-        name: メニュー名
+        category: メニュー名
         genre: ジャンル
         price: 価格
+        tenant_id: 店舗
     errors:
       models:
         admin:

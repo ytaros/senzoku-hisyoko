@@ -1,0 +1,22 @@
+- provide :title, "#{Menu.model_name.human}#{t('show')}"
+
+.container
+  .text-center
+    h1 = "#{Menu.model_name.human}#{t('show')}"
+
+  .card
+    .card-body
+      dl.row
+        dt.col-3 = Menu.human_attribute_name(:id)
+        dd.col-9 = @user.id
+        dt.col-3 = Menu.human_attribute_name(:name)
+        dd.col-9 = @user.name
+        dt.col-3 = Menu.human_attribute_name(:login_id)
+      .d-flex
+        = link_to t('edit'), edit_user_path(@user), class: 'btn btn-primary ms-auto me-2'
+        -  if policy(@user).destroy?
+          = link_to t('delete'), user_path(@user), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') }
+  - if current_user.admin?
+    = link_to t('back_to', action: t('index')), users_path, class: 'btn btn-outline-secondary mt-2'
+  - else
+    = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'

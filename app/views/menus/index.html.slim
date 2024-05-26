@@ -1,0 +1,28 @@
+- provide :title, "#{Menu.model_name.human}#{t('index')}"
+
+.container
+  .text-center
+    h1 = "#{Menu.model_name.human}#{t('index')}"
+
+  .card
+    .card-body
+      = link_to t('new'), new_menu_path, class: 'btn btn-primary mb-2 btn-lg'
+      table.table
+        thead
+          tr
+            th(scope="col") = Menu.human_attribute_name(:tenant_id)
+            th(scope="col") = Menu.human_attribute_name(:genre)
+            th(scope="col") = Menu.human_attribute_name(:category)
+            th(scope="col") = Menu.human_attribute_name(:price)
+            th(scope="col") = t('action')
+        tbody
+          - @menus.each do |menu|
+            tr
+              td = menu.tenant.name
+              td = t("enums.menu.genre.#{menu.genre}")
+              td = menu.category
+              td = menu.price
+              td
+                = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
+
+  = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
