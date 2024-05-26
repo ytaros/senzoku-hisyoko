@@ -15,6 +15,7 @@ class Tenant < ApplicationRecord
     standing_bar: 1
   }
   has_many :users, dependent: :destroy
+  has_many :menus, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :industry, presence: true

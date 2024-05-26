@@ -19,6 +19,9 @@ class MenuPolicy < ApplicationPolicy
     user.common? && user.tenant_id == record.tenant_id
   end
 
+  def permitted_attributes
+    [:category, :price, :genre, :tenant_id]
+  end
 
   class Scope < Scope
     def resolve
