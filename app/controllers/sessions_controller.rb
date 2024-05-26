@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   skip_after_action :verify_authorized
+  skip_before_action :logged_in_user
 
   def new
     redirect_to root_path if logged_in?

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include Pundit::Authorization
   after_action :verify_authorized
+  before_action :logged_in_user
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
