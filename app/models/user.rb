@@ -37,6 +37,10 @@ class User < ApplicationRecord
     false
   end
 
+  def common?
+    true
+  end
+
   # 渡された文字列のハッシュ値を返す
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

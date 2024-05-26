@@ -125,5 +125,9 @@ RSpec.describe User, type: :model do
     describe 'admin?' do
       it { expect(user.admin?).to eq false }
     end
+
+    describe 'common?' do
+      it { expect(user.common?).to eq true }
+    end
   end
 end

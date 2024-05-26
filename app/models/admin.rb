@@ -21,4 +21,8 @@ class Admin < ApplicationRecord
   def admin?
     true
   end
+
+  def common?
+    true
+  end
 end
