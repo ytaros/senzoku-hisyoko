@@ -17,3 +17,8 @@ ja:
       login_id: ログインID
       password: パスワード
       remember_me: ログイン状態を保持する
+  menus:
+    index:
+      menu_register: メニュー登録
+      food_menu: フードメニュー
+      drink_menu: ドリンクメニュー
