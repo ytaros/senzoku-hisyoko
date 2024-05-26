@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :menu do
-    category { 'food' }
+    category { '肉' }
     price { 1000 }
     genre { 0 }
     tenant

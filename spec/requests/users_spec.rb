@@ -106,7 +106,7 @@ RSpec.describe 'Users', type: :request do
         it 'ユーザー新規作成画面へ遷移する' do
           get new_user_path
           expect(response).to have_http_status(:success)
-          expect(response.body).to include('ユーザー新規作成')
+          expect(response.body).to include('ユーザー新規登録')
         end
       end
 
@@ -133,7 +133,7 @@ RSpec.describe 'Users', type: :request do
           it 'ユーザー新規登録に失敗する' do
             expect { subject }.to change(User, :count).by(0)
             expect(response).to have_http_status(:unprocessable_entity)
-            expect(response.body).to include('ユーザーの新規登録に失敗しました')
+            expect(response.body).to include('ユーザーの登録に失敗しました')
           end
         end
       end
@@ -153,6 +153,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       describe 'GET /show' do
+        let(:user) { create(:user) }
         it 'ユーザー詳細画面へ遷移する' do
           get user_path(user)
           expect(response).to have_http_status(:success)
@@ -161,6 +162,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       describe 'GET /edit' do
+        let(:user) { create(:user) }
         it 'ユーザー編集画面へ遷移する' do
           get edit_user_path(user)
           expect(response).to have_http_status(:success)

@@ -17,8 +17,8 @@ ja:
 
   back_to: "%{action}に戻る"
   ask_delete: 削除しますか？
-  create_success: を新規登録しました
-  create_failed: の新規登録に失敗しました
+  create_success: を登録しました
+  create_failed: の登録に失敗しました
   update_success: を更新しました
   update_failed: の更新に失敗しました
   delete_success: を削除しました
