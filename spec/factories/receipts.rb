@@ -24,6 +24,10 @@
 #
 FactoryBot.define do
   factory :receipt do
-    
+    food_value { 1000 }
+    drink_value { 1000 }
+    status { :unrecorded }
+    recorded_at { Date.today }
+    user
   end
 end
