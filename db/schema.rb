@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_27_135246) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_28_140013) do
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
     t.string "login_id", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_27_135246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_menus_on_tenant_id"
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "receipt_id"
+    t.integer "menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_order_details_on_menu_id"
+    t.index ["receipt_id"], name: "index_order_details_on_receipt_id"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -62,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_27_135246) do
   end
 
   add_foreign_key "menus", "tenants"
+  add_foreign_key "order_details", "menus"
+  add_foreign_key "order_details", "receipts"
   add_foreign_key "receipts", "users"
   add_foreign_key "users", "tenants"
 end
