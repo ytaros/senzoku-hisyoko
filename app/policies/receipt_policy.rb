@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReceiptPolicy < ApplicationPolicy
   def index?
     user.common? && user.id == record.user_id

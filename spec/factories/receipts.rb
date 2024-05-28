@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: receipts
@@ -7,7 +9,7 @@
 #  drink_value :integer          not null
 #  food_value  :integer          not null
 #  recorded_at :date             not null
-#  status      :integer          default(0), not null
+#  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null

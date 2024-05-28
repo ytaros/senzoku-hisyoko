@@ -72,28 +72,33 @@ RSpec.describe Menu, type: :model do
         context 'with price is not a number' do
           it { expect(menu.errors.messages[:price]).to include('は数値で入力してください') }
         end
-      end
 
-      describe 'greater_than' do
-        before do
-          menu.price = 0
-          menu.valid?
+        context 'with greater_than_or_equal_to' do
+          before do
+            menu.price = 0
+            menu.valid?
+          end
+
+          it { expect(menu.errors.messages[:price]).to include('は1以上の値にしてください') }
         end
 
-        context 'with price is 0' do
-          it { expect(menu.errors.messages[:price]).to include('は0より大きい値にしてください') }
+        context 'with less_than_or_equal_to' do
+          before do
+            menu.price = 100_000
+            menu.valid?
+          end
+
+          it { expect(menu.errors.messages[:price]).to include('は99999以下の値にしてください') }
         end
       end
 
-      describe 'integer' do
+      context 'with price is not an integer' do
         before do
           menu.price = 1.1
           menu.valid?
         end
 
-        context 'with price is not an integer' do
-          it { expect(menu.errors.messages[:price]).to include('は整数で入力してください') }
-        end
+        it { expect(menu.errors.messages[:price]).to include('は整数で入力してください') }
       end
     end
 

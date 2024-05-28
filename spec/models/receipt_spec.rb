@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: receipts
@@ -7,7 +9,7 @@
 #  drink_value :integer          not null
 #  food_value  :integer          not null
 #  recorded_at :date             not null
-#  status      :integer          default(0), not null
+#  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
@@ -56,15 +58,15 @@ RSpec.describe Receipt, type: :model do
             receipt.food_value = -1
             receipt.valid?
           end
-          it { expect(receipt.errors.messages[:food_value]).to include('は0以上の値にしてください') }
+          it { expect(receipt.errors.messages[:food_value]).to include('は1以上の値にしてください') }
         end
 
-        context 'with food_value is greater than 9999999' do
+        context 'with food_value is greater than 99999' do
           before do
-            receipt.food_value = 10_000_000
+            receipt.food_value = 100_000
             receipt.valid?
           end
-          it { expect(receipt.errors.messages[:food_value]).to include('は9999999以下の値にしてください') }
+          it { expect(receipt.errors.messages[:food_value]).to include('は99999以下の値にしてください') }
         end
       end
     end
@@ -96,15 +98,15 @@ RSpec.describe Receipt, type: :model do
             receipt.drink_value = -1
             receipt.valid?
           end
-          it { expect(receipt.errors.messages[:drink_value]).to include('は0以上の値にしてください') }
+          it { expect(receipt.errors.messages[:drink_value]).to include('は1以上の値にしてください') }
         end
 
-        context 'with drink_value is greater than 9999999' do
+        context 'with drink_value is greater than 99999' do
           before do
-            receipt.drink_value = 10_000_000
+            receipt.drink_value = 100_000
             receipt.valid?
           end
-          it { expect(receipt.errors.messages[:drink_value]).to include('は9999999以下の値にしてください') }
+          it { expect(receipt.errors.messages[:drink_value]).to include('は99999以下の値にしてください') }
         end
       end
     end

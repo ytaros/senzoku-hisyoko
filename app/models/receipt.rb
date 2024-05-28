@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: receipts
@@ -7,7 +9,7 @@
 #  drink_value :integer          not null
 #  food_value  :integer          not null
 #  recorded_at :date             not null
-#  status      :integer          default(0), not null
+#  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
@@ -24,17 +26,17 @@
 #
 class Receipt < ApplicationRecord
   belongs_to :user
-  has_many :receipt_items, dependent: :destroy
-  has_many :items, through: :receipt_items
+  has_many :order_details, dependent: :destroy
 
   enum status: {
-    unrecorded: 0, #未計上
-    recorded: 1 #計上済
+    unrecorded: 0, # 未計上
+    recorded: 1 # 計上済
   }
 
-  validates :food_value, presence: true,  numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 }
-  validates :drink_value, presence: true,  numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 }
+  # カスタムバリデーションを作成する必要あり。テスト落ちる。
+  validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
+  validates :drink_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
   validates :status, presence: true
-  validates :recorded_at, presence: true
-  validates :user_id, presence: true
+  validates :recorded_at, presence: true, on: :create
+  validates :user_id, presence: true, on: :create
 end
