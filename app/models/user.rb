@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :tenant
+  has_many :receipts, dependent: :destroy
 
   attr_accessor :remember_token
 
