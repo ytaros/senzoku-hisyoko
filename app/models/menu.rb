@@ -27,6 +27,7 @@ class Menu < ApplicationRecord
   }
 
   belongs_to :tenant
+  has_many :order_details, dependent: :destroy
 
   validates :category, presence: true, length: { maximum: 20 }
   validates :genre, presence: true

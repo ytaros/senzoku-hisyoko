@@ -7,7 +7,7 @@
 #  drink_value :integer          not null
 #  food_value  :integer          not null
 #  recorded_at :date             not null
-#  status      :integer          default(0), not null
+#  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
@@ -26,6 +26,7 @@ class Receipt < ApplicationRecord
   belongs_to :user
   has_many :receipt_items, dependent: :destroy
   has_many :items, through: :receipt_items
+  has_many :order_details, dependent: :destroy
 
   enum status: {
     unrecorded: 0, #未計上
