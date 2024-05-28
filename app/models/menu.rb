@@ -31,6 +31,6 @@ class Menu < ApplicationRecord
 
   validates :category, presence: true, length: { maximum: 20 }
   validates :genre, presence: true
-  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }
   validates :tenant_id, presence: true
 end

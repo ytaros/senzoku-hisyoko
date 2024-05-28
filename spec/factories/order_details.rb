@@ -21,6 +21,8 @@
 #
 FactoryBot.define do
   factory :order_detail do
-    
+    quantity { 1 }
+    menu { nil }
+    receipt { nil }
   end
 end

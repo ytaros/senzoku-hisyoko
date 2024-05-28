@@ -23,7 +23,7 @@ class OrderDetail < ApplicationRecord
   belongs_to :menu
   belongs_to :receipt
 
-  validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100}
   validates :menu_id, presence: true
   validates :receipt_id, presence: true
 end

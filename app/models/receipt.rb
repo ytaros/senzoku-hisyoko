@@ -24,8 +24,6 @@
 #
 class Receipt < ApplicationRecord
   belongs_to :user
-  has_many :receipt_items, dependent: :destroy
-  has_many :items, through: :receipt_items
   has_many :order_details, dependent: :destroy
 
   enum status: {
@@ -33,9 +31,9 @@ class Receipt < ApplicationRecord
     recorded: 1 #計上済
   }
 
-  validates :food_value, presence: true,  numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 }
-  validates :drink_value, presence: true,  numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 }
-  validates :status, presence: true
-  validates :recorded_at, presence: true
-  validates :user_id, presence: true
+  validates :food_value, presence: true,  numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
+  validates :drink_value, presence: true,  numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
+  validates :status, presence: true, allow_nil: true, on: :update
+  validates :recorded_at, presence: true, on: :create
+  validates :user_id, presence: true, on: :create
 end
