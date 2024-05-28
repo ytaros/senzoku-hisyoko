@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: receipts
@@ -27,13 +29,14 @@ class Receipt < ApplicationRecord
   has_many :order_details, dependent: :destroy
 
   enum status: {
-    unrecorded: 0, #未計上
-    recorded: 1 #計上済
+    unrecorded: 0, # 未計上
+    recorded: 1 # 計上済
   }
 
-  validates :food_value, presence: true,  numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
-  validates :drink_value, presence: true,  numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
-  validates :status, presence: true, allow_nil: true, on: :update
+  # カスタムバリデーションを作成する必要あり。テスト落ちる。
+  validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
+  validates :drink_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, allow_nil: true, on: :update
+  validates :status, presence: true
   validates :recorded_at, presence: true, on: :create
   validates :user_id, presence: true, on: :create
 end

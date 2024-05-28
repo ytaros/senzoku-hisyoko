@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderDetailPolicy < ApplicationPolicy
   def create?
     user.common?
