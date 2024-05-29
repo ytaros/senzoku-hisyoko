@@ -25,7 +25,7 @@ require 'rails_helper'
 
 RSpec.describe OrderDetail, type: :model do
   let(:menu) { create(:menu) }
-  let(:receipt) { create(:receipt) }
+  let(:receipt) { create(:receipt, :update_to_redord) }
   let(:order_detail) { build(:order_detail, menu:, receipt:) }
 
   describe 'Validation' do

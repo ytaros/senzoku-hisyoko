@@ -26,10 +26,15 @@
 #
 FactoryBot.define do
   factory :receipt do
-    food_value { 1000 }
-    drink_value { 1000 }
+    food_value { nil }
+    drink_value { nil }
     status { :unrecorded }
     recorded_at { Date.today }
     user
+  end
+
+  trait :update_to_redord do
+    food_value { 1000 }
+    drink_value { 1000 }
   end
 end

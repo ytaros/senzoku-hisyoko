@@ -32,81 +32,88 @@ RSpec.describe Receipt, type: :model do
 
   describe 'Validation' do
     describe 'food_value' do
-      context 'presence' do
-        before do
-          receipt.food_value = nil
-          receipt.valid?
-        end
+      context 'on update' do
+        before { receipt.new_record? == false }
 
-        context 'with food_value is nil' do
-          it { expect(receipt.errors.messages[:food_value]).to include('を入力してください') }
-        end
-      end
-
-      context 'numericality' do
-        context 'with food_value is not a number' do
+        context 'presence' do
           before do
-            receipt.food_value = 'a'
-            receipt.valid?
+            receipt.food_value = nil
+            receipt.valid?(:update)
           end
 
-          it { expect(receipt.errors.messages[:food_value]).to include('は数値で入力してください') }
+          context 'with food_value is nil' do
+            it { expect(receipt.errors.messages[:food_value]).to include('を入力してください') }
+          end
         end
 
-        context 'with food_value is less than 0' do
-          before do
-            receipt.food_value = -1
-            receipt.valid?
-          end
-          it { expect(receipt.errors.messages[:food_value]).to include('は1以上の値にしてください') }
-        end
+        context 'numericality' do
+          context 'with food_value is not a number' do
+            before do
+              receipt.food_value = 'a'
+              receipt.valid?(:update)
+            end
 
-        context 'with food_value is greater than 99999' do
-          before do
-            receipt.food_value = 100_000
-            receipt.valid?
+            it { expect(receipt.errors.messages[:food_value]).to include('は数値で入力してください') }
           end
-          it { expect(receipt.errors.messages[:food_value]).to include('は99999以下の値にしてください') }
+
+          context 'with food_value is less than 0' do
+            before do
+              receipt.food_value = -1
+              receipt.valid?(:update)
+            end
+            it { expect(receipt.errors.messages[:food_value]).to include('は1以上の値にしてください') }
+          end
+
+          context 'with food_value is greater than 99999' do
+            before do
+              receipt.food_value = 100_000
+              receipt.valid?(:update)
+            end
+            it { expect(receipt.errors.messages[:food_value]).to include('は99999以下の値にしてください') }
+          end
         end
       end
     end
 
     describe 'drink_value' do
-      context 'presence' do
-        before do
-          receipt.drink_value = nil
-          receipt.valid?
-        end
-
-        context 'with drink_value is nil' do
-          it { expect(receipt.errors.messages[:drink_value]).to include('を入力してください') }
-        end
-      end
-
-      context 'numericality' do
-        context 'with drink_value is not a number' do
+      context 'on update' do
+        before { receipt.new_record? == false }
+        context 'presence' do
           before do
-            receipt.drink_value = 'a'
-            receipt.valid?
+            receipt.drink_value = nil
+            receipt.valid?(:update)
           end
 
-          it { expect(receipt.errors.messages[:drink_value]).to include('は数値で入力してください') }
+          context 'with drink_value is nil' do
+            it { expect(receipt.errors.messages[:drink_value]).to include('を入力してください') }
+          end
         end
 
-        context 'with drink_value is less than 0' do
-          before do
-            receipt.drink_value = -1
-            receipt.valid?
-          end
-          it { expect(receipt.errors.messages[:drink_value]).to include('は1以上の値にしてください') }
-        end
+        context 'numericality' do
+          context 'with drink_value is not a number' do
+            before do
+              receipt.drink_value = 'a'
+              receipt.valid?(:update)
+            end
 
-        context 'with drink_value is greater than 99999' do
-          before do
-            receipt.drink_value = 100_000
-            receipt.valid?
+            it { expect(receipt.errors.messages[:drink_value]).to include('は数値で入力してください') }
           end
-          it { expect(receipt.errors.messages[:drink_value]).to include('は99999以下の値にしてください') }
+
+          context 'with drink_value is less than 0' do
+            before do
+              receipt.drink_value = -1
+              receipt.valid?(:update)
+            end
+            it { expect(receipt.errors.messages[:drink_value]).to include('は1以上の値にしてください') }
+          end
+
+          context 'with drink_value is greater than 99999' do
+            before do
+              receipt.drink_value = 100_000
+              receipt.valid?(:update)
+            end
+            it { expect(receipt.errors.messages[:drink_value]).to include('は99999以下の値にしてください') }
+          end
         end
       end
     end

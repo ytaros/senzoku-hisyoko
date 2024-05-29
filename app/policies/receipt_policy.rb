@@ -21,7 +21,11 @@ class ReceiptPolicy < ApplicationPolicy
     user.common? && user.id == record.user_id
   end
 
-  def permitted_attributes
+  def permitted_attributes_for_create
+    [:user_id, :status, :recorded_at]
+  end
+
+  def permitted_attributes_for_update
     [:food_value, :drink_value, :total_value, :user_id, :status, :compiled_at, :recorded_at]
   end
 end
