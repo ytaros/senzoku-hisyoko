@@ -15,4 +15,8 @@ RSpec.describe OrderDetailPolicy, type: :policy do
     it { expect(described_class).not_to permit(admin, order_detail) }
     it { expect(described_class).to permit(user, order_detail) }
   end
+
+  permissions :permitted_attributes do
+    it { expect(described_class.new(user, Receipt).permitted_attributes).to contain_exactly(:quantity, :menu_id, :receipt_id) }
+  end
 end
