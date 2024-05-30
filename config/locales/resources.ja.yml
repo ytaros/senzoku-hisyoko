@@ -22,3 +22,7 @@ ja:
       menu_register: メニュー登録
       food_menu: フードメニュー
       drink_menu: ドリンクメニュー
+  receipts:
+    index:
+      receipt_entry: 伝票入力フォームへ進む
+      select_record_date: 売上記録日を選択してください

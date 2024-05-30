@@ -7,3 +7,7 @@ ja:
       genre:
         food: フード
         drink: ドリンク
+    receipt:
+      status:
+        unrecorded: 未計上
+        recorded: 計上済
