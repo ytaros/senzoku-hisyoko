@@ -2,7 +2,7 @@
 
 class ReceiptPolicy < ApplicationPolicy
   def index?
-    user.common? && user.id == record.user_id
+    user.common?
   end
 
   def show?
@@ -27,5 +27,11 @@ class ReceiptPolicy < ApplicationPolicy
 
   def permitted_attributes_for_update
     [:food_value, :drink_value, :total_value, :user_id, :status, :compiled_at, :recorded_at]
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user_id: user.id) if user.common?
+    end
   end
 end
