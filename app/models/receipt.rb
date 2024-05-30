@@ -6,8 +6,8 @@
 #
 #  id          :integer          not null, primary key
 #  compiled_at :date
-#  drink_value :integer          not null
-#  food_value  :integer          not null
+#  drink_value :integer
+#  food_value  :integer
 #  recorded_at :date             not null
 #  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
@@ -33,9 +33,7 @@ class Receipt < ApplicationRecord
     recorded: 1 # 計上済
   }
 
-  validates :food_value,  numericality: { allow_nil: true }, on: :create
   validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, on: :update
-  validates :drink_value,  numericality: { allow_nil: true }, on: :create
   validates :drink_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, on: :update
   validates :status, presence: true
   validates :recorded_at, presence: true, on: :create

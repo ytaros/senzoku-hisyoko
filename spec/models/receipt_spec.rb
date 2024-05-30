@@ -6,8 +6,8 @@
 #
 #  id          :integer          not null, primary key
 #  compiled_at :date
-#  drink_value :integer          not null
-#  food_value  :integer          not null
+#  drink_value :integer
+#  food_value  :integer
 #  recorded_at :date             not null
 #  status      :integer          default("unrecorded"), not null
 #  created_at  :datetime         not null
