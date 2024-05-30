@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :tenants
   resources :users
   resources :menus
+  resources :receipts
+  resources :order_details, only: [:create ,:destroy]
 end
