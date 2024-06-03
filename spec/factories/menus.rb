@@ -22,9 +22,15 @@
 #
 FactoryBot.define do
   factory :menu do
-    category { '肉' }
+    category { '肉料理' }
     price { 1000 }
     genre { 0 }
     tenant
+  end
+
+  trait :drink do
+    category { 'ビール' }
+    price { 500 }
+    genre { 1 }
   end
 end

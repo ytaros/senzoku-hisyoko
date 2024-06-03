@@ -33,7 +33,7 @@ FactoryBot.define do
     user
   end
 
-  trait :update_to_redord do
+  trait :update_to_record do
     food_value { 1000 }
     drink_value { 1000 }
   end
