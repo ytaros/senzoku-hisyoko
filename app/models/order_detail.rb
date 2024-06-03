@@ -28,4 +28,19 @@ class OrderDetail < ApplicationRecord
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
   validates :menu_id, presence: true
   validates :receipt_id, presence: true
+
+  # 特定の注文の合計金額を返す
+  def order_price
+    menu.price * quantity
+  end
+
+  # トータルの合計金額を返す
+  def self.total_price(receipt_id)
+    where(receipt_id: receipt_id).sum(&:order_price)
+  end
+
+  # ジャンルごとに合計金額を計算する
+  def self.total_by_genre(order_details, genre)
+    order_details.joins(:menu).where(menus: { genre: genre }).sum('menus.price * order_details.quantity')
+  end
 end

@@ -31,6 +31,9 @@ ja:
         compiled_at: 集計日
         status: ステータス
         recorded_at: 記録日
+      order_detail:
+        menu_id: メニュー
+        quantity: 注文数
     errors:
       models:
         admin:

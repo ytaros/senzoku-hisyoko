@@ -1,0 +1,13 @@
+.card.mb-3
+  .card-body
+    .row
+      .col-md-4
+        p = order_detail.menu.formatted_name
+      .col-md-2
+        p = order_detail.quantity
+      .col-md-2
+        p = order_detail.menu.price
+      .col-md-2
+        p = order_detail.order_price
+      .col-md-2.text-end
+        = link_to t('delete'), order_detail_path(order_detail), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') }

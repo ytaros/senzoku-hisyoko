@@ -1,0 +1,46 @@
+- provide :title, "#{Receipt.model_name.human}#{t('management')}"
+
+.container
+  .text-center
+    h1 = "#{Receipt.model_name.human}#{t('management')}"
+
+
+  .form
+    .card
+      .card-body
+        h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
+        = simple_form_for(@receipt, url: receipts_path, method: :post) do |f|
+          = f.error_notification
+          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+          .form-inputs
+            .mt-2
+              = f.input :recorded_at, label: t('.select_record_date'), input_html: { class: 'form-control' }, html5: true
+          .form-actions
+            .text-end.mt-3
+              = f.button :submit, t('.receipt_entry'), class: 'btn btn-primary btn-lg'
+
+  .index
+    .card.mt-5
+      .card-body
+        h3 = "#{Receipt.model_name.human}#{t('index')}"
+        table.table
+          thead
+            tr
+              th(scope="col") = Receipt.human_attribute_name(:recorded_at)
+              th(scope="col") = Receipt.human_attribute_name(:food_value)
+              th(scope="col") = Receipt.human_attribute_name(:drink_value)
+              th(scope="col") = Receipt.human_attribute_name(:status)
+              th(scope="col") = t('action')
+          tbody
+            - @receipts&.each do |receipt|
+              tr
+                td = receipt.recorded_at
+                td = receipt.food_value
+                td = receipt.drink_value
+                td = receipt.status_i18n
+                - if receipt.unrecorded?
+                  td
+                    = link_to t('edit'), edit_receipt_path(receipt), class: 'btn btn-primary btn-sm'
+
+    = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
