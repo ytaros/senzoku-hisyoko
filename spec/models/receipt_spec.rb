@@ -61,7 +61,7 @@ RSpec.describe Receipt, type: :model do
               receipt.food_value = -1
               receipt.valid?(:update)
             end
-            it { expect(receipt.errors.messages[:food_value]).to include('は1以上の値にしてください') }
+            it { expect(receipt.errors.messages[:food_value]).to include('は0以上の値にしてください') }
           end
 
           context 'with food_value is greater than 99999' do
@@ -104,7 +104,7 @@ RSpec.describe Receipt, type: :model do
               receipt.drink_value = -1
               receipt.valid?(:update)
             end
-            it { expect(receipt.errors.messages[:drink_value]).to include('は1以上の値にしてください') }
+            it { expect(receipt.errors.messages[:drink_value]).to include('は0以上の値にしてください') }
           end
 
           context 'with drink_value is greater than 99999' do

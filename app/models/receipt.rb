@@ -33,8 +33,8 @@ class Receipt < ApplicationRecord
     recorded: 1 # 計上済
   }
 
-  validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, on: :update
-  validates :drink_value, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }, on: :update
+  validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99_999 }, on: :update
+  validates :drink_value, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99_999 }, on: :update
   validates :status, presence: true
   validates :recorded_at, presence: true, on: :create
   validates :user_id, presence: true, on: :create
