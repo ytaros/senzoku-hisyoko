@@ -5,11 +5,12 @@ class OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.new(permitted_attributes(OrderDetail))
 
     if @order_detail.save
-      redirect_to edit_receipt_path(@order_detail.receipt)
+      flash[:success] = "#{OrderDetail.model_name.human}#{t('create_success')}"
     else
-      flash.now[:danger] = "#{OrderDetail.model_name.human}#{t('create_failed')}"
-      render edit_receipt_path
+      flash[:danger] = "#{OrderDetail.model_name.human}#{t('create_failed')}"
+      Rails.logger.error(@order_detail.errors.full_messages)
     end
+    redirect_to edit_receipt_path(@order_detail.receipt)
   end
 
   def destroy
