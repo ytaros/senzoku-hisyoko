@@ -34,6 +34,7 @@ class ReceiptsController < ApplicationController
     drink_value = OrderDetail.total_by_genre(@order_details, 'drink')
 
     if @receipt.update(food_value: food_value, drink_value: drink_value)
+      flash[:success] = "#{Receipt.model_name.human}#{t('update_success')}"
       redirect_to receipts_path
     else
       set_order_detail_and_menus
@@ -51,7 +52,7 @@ class ReceiptsController < ApplicationController
   private
 
   def set_receipt
-    @receipt = policy_scope(Receipt).find(params[:id])
+    @receipt = policy_scope(Receipt)&.find(params[:id])
   end
 
   def set_order_detail_and_menus

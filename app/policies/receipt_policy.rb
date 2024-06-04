@@ -5,10 +5,6 @@ class ReceiptPolicy < ApplicationPolicy
     user.common?
   end
 
-  def show?
-    user.common? && user.id == record.user_id
-  end
-
   def create?
     user.common?
   end
