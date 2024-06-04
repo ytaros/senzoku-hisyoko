@@ -22,3 +22,16 @@ ja:
       menu_register: メニュー登録
       food_menu: フードメニュー
       drink_menu: ドリンクメニュー
+  receipts:
+    index:
+      receipt_entry: 伝票入力フォームへ進む
+      select_record_date: 売上記録日を選択してください
+    edit:
+      order_entry: オーダー入力
+      food_total: フード合計
+      drink_total: ドリンク合計
+      total: 合計
+      update_receipt: 伝票を登録する
+    order_detail_form:
+      select: 選択してください
+      entry: 追加する

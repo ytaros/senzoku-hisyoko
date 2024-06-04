@@ -42,8 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 20_240_528_140_013) do
   end
 
   create_table 'receipts', force: :cascade do |t|
-    t.integer 'food_value', null: false
-    t.integer 'drink_value', null: false
+    t.integer 'food_value'
+    t.integer 'drink_value'
     t.integer 'status', default: 0, null: false
     t.date 'compiled_at'
     t.date 'recorded_at', null: false

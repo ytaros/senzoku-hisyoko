@@ -14,6 +14,7 @@ ja:
   data_entry: 入力
   login: ログイン
   logout: ログアウト
+  yen: 円
 
   back_to: "%{action}に戻る"
   ask_delete: 削除しますか？

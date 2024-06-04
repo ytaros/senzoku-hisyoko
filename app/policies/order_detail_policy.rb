@@ -8,4 +8,8 @@ class OrderDetailPolicy < ApplicationPolicy
   def destroy?
     user.common?
   end
+
+  def permitted_attributes
+    [:quantity, :menu_id, :receipt_id]
+  end
 end

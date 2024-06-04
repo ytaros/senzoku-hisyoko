@@ -1,0 +1,27 @@
+.container
+  .row.justify-content-center
+    .col-md-8.text-center
+      h3 = "#{@receipt.recorded_at}#{t('.order_entry')}"
+
+    .col-md-8
+      = render 'order_detail_form', order_detail: @order_detail, menus: @menus, receipt: @receipt
+
+    .col-md-8.mt-4
+      - @order_details.each do |order_detail|
+        = render 'order_details', order_detail: order_detail
+
+    .col-md-8.mt-4
+      .d-flex.justify-content-between
+        - food_total = OrderDetail.total_by_genre(@order_details, 'food')
+        - drink_total = OrderDetail.total_by_genre(@order_details, 'drink')
+        - total_price = OrderDetail.total_price(@receipt)
+        h5= "#{t('.food_total')}: #{OrderDetail.total_by_genre(@order_details, :food)}"
+        h5= "#{t('.drink_total')}: #{OrderDetail.total_by_genre(@order_details, :drink)}"
+        h5= "#{t('.total')}: #{OrderDetail.total_price(@receipt)}"
+
+    .col-md-8.text-center.mt-5
+      = simple_form_for(@receipt, url: receipt_path, method: :patch) do |f|
+        = f.hidden_field :food_value, value: food_total
+        = f.hidden_field :drink_value, value: drink_total
+        = f.submit t('.update_receipt'), class: 'btn btn-primary'
+

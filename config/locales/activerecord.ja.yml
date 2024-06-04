@@ -5,6 +5,7 @@ ja:
       tenant: テナント
       user: ユーザー
       menu: メニュー
+      receipt: 伝票
     attributes:
       admin:
         name: 名前
@@ -24,6 +25,15 @@ ja:
         genre: ジャンル
         price: 価格
         tenant_id: 店舗
+      receipt:
+        food_value: フード合計
+        drink_value: ドリンク合計
+        compiled_at: 集計日
+        status: ステータス
+        recorded_at: 記録日
+      order_detail:
+        menu_id: メニュー
+        quantity: 注文数
     errors:
       models:
         admin:
