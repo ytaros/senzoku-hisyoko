@@ -26,6 +26,7 @@ class ReceiptsController < ApplicationController
     @order_detail = OrderDetail.new(receipt: @receipt)
     @order_details = @receipt.order_details.includes(:menu)
   end
+
   # リファクタリングする
   # OrderDetailで作成されたオブジェクトからfood_value,drink_valueを取得して、それを元にReceiptのオブジェクトを作成する
   def update

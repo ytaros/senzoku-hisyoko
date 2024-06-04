@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Receipts', type: :request do
-let(:owner) { create(:user) }
-let(:admin) { create(:admin) }
-let(:receipt) { create(:receipt, user: owner) }
-let(:valid_attributes) { { recorded_at: Date.today, user: owner } }
-let(:invalid_attributes) { { recorded_at: '', user: } }
+  let(:owner) { create(:user) }
+  let(:admin) { create(:admin) }
+  let(:receipt) { create(:receipt, user: owner) }
+  let(:valid_attributes) { { recorded_at: Date.today, user: owner } }
+  let(:invalid_attributes) { { recorded_at: '', user: } }
 
-before { login(user) }
+  before { login(user) }
 
   describe 'with admin' do
     let(:user) { admin }
@@ -45,7 +45,7 @@ before { login(user) }
       let(:attributes) { { food_value: 1000, drink_value: 500 } }
 
       it 'ホーム画面にリダイレクトされる' do
-        expect { action }.not_to change { receipt.reload.recorded_at }
+        expect { action }.not_to(change { receipt.reload.recorded_at })
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end

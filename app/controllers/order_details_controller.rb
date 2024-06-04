@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderDetailsController < ApplicationController
   before_action :authorize_order_detail
 
@@ -24,5 +26,4 @@ class OrderDetailsController < ApplicationController
   def authorize_order_detail
     authorize OrderDetail
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'OrderDetails', type: :request do
@@ -6,8 +8,7 @@ RSpec.describe 'OrderDetails', type: :request do
   let(:receipt) { create(:receipt, user: owner) }
   let(:menu) { create(:menu) }
   let(:valid_attributes) { { receipt_id: receipt.id, menu_id: menu.id, quantity: 3 } }
-  let(:invalid_attributes) { {receipt_id: receipt.id, menu_id: menu.id, quantity: nil } }
-
+  let(:invalid_attributes) { { receipt_id: receipt.id, menu_id: menu.id, quantity: nil } }
 
   before { login(user) }
 
