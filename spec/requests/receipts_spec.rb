@@ -116,7 +116,6 @@ RSpec.describe 'Receipts', type: :request do
       let!(:attributes) { { food_value: 1000, drink_value: 0 } }
 
       it 'オブジェクトが更新される' do
-        binding.break
         expect { action }.to change { receipt.reload.food_value }.from(nil).to(1000)
         expect(response).to redirect_to receipts_path
       end
