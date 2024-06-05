@@ -67,7 +67,7 @@ class ReceiptsController < ApplicationController
 
   def set_total_values_by_genre
     totals_by_genre = OrderDetail.total_by_genre(@receipt)
-    @food_value = totals_by_genre['food']
-    @drink_value = totals_by_genre['drink']
+    @food_value = totals_by_genre['food'] || 0
+    @drink_value = totals_by_genre['drink'] || 0
   end
 end
