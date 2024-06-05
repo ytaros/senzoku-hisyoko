@@ -32,7 +32,7 @@ class ReceiptsController < ApplicationController
   # OrderDetailで作成されたオブジェクトからfood_value,drink_valueを取得して、それを元にReceiptのオブジェクトを作成する
   def update
     @order_details = @receipt.order_details.includes(:menu)
-  
+
     if @receipt.update(food_value: @food_value, drink_value: @drink_value)
       flash[:success] = "#{Receipt.model_name.human}#{t('update_success')}"
       redirect_to receipts_path
