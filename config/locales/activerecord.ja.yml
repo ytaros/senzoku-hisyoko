@@ -6,6 +6,7 @@ ja:
       user: ユーザー
       menu: メニュー
       receipt: 伝票
+      order_detail: オーダー
     attributes:
       admin:
         name: 名前
