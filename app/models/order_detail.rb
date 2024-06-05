@@ -34,13 +34,8 @@ class OrderDetail < ApplicationRecord
     menu.price * quantity
   end
 
-  # トータルの合計金額を返す
-  def self.total_price(receipt_id)
-    where(receipt_id: receipt_id).sum(&:order_price)
-  end
-
   # ジャンルごとに合計金額を計算する
-  def self.total_by_genre(order_details, genre)
-    order_details.joins(:menu).where(menus: { genre: genre }).sum('menus.price * order_details.quantity')
+  def self.total_by_genre(receipt)
+    where(receipt_id: receipt.id).joins(:menu).group('menus.genre').sum('menus.price * order_details.quantity')
   end
 end
