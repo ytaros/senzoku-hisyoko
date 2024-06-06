@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_145413) do
     t.integer "expense_value", null: false
     t.string "status", default: "0", null: false
     t.date "compiled_at"
-    t.date "recorded_at"
+    t.date "recorded_at", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -26,6 +26,7 @@ class User < ApplicationRecord
 
   belongs_to :tenant
   has_many :receipts, dependent: :destroy
+  has_many :expenditures, dependent: :destroy
 
   attr_accessor :remember_token
 
