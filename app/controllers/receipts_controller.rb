@@ -27,7 +27,6 @@ class ReceiptsController < ApplicationController
     @order_details = @receipt.order_details.includes(:menu)
   end
 
-
   def update
     @order_details = @receipt.order_details.includes(:menu)
 

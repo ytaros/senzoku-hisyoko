@@ -6,12 +6,10 @@ class OrderDetailsController < ApplicationController
   def create
     @order_detail = OrderDetail.new(permitted_attributes(OrderDetail))
 
-    if @order_detail.save
-      redirect_to edit_receipt_path(@order_detail.receipt)
-    else
+    unless @order_detail.save
       # 非同期でエラーが発生した時の処理を追加
-      redirect_to edit_receipt_path(@order_detail.receipt)
     end
+    redirect_to edit_receipt_path(@order_detail.receipt)
   end
 
   def destroy

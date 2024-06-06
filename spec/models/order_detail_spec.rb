@@ -119,8 +119,8 @@ RSpec.describe OrderDetail, type: :model do
       let!(:receipt) { create(:receipt) }
 
       before do
-        create(:order_detail, menu: food , receipt: , quantity: 2)
-        create(:order_detail, menu: drink , receipt: , quantity: 3)
+        create(:order_detail, menu: food, receipt:, quantity: 2)
+        create(:order_detail, menu: drink, receipt:, quantity: 3)
       end
 
       it 'ジャンルごとの合計金額が返ってくる' do
