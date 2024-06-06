@@ -21,15 +21,13 @@ class ReceiptsController < ApplicationController
     end
   end
 
-  # リファクタリングする
   def edit
     @menus = policy_scope(Menu).order(:genre, price: :desc)
     @order_detail = OrderDetail.new
     @order_details = @receipt.order_details.includes(:menu)
   end
 
-  # リファクタリングする
-  # OrderDetailで作成されたオブジェクトからfood_value,drink_valueを取得して、それを元にReceiptのオブジェクトを作成する
+
   def update
     @order_details = @receipt.order_details.includes(:menu)
 
