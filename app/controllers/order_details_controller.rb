@@ -7,12 +7,11 @@ class OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.new(permitted_attributes(OrderDetail))
 
     if @order_detail.save
-      flash[:success] = "#{OrderDetail.model_name.human}#{t('create_success')}"
+      redirect_to edit_receipt_path(@order_detail.receipt)
     else
-      flash[:danger] = "#{OrderDetail.model_name.human}#{t('create_failed')}"
-      Rails.logger.error(@order_detail.errors.full_messages)
+      # 非同期でエラーが発生した時の処理を追加
+      redirect_to edit_receipt_path(@order_detail.receipt)
     end
-    redirect_to edit_receipt_path(@order_detail.receipt)
   end
 
   def destroy
@@ -25,5 +24,10 @@ class OrderDetailsController < ApplicationController
 
   def authorize_order_detail
     authorize OrderDetail
+  end
+
+  def set_receipt_and_menus
+    @receipt = policy_scope(Receipt)&.find(params[:id])
+    @menus = policy_scope(Menu).order(:genre, price: :desc)
   end
 end

@@ -1,4 +1,4 @@
-= simple_form_for order_detail, url: order_details_path, method: :post, html: { class: 'form-inline' } do |f|
+= simple_form_for order_detail, url: order_details_path, method: :post, data: { turbo_frame: 'order_details' }, html: { class: 'form-inline' } do |f|
   = f.hidden_field :receipt_id, value: @receipt.id
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
