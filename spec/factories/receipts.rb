@@ -30,11 +30,17 @@ FactoryBot.define do
     drink_value { nil }
     status { :unrecorded }
     recorded_at { Date.today }
+    compiled_at { nil }
     user
   end
 
   trait :update_to_record do
     food_value { 1000 }
     drink_value { 1000 }
+  end
+
+  trait :recorded do
+    status { :recorded }
+    compiled_at { Date.today }
   end
 end
