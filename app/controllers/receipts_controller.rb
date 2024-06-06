@@ -3,6 +3,7 @@
 class ReceiptsController < ApplicationController
   before_action :set_receipt, only: [:edit, :update, :destroy]
   before_action :authorize_receipt
+  before_action :set_total_values_by_genre, only: [:edit, :update]
 
   def index
     @receipts = policy_scope(Receipt)
@@ -20,21 +21,16 @@ class ReceiptsController < ApplicationController
     end
   end
 
-  # リファクタリングする
   def edit
     @menus = policy_scope(Menu).order(:genre, price: :desc)
-    @order_detail = OrderDetail.new(receipt: @receipt)
+    @order_detail = OrderDetail.new
     @order_details = @receipt.order_details.includes(:menu)
   end
 
-  # リファクタリングする
-  # OrderDetailで作成されたオブジェクトからfood_value,drink_valueを取得して、それを元にReceiptのオブジェクトを作成する
   def update
     @order_details = @receipt.order_details.includes(:menu)
-    food_value = OrderDetail.total_by_genre(@order_details, 'food')
-    drink_value = OrderDetail.total_by_genre(@order_details, 'drink')
 
-    if @receipt.update(food_value: food_value, drink_value: drink_value)
+    if @receipt.update(food_value: @food_value, drink_value: @drink_value)
       flash[:success] = "#{Receipt.model_name.human}#{t('update_success')}"
       redirect_to receipts_path
     else
@@ -64,5 +60,11 @@ class ReceiptsController < ApplicationController
 
   def authorize_receipt
     authorize @receipt || Receipt
+  end
+
+  def set_total_values_by_genre
+    totals_by_genre = OrderDetail.total_by_genre(@receipt)
+    @food_value = totals_by_genre['food'] || 0
+    @drink_value = totals_by_genre['drink'] || 0
   end
 end

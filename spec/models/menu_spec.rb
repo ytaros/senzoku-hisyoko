@@ -128,4 +128,12 @@ RSpec.describe Menu, type: :model do
       end
     end
   end
+
+  describe 'Instance methods' do
+    describe '#formatted_name' do
+      it 'カテゴリと価格を結合した文字列を返す' do
+        expect(menu.formatted_name).to eq("#{menu.category}:#{menu.price}""#{I18n.t('yen')}")
+      end
+    end
+  end
 end

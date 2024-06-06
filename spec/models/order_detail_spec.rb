@@ -100,4 +100,32 @@ RSpec.describe OrderDetail, type: :model do
       end
     end
   end
+
+  describe 'Instance method' do
+    describe '#order_price' do
+      let(:menu) { create(:menu, price: 100) }
+      let(:order_detail) { build(:order_detail, menu: menu, quantity: 2) }
+
+      it 'オーダーの値段が返ってくる' do
+        expect(order_detail.order_price).to eq 200
+      end
+    end
+  end
+
+  describe 'Class method' do
+    describe '.total_by_genre' do
+      let!(:food) { create(:menu, genre: 'food', price: 100) }
+      let!(:drink) { create(:menu, genre: 'drink', price: 200) }
+      let!(:receipt) { create(:receipt) }
+
+      before do
+        create(:order_detail, menu: food, receipt:, quantity: 2)
+        create(:order_detail, menu: drink, receipt:, quantity: 3)
+      end
+
+      it 'ジャンルごとの合計金額が返ってくる' do
+        expect(OrderDetail.total_by_genre(receipt)).to eq({ 'food' => 200, 'drink' => 600 })
+      end
+    end
+  end
 end
