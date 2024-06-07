@@ -11,3 +11,7 @@ ja:
       status:
         unrecorded: 未計上
         recorded: 計上済
+    expenditure:
+      status:
+        unrecorded: 未計上
+        recorded: 計上済
