@@ -6,7 +6,7 @@ class ExpenditurePolicy < ApplicationPolicy
   end
 
   def create?
-    user.common?
+    index?
   end
 
   def update?
@@ -14,7 +14,7 @@ class ExpenditurePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.common? && user.id == record.user_id
+    update?
   end
 
   def permitted_attributes

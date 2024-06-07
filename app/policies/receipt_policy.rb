@@ -14,7 +14,7 @@ class ReceiptPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.common? && user.id == record.user_id
+    update?
   end
 
   def permitted_attributes_for_create
