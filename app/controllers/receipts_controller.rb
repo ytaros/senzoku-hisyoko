@@ -6,7 +6,7 @@ class ReceiptsController < ApplicationController
   before_action :set_total_values_by_genre, only: [:edit, :update]
 
   def index
-    @receipts = policy_scope(Receipt)
+    @receipts = policy_scope(Receipt).order(created_at: :desc)
     @receipt = current_user.receipts.new
   end
 
@@ -49,7 +49,7 @@ class ReceiptsController < ApplicationController
   private
 
   def set_receipt
-    @receipt = policy_scope(Receipt)&.find(params[:id])
+    @receipt = Receipt.find(params[:id])
   end
 
   def set_order_detail_and_menus

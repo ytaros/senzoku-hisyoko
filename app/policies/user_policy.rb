@@ -14,7 +14,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || (user.common? && user.id == record.id)
+    show?
   end
 
   def destroy?

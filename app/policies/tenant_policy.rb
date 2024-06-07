@@ -6,19 +6,19 @@ class TenantPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin?
+    index?
   end
 
   def create?
-    user.admin?
+    index?
   end
 
   def update?
-    user.admin?
+    index?
   end
 
   def destroy?
-    user.admin?
+    index?
   end
 
   def permitted_attributes

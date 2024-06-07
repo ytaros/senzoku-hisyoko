@@ -6,7 +6,7 @@ class OrderDetailPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.common?
+    create?
   end
 
   def permitted_attributes

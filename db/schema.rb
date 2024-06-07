@@ -12,11 +12,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_240_528_140_013) do
+ActiveRecord::Schema[7.0].define(version: 20_240_606_145_413) do
   create_table 'admins', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'login_id', null: false
     t.string 'password_digest', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  create_table 'expenditures', force: :cascade do |t|
+    t.integer 'expense_value', null: false
+    t.string 'status', default: '0', null: false
+    t.date 'compiled_at'
+    t.date 'recorded_at', null: false
+    t.integer 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end

@@ -14,11 +14,11 @@ class MenuPolicy < ApplicationPolicy
   end
 
   def update?
-    user.common? && user.tenant_id == record.tenant_id
+    show?
   end
 
   def destroy?
-    user.common? && user.tenant_id == record.tenant_id
+    show?
   end
 
   def permitted_attributes

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class ReceiptPolicy < ApplicationPolicy
+class ExpenditurePolicy < ApplicationPolicy
   def index?
     user.common?
   end
 
   def create?
-    user.common?
+    index?
   end
 
   def update?
@@ -17,12 +17,8 @@ class ReceiptPolicy < ApplicationPolicy
     update?
   end
 
-  def permitted_attributes_for_create
-    [:user_id, :status, :recorded_at]
-  end
-
-  def permitted_attributes_for_update
-    [:food_value, :drink_value, :total_value, :user_id, :status, :compiled_at, :recorded_at]
+  def permitted_attributes
+    [:user_id, :status, :expense_value, :recorded_at, :compiled_at]
   end
 
   class Scope < Scope

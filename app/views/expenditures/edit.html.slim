@@ -1,0 +1,11 @@
+- provide :title, "#{Expenditure.model_name.human}#{t('edit')}"
+
+.container
+  .text-center
+    h1 = "#{Expenditure.model_name.human}#{t('edit')}"
+
+  .card
+    .card-body
+      = render 'form', tenant: @expenditure
+
+  = link_to t('back_to', action: t('index')), expenditures_path, class: 'btn btn-outline-secondary mt-2'
