@@ -49,7 +49,7 @@ class ReceiptsController < ApplicationController
   private
 
   def set_receipt
-    @receipt = policy_scope(Receipt)&.find(params[:id])
+    @receipt = Receipt.find(params[:id])
   end
 
   def set_order_detail_and_menus
