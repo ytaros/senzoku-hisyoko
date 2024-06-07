@@ -7,6 +7,7 @@ ja:
       menu: メニュー
       receipt: 伝票
       order_detail: オーダー
+      expenditure: 経費
     attributes:
       admin:
         name: 名前
@@ -35,6 +36,11 @@ ja:
       order_detail:
         menu_id: メニュー
         quantity: 注文数
+      expenditure:
+        compiled_at: 集計日
+        expense_value: 支出
+        status: ステータス
+        recorded_at: 記録日
     errors:
       models:
         admin:
