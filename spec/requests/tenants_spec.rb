@@ -179,7 +179,7 @@ RSpec.describe 'Tenants', type: :request do
       let!(:tenant) { create(:tenant) }
       subject(:action) { delete tenant_path(tenant) }
 
-      it 'テナントが削除される' do
+      it 'ホーム画面にリダイレクトする' do
         expect { action }.not_to change(Tenant, :count)
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
