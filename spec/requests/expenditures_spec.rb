@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Expenditures", type: :request do
-  let(:valid_attributes) { { expense_value: 1000, recorded_at: Date.today, status: :unrecorded} }
+RSpec.describe 'Expenditures', type: :request do
+  let(:valid_attributes) { { expense_value: 1000, recorded_at: Date.today, status: :unrecorded } }
   let(:invalid_attributes) { { expense_value: nil, recorded_at: Date.today, status: :unrecorded } }
 
   before { login(user) }
@@ -131,7 +133,7 @@ RSpec.describe "Expenditures", type: :request do
       subject(:action) { patch expenditure_path(expenditure), params: { expenditure: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { { expense_value: 10000, status: :unrecorded} }
+        let(:attributes) { { expense_value: 10_000, status: :unrecorded } }
 
         it 'テナントが更新される' do
           expect { action }.to change { expenditure.reload.expense_value }.from(expenditure.expense_value).to(attributes[:expense_value])

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExpendituresController < ApplicationController
   before_action :set_expenditure, only: [:edit, :update, :destroy]
   before_action :authorize_expenditure
@@ -5,7 +7,6 @@ class ExpendituresController < ApplicationController
   def index
     @expenditures = policy_scope(Expenditure).order(created_at: :desc)
   end
-
 
   def new
     @expenditure = current_user.expenditures.new
