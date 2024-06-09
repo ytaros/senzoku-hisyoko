@@ -81,4 +81,29 @@ RSpec.describe 'FinancialSummaryService', type: :service do
       end
     end
   end
+
+  describe '.compile' do
+    context 'when unrecorded receipt and expenditure exist' do
+      let!(:receipt) { create(:receipt, recorded_at: date, compiled_at:nil, status: 'unrecorded') }
+      let!(:expenditure) { create(:expenditure, recorded_at: date, compiled_at:nil, status: 'unrecorded') }
+
+      it 'レコードが集計される' do
+        FinancialSummaryService.compile_for_date(date)
+        expect(receipt.reload.compiled_at).to eq Date.current
+        expect(expenditure.reload.compiled_at).to eq Date.current
+        expect(receipt.reload.status).to eq 'recorded'
+        expect(expenditure.reload.status).to eq 'recorded'
+      end
+    end
+
+    context 'when unrecorded receipt and expenditure do not exist' do
+      let!(:receipt) { create(:receipt, recorded_at: date, compiled_at: date, status: 'recorded') }
+      let!(:expenditure) { create(:expenditure, recorded_at: date, compiled_at: date, status: 'recorded') }
+
+      it 'returns false' do
+        result = FinancialSummaryService.compile_for_date(date)
+        expect(result).to be_falsey
+      end
+    end
+  end
 end
