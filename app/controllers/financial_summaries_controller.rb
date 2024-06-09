@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FinancialSummariesController < ApplicationController
   before_action :authorize_financial
 
@@ -33,7 +35,8 @@ class FinancialSummariesController < ApplicationController
   end
 
   def parse_month(month)
-    Date.strptime(month, '%Y-%m') rescue nil
+    Date.strptime(month, '%Y-%m')
+  rescue StandardError
+    nil
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FinancialSummaryService
   attr_reader :date, :total_revenue, :total_expense, :profit
 
@@ -5,7 +7,7 @@ class FinancialSummaryService
     @date = date
   end
 
-  #simple_calendarのeventオブジェクトに持たせる
+  # simple_calendarのeventオブジェクトに持たせる
   def start_time
     date
   end
@@ -34,13 +36,13 @@ class FinancialSummaryService
     summarize_by_period(month, :monthly)
   end
 
-  #受け取るタイプによって、日次または月次の集計を行う
+  # 受け取るタイプによって、日次または月次の集計を行う
   def self.summarize_by_period(period, type)
     receipts = type == :daily ? Receipt.where(recorded_at: period) : Receipt.for_month(period)
     expenditures = type == :daily ? Expenditure.where(recorded_at: period) : Expenditure.for_month(period)
 
     total_revenue = receipts.sum { |receipt| (receipt.food_value || 0) + (receipt.drink_value || 0) }
-    total_expense = expenditures.sum { |expenditure| expenditure.expense_value }
+    total_expense = expenditures.sum(&:expense_value)
     profit = total_revenue - total_expense
 
     if type == :daily
