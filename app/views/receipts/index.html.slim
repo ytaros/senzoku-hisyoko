@@ -39,8 +39,8 @@
                 td = receipt.food_value
                 td = receipt.drink_value
                 td = receipt.status_i18n
-                - if receipt.unrecorded?
-                  td
+                td
+                  - if receipt.unrecorded?
                     = link_to t('edit'), edit_receipt_path(receipt), class: 'btn btn-primary'
                     = link_to t('delete'), receipt_path(receipt),class: 'btn btn-danger ms-2', data: { turbo_method: :delete, turbo_confirm: t('ask_delete') }
 
