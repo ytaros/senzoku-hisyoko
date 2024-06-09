@@ -38,4 +38,6 @@ class Receipt < ApplicationRecord
   validates :status, presence: true
   validates :recorded_at, presence: true, on: :create
   validates :user_id, presence: true, on: :create
+
+  scope :for_month, ->(month) { where(recorded_at: month.beginning_of_month..month.end_of_month).where.not(compiled_at: nil) }
 end
