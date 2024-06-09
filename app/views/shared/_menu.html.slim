@@ -12,7 +12,7 @@
   = link_to "#{Expenditure.model_name.human}#{t('management')}", expenditures_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-chart-pie.fa-fw.me-3
-  = link_to '財務情報', '#', class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+  = link_to t('.financial_summary'), financial_summaries_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
 .mt-3.ms-2
   i.fa-solid.fa-right-from-bracket.fa-fw.me-3
   = link_to t('logout'), logout_path, class: 'link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover', data: { turbo_method: :delete }

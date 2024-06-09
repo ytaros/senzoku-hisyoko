@@ -1,0 +1,47 @@
+.container
+  h3 = t('.title')
+  #form
+    .row
+      .col-6
+        = simple_form_for :compile, url: compile_financial_summaries_path, method: :post, html: {class: "form-inline" } do |f|
+          .form-group.mb-2.
+            = f.input :date, as: :date, label: t('.select_date_to_compile'), input_html: { class: "form-control" }, html5: true
+          .form-group.mb-2
+            = f.button :submit, t('.compile'), class: "btn btn-primary"
+      .col-6
+        = simple_form_for :financial_summaries, url: financial_summaries_path, method: :get, html: { class: "form-inline" } do |f|
+          .form-group.mb-2
+            = f.input :month, as: :date, label: t('.select_month'), input_html: {name: 'month', type: 'month', value: params[[:month]], class: "form-control" }, html5: true
+          .form-group.mb-2
+            = f.button :submit, t('.change_to_month'), class: "btn btn-primary"
+
+  #monthly-summary
+    .row
+      .col-md-6
+        .card
+          .card-header
+            h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
+          .card-body
+            .row.mb-3
+              .col-12
+                .mb-1
+                  = "#{t('.total_revenue')}:#{@monthly_summary[:total_revenue]}"
+              .col-12
+                .mb-1
+                  = "#{t('.total_expense')}:#{@monthly_summary[:total_expense]} "
+              .col-12
+                .mb-1
+                  = "#{t('.total_profit')}: #{@monthly_summary[:profit]}"
+      .col-md-6
+        .card
+          .card-header
+            h4.text-center = l @month, format: :calender
+          .card-body
+            = month_calendar(events: @summaries, start_date: @month) do |date, events|
+              - event = events.find { |e| e.date == date }
+              - if event
+                = link_to date.day, date_financial_summaries_path(date: event.date)
+              - else
+                = date.day
+  .mt-2
+    = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'

@@ -1,0 +1,17 @@
+.container
+  .card
+    .card-header
+      h1 = "#{t('.daily_summary', date: l(@daily_summary[:date], format: :long))}"
+    .card-body
+      .row.mb-3
+        .col-12
+          .mb-1
+            = "#{t('.total_revenue')}:#{@daily_summary[:total_revenue]}"
+        .col-12
+          .mb-1
+            = "#{t('.total_expense')}:#{@daily_summary[:total_expense]} "
+        .col-12
+          .mb-1
+            = "#{t('.total_profit')}: #{@daily_summary[:profit]}"
+  .mt-2
+  = link_to t('back_to', action: t('index')), financial_summaries_path(month: @daily_summary), class: 'btn btn-outline-primary ms-auto me-2'
