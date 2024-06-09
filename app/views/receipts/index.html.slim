@@ -35,9 +35,9 @@
           tbody
             - @receipts&.each do |receipt|
               tr
-                td = receipt.recorded_at
-                td = receipt.food_value
-                td = receipt.drink_value
+                td = l receipt.recorded_at, format: :long
+                td = "#{receipt.food_value}#{t('yen')}"
+                td = "#{receipt.drink_value}#{t('yen')}"
                 td = receipt.status_i18n
                 td
                   - if receipt.unrecorded?

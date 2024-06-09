@@ -17,7 +17,7 @@
 
   #monthly-summary
     .row
-      .col-md-6
+      .col-md-6.mt-2
         .card
           .card-header
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
@@ -25,15 +25,15 @@
             .row.mb-3
               .col-12
                 .mb-1
-                  = "#{t('.total_revenue')}:#{@monthly_summary[:total_revenue]}"
+                  = "#{t('.total_revenue')}:#{@monthly_summary[:total_revenue]}#{t('yen')}"
               .col-12
                 .mb-1
-                  = "#{t('.total_expense')}:#{@monthly_summary[:total_expense]} "
+                  = "#{t('.total_expense')}:#{@monthly_summary[:total_expense]}#{t('yen')}"
               .col-12
                 .mb-1
-                  = "#{t('.total_profit')}: #{@monthly_summary[:profit]}"
+                  = "#{t('.total_profit')}:#{@monthly_summary[:profit]}#{t('yen')}"
 
-      #calender.col-md-6
+      #calender.col-md-6.mt-2
         .card
           .card-header
             h4.text-center = l @month, format: :calender
@@ -41,8 +41,10 @@
             = month_calendar(events: @summaries, start_date: @month) do |date, events|
               - event = events.find { |e| e.date == date }
               - if event
-                = link_to date.day, date_financial_summaries_path(date: event.date)
+                = link_to date.day, date_financial_summaries_path(date: event.date), class: 'fw-bold text-info-emphasis text-decoration-none'
+                br
+                i.fa-solid.fa-money-check-dollar style="color: #3208af;"
               - else
-                = date.day
+                .mb-3 = date.day
   .mt-2
     = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'

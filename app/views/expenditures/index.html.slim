@@ -17,8 +17,8 @@
         tbody
           - @expenditures&.each do |expenditure|
             tr
-              td = expenditure.recorded_at
-              td = expenditure.expense_value
+              td = l expenditure.recorded_at, format: :long
+              td = "#{expenditure.expense_value}#{t('yen')}"
               td = expenditure.status_i18n
               td
                 - if expenditure.unrecorded?
