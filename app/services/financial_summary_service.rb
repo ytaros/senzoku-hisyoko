@@ -15,7 +15,7 @@ class FinancialSummaryService
     receipts = Receipt.for_month(month)
     expenditures = Expenditure.for_month(month)
 
-    # レシートと経費の両方の日付を結合し、一意の日付リスト（配列）を作成
+    # 一意の日付リスト（配列）を作成
     summary_dates = (receipts.pluck(:recorded_at) + expenditures.pluck(:recorded_at)).uniq
 
     # FinancialSummaryServiceオブジェクトとして一意の日付を返す
