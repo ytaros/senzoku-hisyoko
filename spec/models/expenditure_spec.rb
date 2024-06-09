@@ -82,4 +82,18 @@ RSpec.describe Expenditure, type: :model do
       end
     end
   end
+
+  describe 'Scope' do
+    describe '.for_month' do
+      let(:month) { Date.new(2024, 6, 1) }
+      let(:expenditure_a) { create(:expenditure, recorded_at: '2024-06-01', compiled_at: '2024-06-01') }
+      let(:expenditure_b) { create(:expenditure, recorded_at: '2024-06-01', compiled_at: nil) }
+      let(:expenditure_c) { create(:expenditure, recorded_at: '2024-05-30', compiled_at: '2024-06-01') }
+
+      it '2024年6月の集計済みのレコードが抽出される' do
+        expect(Expenditure.for_month(month)).to include(expenditure_a)
+        expect(Expenditure.for_month(month)).not_to include(expenditure_b, expenditure_c)
+      end
+    end
+  end
 end

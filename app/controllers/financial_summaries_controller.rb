@@ -6,6 +6,7 @@ class FinancialSummariesController < ApplicationController
   def index
     @month = parse_month(params[:month]) || Date.today.beginning_of_month
     @summaries = FinancialSummaryService.summarize(@month)
+    Rails.logger.debug "えーとこれは何。#{@summaries.class}"
     @monthly_summary = FinancialSummaryService.monthly_summary(@month)
   end
 

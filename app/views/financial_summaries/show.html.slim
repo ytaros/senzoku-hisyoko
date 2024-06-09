@@ -12,6 +12,6 @@
             = "#{t('.total_expense')}:#{@daily_summary[:total_expense]}#{t('yen')}"
         .col-12
           .mb-1
-            = "#{t('.total_profit')}: #{@daily_summary[:profit]}#{t('yen')}"
+            = "#{t('.total_profit')}:#{@daily_summary[:profit]}#{t('yen')}"
   .mt-2
   = link_to t('back_to', action: t('index')), financial_summaries_path(month: @daily_summary), class: 'btn btn-outline-primary ms-auto me-2'
