@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 20_240_606_145_413) do
 
   create_table 'expenditures', force: :cascade do |t|
     t.integer 'expense_value', null: false
-    t.string 'status', default: '0', null: false
+    t.integer 'status', default: 0, null: false
     t.date 'compiled_at'
     t.date 'recorded_at', null: false
     t.integer 'user_id', null: false

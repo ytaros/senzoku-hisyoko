@@ -1,6 +1,7 @@
 ja:
   shared:
-    header:
+    menu:
+      financial_summary: 収支情報
   homes:
     index:
       title: ホーム画面
@@ -35,3 +36,24 @@ ja:
     order_detail_form:
       select: 選択してください
       entry: 追加する
+  financial_summaries:
+    index:
+      title: 収支情報
+      select_date_to_compile: 集計日を選択
+      select_month: 表示する月を選択
+      change_to_month: カレンダー月を変更
+      compile: 集計する
+      summary: 集計
+      monthly_summary: "%{month}収支状況"
+      total_revenue: 売上合計
+      total_expense: 経費合計
+      total_profit: 利益合計
+    show:
+      daily_summary: "%{date}収支状況"
+      total_revenue: 売上合計
+      total_expense: 経費合計
+      total_profit: 利益合計
+    compile:
+      success: "%{summary_date}の収支情報を集計しました"
+      records_not_found: "%{summary_date}の収支情報の入力漏れがあります"
+      invalid_date: 集計する日付を入力してください

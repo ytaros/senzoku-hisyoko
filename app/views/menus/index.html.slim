@@ -4,7 +4,7 @@
   .text-center
     h1 = "#{Menu.model_name.human}#{t('index')}"
   - if policy(Menu).create?
-    = link_to t('.menu_register'), new_menu_path, class: 'btn btn-primary mb-2 btn-lg w-25'
+    = link_to t('.menu_register'), new_menu_path, class: 'btn btn-primary mb-2 w-25'
 
   .card.mb-3
     .card-body

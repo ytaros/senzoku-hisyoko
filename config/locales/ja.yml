@@ -33,6 +33,7 @@ ja:
       default: "%Y.%m.%d"
       long: "%Y年%m月%d日"
       short: "%m月%d日"
+      calender: "%Y年%m月"
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
