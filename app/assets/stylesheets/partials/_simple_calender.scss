@@ -1,0 +1,48 @@
+.simple-calendar {
+  background-color: #ffffff;
+  color: #000066;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: rgb(4, 25, 103);
+  }
+
+  td {
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    border: 1px solid #cbebff;
+    vertical-align: top;
+  }
+
+  .day {
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .day:hover {
+    background-color: #f5fbfe;
+  }
+
+  .wday-0, .wday-6 {
+    color: #f78994;
+  }
+
+  .wday-1, .wday-2, .wday-3, .wday-4, .wday-5 {
+    color: #000066;
+  }
+
+  .today {
+    background-color: hwb(51 92% 0% / 0.956);
+    color: #d2d1d1;
+  }
+}

@@ -8,21 +8,21 @@ ja:
   admin_sessions:
     new:
       title: 管理者ログイン
-      login_id: ログインID
-      password: パスワード
+      login_id: LOGIN ID
+      password: PASSWORD
   users:
     form:
       select_tenant: 店舗を選択してください
   sessions:
     new:
-      login_id: ログインID
-      password: パスワード
+      login_id: LOGIN ID
+      password: PASSWORD
       remember_me: ログイン状態を保持する
   menus:
     index:
-      menu_register: メニュー登録
-      food_menu: フードメニュー
-      drink_menu: ドリンクメニュー
+      menu_register: MENU登録
+      food_menu: FOOD MENU
+      drink_menu: DRINK MENU
   receipts:
     index:
       receipt_entry: 伝票入力フォームへ進む

@@ -18,8 +18,8 @@
   #monthly-summary
     .row
       .col-md-6.mt-2
-        .card
-          .card-header
+        .card.border-primary
+          .card-header.bg-transparent.border-primary
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
           .card-body
             .row.mb-3
@@ -34,8 +34,8 @@
                   = "#{t('.total_profit')}:#{@monthly_summary[:profit]}#{t('yen')}"
 
       #calender.col-md-6.mt-2
-        .card
-          .card-header
+        .card.border-primary
+          .card-header.bg-transparent.border-primary
             h4.text-center = l @month, format: :calender
           .card-body
             = month_calendar(events: @summaries, start_date: @month) do |date, events|
