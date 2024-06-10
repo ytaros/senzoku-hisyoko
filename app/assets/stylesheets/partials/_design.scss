@@ -1,0 +1,75 @@
+// フォント
+h1, h2, h3 {
+  font-weight: 500;
+  color: rgb(0, 24, 88);
+}
+
+p {
+  font-weight: 400;
+  color: rgb(96, 96, 96);
+}
+
+// ボタン
+.btn {
+  border-radius: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.btn-primary {
+  background-color: lighten($primary, 10%);
+  color: #fff;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.btn-danger {
+  background-color: lighten($danger, 10%);
+  color: #fff;
+
+  &:hover {
+    background-color: $danger;
+  }
+}
+
+// カード
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* 柔らかい影 */
+  border: 1px solid #cce7ff;
+  padding: 20px;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #000066;
+  text-align: center;
+}
+
+.card-body {
+  padding: 20px; /* ボディ部分の内側の余白 */
+  font-size: 1em; /* 通常の文字サイズ */
+  color: #000066; /* 落ち着いた青色の文字色 */
+}
+
