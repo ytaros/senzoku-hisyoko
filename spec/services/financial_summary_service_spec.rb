@@ -84,8 +84,8 @@ RSpec.describe 'FinancialSummaryService', type: :service do
 
   describe '.compile_for_date' do
     context 'when unrecorded receipt and expenditure exist' do
-      let!(:receipt) { create(:receipt, recorded_at: date, compiled_at:nil, status: 'unrecorded') }
-      let!(:expenditure) { create(:expenditure, recorded_at: date, compiled_at:nil, status: 'unrecorded') }
+      let!(:receipt) { create(:receipt, recorded_at: date, compiled_at: nil, status: 'unrecorded') }
+      let!(:expenditure) { create(:expenditure, recorded_at: date, compiled_at: nil, status: 'unrecorded') }
 
       it 'レコードが集計される' do
         FinancialSummaryService.compile_for_date(date)
