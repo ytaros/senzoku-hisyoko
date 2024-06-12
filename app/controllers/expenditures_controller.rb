@@ -5,7 +5,7 @@ class ExpendituresController < ApplicationController
   before_action :authorize_expenditure
 
   def index
-    @expenditures = policy_scope(Expenditure).order(created_at: :desc)
+    @pagy, @expenditures = pagy(policy_scope(Expenditure).order(created_at: :desc))
   end
 
   def new

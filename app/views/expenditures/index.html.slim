@@ -24,5 +24,6 @@
                 - if expenditure.unrecorded?
                   = link_to t('edit'), edit_expenditure_path(expenditure), class: 'btn btn-primary'
                   = link_to t('delete'), expenditure_path(expenditure), class: 'btn btn-danger ms-2', data: { turbo_method: :delete, turbo_confirm: t('ask_delete') }
+      .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy)
 
   = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
