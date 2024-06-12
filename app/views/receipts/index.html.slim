@@ -10,9 +10,6 @@
       .card-body
         h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
         = simple_form_for(@receipt, url: receipts_path, method: :post) do |f|
-          = f.error_notification
-          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
           .form-inputs
             .mt-2
               = f.input :recorded_at, label: t('.select_record_date'), input_html: { class: 'form-control' }, html5: true
