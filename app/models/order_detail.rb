@@ -44,7 +44,7 @@ class OrderDetail < ApplicationRecord
     where(receipt_id: receipt.id).joins(:menu).group('menus.genre').sum('menus.price * order_details.quantity')
   end
 
-  #　 円グラフで使用
+  # 　 円グラフで使用
   def self.format_data_for_period(scope_name, period)
     order_details = send(scope_name, period).includes(:menu)
     # menu_idごとにorder_detailsをグループ化して各グループの数量を合計
@@ -52,10 +52,9 @@ class OrderDetail < ApplicationRecord
     # メニュー情報をmenu_idをキーとして事前に取得し、検索用のハッシュを作成
     menu_lookup = Menu.where(id: order_details.map(&:menu_id).uniq).index_by(&:id)
     # 各menu_idに対応するメニュー情報を用いて、キーをフォーマット化
-    formatted_data = grouped_details.transform_keys do |menu_id|
+    grouped_details.transform_keys do |menu_id|
       menu = menu_lookup[menu_id]
       "#{menu.category}: #{menu.price}#{I18n.t('yen')}"
     end
-    formatted_data
   end
 end

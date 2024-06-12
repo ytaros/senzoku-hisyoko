@@ -55,10 +55,10 @@ gem 'cssbundling-rails'
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'chartkick'
 gem 'enum_help'
 gem 'simple_calendar'
 gem 'simple_form'
-gem "chartkick"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
