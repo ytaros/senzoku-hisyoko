@@ -6,8 +6,8 @@ class MenusController < ApplicationController
 
   def index
     menus = policy_scope(Menu).order(price: :desc)
-    @food_menus = menus.select(&:food?)
-    @drink_menus = menus.select(&:drink?)
+    @pagy_food, @food_menus = pagy(menus.where(genre: 'food'), items: 5)
+    @pagy_drink, @drink_menus = pagy(menus.where(genre: 'drink'), items: 5)
   end
 
   def show; end

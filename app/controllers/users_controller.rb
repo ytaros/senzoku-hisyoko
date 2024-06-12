@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :user_authorize
 
   def index
-    @users = policy_scope(User)
+    @pagy, @users = pagy(policy_scope(User))
   end
 
   def show; end

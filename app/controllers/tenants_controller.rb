@@ -5,7 +5,7 @@ class TenantsController < ApplicationController
   before_action :tenant_authorize
 
   def index
-    @tenants = Tenant.all
+    @pagy, @tenants = pagy(Tenant.all)
   end
 
   def new
