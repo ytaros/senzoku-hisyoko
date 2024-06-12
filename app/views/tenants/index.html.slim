@@ -22,6 +22,7 @@
               td = tenant.industry_i18n
               td
                 = link_to t('show'), tenant_path(tenant), class: 'btn btn-primary btn-sm'
-      .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy)
+      - if @pagy
+        .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy)
 
   = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
