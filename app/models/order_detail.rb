@@ -29,6 +29,11 @@ class OrderDetail < ApplicationRecord
   validates :menu_id, presence: true
   validates :receipt_id, presence: true
 
+  scope :food_for_day, ->(date) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day }) }
+  scope :drink_for_day, ->(date) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day }) }
+  scope :food_for_month, ->(month) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month }) }
+  scope :drink_for_month, ->(month) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month }) }
+
   # 特定の注文の合計金額を返す
   def order_price
     menu.price * quantity
@@ -37,5 +42,20 @@ class OrderDetail < ApplicationRecord
   # ジャンルごとに合計金額を計算する
   def self.total_by_genre(receipt)
     where(receipt_id: receipt.id).joins(:menu).group('menus.genre').sum('menus.price * order_details.quantity')
+  end
+
+  #　 円グラフで使用
+  def self.format_data_for_period(scope_name, period)
+    order_details = send(scope_name, period).includes(:menu)
+    # menu_idごとにorder_detailsをグループ化して各グループの数量を合計
+    grouped_details = order_details.group_by(&:menu_id).transform_values { |details| details.sum(&:quantity) }
+    # メニュー情報をmenu_idをキーとして事前に取得し、検索用のハッシュを作成
+    menu_lookup = Menu.where(id: order_details.map(&:menu_id).uniq).index_by(&:id)
+    # 各menu_idに対応するメニュー情報を用いて、キーをフォーマット化
+    formatted_data = grouped_details.transform_keys do |menu_id|
+      menu = menu_lookup[menu_id]
+      "#{menu.category}: #{menu.price}#{I18n.t('yen')}"
+    end
+    formatted_data
   end
 end
