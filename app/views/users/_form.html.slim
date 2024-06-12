@@ -5,7 +5,7 @@
     .mt-2
       = f.input :login_id, input_html: { class: 'form-control' }
     .mt-2
-      = f.association :tenant, input_html: { class: 'form-control' }, collection: Tenant.all, prompt: t('.select_tenant')
+      = f.input :tenant_id, input_html: { class: 'form-control' }, collection: Tenant.all, prompt: t('.select_tenant')
     .mt-2
       = f.input :password, input_html: { class: 'form-control' }
     .mt-2
