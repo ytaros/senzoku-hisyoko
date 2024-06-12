@@ -23,15 +23,20 @@
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
           .card-body
             .row.mb-3
-              .col-12
+              .col-4
                 .mb-1
                   = "#{t('.total_revenue')}:#{@monthly_summary[:total_revenue]}#{t('yen')}"
-              .col-12
+              .col-4
                 .mb-1
                   = "#{t('.total_expense')}:#{@monthly_summary[:total_expense]}#{t('yen')}"
-              .col-12
+              .col-4
                 .mb-1
                   = "#{t('.total_profit')}:#{@monthly_summary[:profit]}#{t('yen')}"
+            .row.mt-4.mb-4
+              .col-6.mb-1
+                = pie_chart  @formatted_food_for_month
+              .col-6.mb-1
+                = pie_chart @formatted_drink_for_month
 
       #calender.col-md-6.mt-2
         .card.border-primary

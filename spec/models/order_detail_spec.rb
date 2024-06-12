@@ -127,5 +127,43 @@ RSpec.describe OrderDetail, type: :model do
         expect(OrderDetail.total_by_genre(receipt)).to eq({ 'food' => 200, 'drink' => 600 })
       end
     end
+
+    describe '.format_data_for_period' do
+      context 'with month' do
+        let(:food) { create(:menu, id: 1, genre: :food, category: 'food', price: 100) }
+        let(:drink) { create(:menu, id: 2, genre: :drink, category: 'drink', price: 200) }
+        let(:receipt_a) { create(:receipt, compiled_at: Date.new(2024, 6, 3)) }
+        let(:receipt_b) { create(:receipt, compiled_at: Date.new(2024, 6, 2)) }
+        let(:month) { Date.new(2024, 6, 1) }
+
+        before do
+          create(:order_detail, menu: food, receipt: receipt_a, quantity: 5)
+          create(:order_detail, menu: drink, receipt: receipt_a, quantity: 3)
+          create(:order_detail, menu: food, receipt: receipt_b, quantity: 3)
+          create(:order_detail, menu: drink, receipt: receipt_b, quantity: 2)
+        end
+
+        it 'キーがフォーマット化され、値が合計されたハッシュで返ってくる' do
+          expect(OrderDetail.format_data_for_period(:food_for_month, month)).to eq({ 'food: 100円' => 8 })
+          expect(OrderDetail.format_data_for_period(:drink_for_month, month)).to eq({ 'drink: 200円' => 5 })
+        end
+      end
+
+      context 'with day' do
+        let!(:food) { create(:menu, genre: :food, category: 'food', price: 100) }
+        let!(:drink) { create(:menu, genre: :drink, category: 'drink', price: 200) }
+        let!(:receipt) { create(:receipt, recorded_at: 1.days.ago, compiled_at: 1.days.ago) }
+
+        before do
+          create(:order_detail, menu: food, receipt:, quantity: 2)
+          create(:order_detail, menu: drink, receipt:, quantity: 3)
+        end
+
+        it 'キーがフォーマット化され、値が合計されたハッシュで返ってくる' do
+          expect(OrderDetail.format_data_for_period(:food_for_day, receipt.recorded_at)).to eq({ 'food: 100円' => 2 })
+          expect(OrderDetail.format_data_for_period(:drink_for_day, receipt.recorded_at)).to eq({ 'drink: 200円' => 3 })
+        end
+      end
+    end
   end
 end

@@ -7,11 +7,15 @@ class FinancialSummariesController < ApplicationController
     @month = parse_month(params[:month]) || Date.today.beginning_of_month
     @summaries = FinancialSummaryService.summarize(@month)
     @monthly_summary = FinancialSummaryService.monthly_summary(@month)
+    @formatted_food_for_month = OrderDetail.format_data_for_period(:food_for_month, @month)
+    @formatted_drink_for_month = OrderDetail.format_data_for_period(:drink_for_month, @month)
   end
 
   def show
-    date = Date.parse(params[:date])
-    @daily_summary = FinancialSummaryService.daily_summary(date)
+    @date = Date.parse(params[:date])
+    @daily_summary = FinancialSummaryService.daily_summary(@date)
+    @formatted_food_for_day = OrderDetail.format_data_for_period(:food_for_day, @date)
+    @formatted_drink_for_day = OrderDetail.format_data_for_period(:drink_for_day, @date)
   end
 
   def compile
