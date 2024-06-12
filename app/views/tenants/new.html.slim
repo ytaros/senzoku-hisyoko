@@ -3,7 +3,7 @@
 .container
   .text-center
     h1 = "#{Tenant.model_name.human}#{t('new')}"
-  
+
   .card
     .card-body
       = render 'form', tenant: @tenant
