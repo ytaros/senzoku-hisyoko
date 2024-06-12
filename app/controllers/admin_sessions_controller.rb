@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AdminSessionsController < ApplicationController
+  skip_before_action :logged_in_user, only: [:new, :create]
   skip_after_action :verify_authorized
   skip_before_action :logged_in_user
 

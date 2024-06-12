@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def logged_in_user
     return if logged_in?
 
-    flash[:danger] = t('please_log_in')
+    flash[:danger] = t('please_login')
     redirect_to login_url, status: :see_other
   end
 end

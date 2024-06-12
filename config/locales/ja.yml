@@ -28,6 +28,8 @@ ja:
   login_failed: ログインに失敗しました
   logout_success: ログアウトに成功しました
 
+  please_login: ログインしてください
+
   date:
     formats:
       default: "%Y.%m.%d"
