@@ -31,9 +31,8 @@ class User < ApplicationRecord
   attr_accessor :remember_token
 
   validates :name, presence: true, length: { maximum: 10 }
-  validates :login_id, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }, confirmation: true # 正規表現でパスワードの強度をチェックする
-  validates :tenant_id, presence: true, on: :create
+  validates :login_id, presence: true, uniqueness: true, length: { minimum: 8 }, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: :login_id_format }
+  validates :password, presence: true, length: { minimum: 8 }, confirmation: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: :password_format }
 
   def admin?
     false

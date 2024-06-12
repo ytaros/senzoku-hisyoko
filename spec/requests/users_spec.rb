@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:tenant) { create(:tenant) }
-  let(:valid_attributes) { { name: 'サンプル', login_id: '12345678', password: 'password', password_confirmation: 'password', tenant_id: tenant.id } }
+  let(:valid_attributes) { { name: 'サンプル', login_id: 'abcd1234', password: 'pass1234', password_confirmation: 'pass1234', tenant_id: tenant.id } }
   let(:invalid_attributes) { { name: ' ', industry: 'standing_bar' } }
 
   describe 'with admin ' do
@@ -66,7 +66,7 @@ RSpec.describe 'Users', type: :request do
       subject(:action) { patch user_path(user_a), params: { user: attributes } }
 
       context 'with valid attribute' do
-        let(:attributes) { { name: 'テスト', password: 'password', password_confirmation: 'password' } }
+        let(:attributes) { { name: 'テスト', password: 'pass1234', password_confirmation: 'pass1234' } }
 
         it 'ユーザー情報の更新に成功する' do
           expect { action }.to change { user_a.reload.name }.from(user_a.name).to('テスト')
@@ -174,7 +174,7 @@ RSpec.describe 'Users', type: :request do
         subject(:action) { patch user_path(user), params: { user: attributes } }
 
         context 'with valid attribute' do
-          let(:attributes) { { name: 'テスト', password: 'password', password_confirmation: 'password' } }
+          let(:attributes) { { name: 'テスト', password: 'pass1234', password_confirmation: 'pass1234' } }
 
           it 'ユーザー情報の更新に成功する' do
             expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
