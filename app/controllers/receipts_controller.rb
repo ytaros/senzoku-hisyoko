@@ -16,9 +16,8 @@ class ReceiptsController < ApplicationController
     if @receipt.save
       redirect_to edit_receipt_path(@receipt)
     else
-      @receipts = policy_scope(Receipt)
-      flash.now[:danger] = "#{Receipt.model_name.human}#{t('create_failed')}"
-      render :index, status: :unprocessable_entity
+      flash[:danger] = "#{Receipt.model_name.human}#{t('create_failed')}"
+      redirect_to receipts_path
     end
   end
 

@@ -27,7 +27,7 @@ class Expenditure < ApplicationRecord
 
   scope :for_month, ->(month) { where(recorded_at: month.beginning_of_month..month.end_of_month).where.not(compiled_at: nil) }
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[recorded_at status]
   end
 end

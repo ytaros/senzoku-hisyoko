@@ -31,8 +31,8 @@ class User < ApplicationRecord
   attr_accessor :remember_token
 
   validates :name, presence: true, length: { maximum: 10 }
-  validates :login_id, presence: true, uniqueness: true, length: { minimum: 8 }, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: :login_id_format }
-  validates :password, presence: true, length: { minimum: 8 }, confirmation: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: :password_format }
+  validates :login_id, presence: true, uniqueness: true, length: { minimum: 8 }, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: :login_id_format }
+  validates :password, presence: true, length: { minimum: 8 }, confirmation: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: :password_format }
 
   def admin?
     false
@@ -76,11 +76,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[id name login_id tenant_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_auth_object = nil)
     %w[tenant]
   end
 end
