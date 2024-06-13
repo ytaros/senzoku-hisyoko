@@ -19,4 +19,12 @@ class Tenant < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :industry, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id industry name]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[menus users]
+  end
 end

@@ -5,7 +5,8 @@ class ExpendituresController < ApplicationController
   before_action :authorize_expenditure
 
   def index
-    @pagy, @expenditures = pagy(policy_scope(Expenditure).order(created_at: :desc))
+    @q = policy_scope(Expenditure).ransack(params[:q])
+    @pagy, @expenditures = pagy(@q.result.order(created_at: :desc))
   end
 
   def new
@@ -15,10 +16,11 @@ class ExpendituresController < ApplicationController
   def create
     @expenditure = current_user.expenditures.new(permitted_attributes(Expenditure))
     if @expenditure.save
+      flash[:success] = "#{Expenditure.model_name.human}#{t('create_success')}"
       redirect_to expenditures_path
     else
       flash.now[:danger] = "#{Expenditure.model_name.human}#{t('create_failed')}"
-      render :index, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

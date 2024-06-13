@@ -102,7 +102,8 @@ RSpec.describe 'Receipts', type: :request do
 
         it 'オブジェクトの作成に失敗する' do
           expect { action }.not_to change(Receipt, :count)
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to redirect_to receipts_path
+          follow_redirect!
           expect(response.body).to include('伝票の登録に失敗しました')
           expect(response.body).to include('伝票管理')
         end

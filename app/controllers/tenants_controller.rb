@@ -5,7 +5,8 @@ class TenantsController < ApplicationController
   before_action :tenant_authorize
 
   def index
-    @pagy, @tenants = pagy(Tenant.all)
+    @q = Tenant.ransack(params[:q])
+    @pagy, @tenants = pagy(@q.result)
   end
 
   def new

@@ -57,9 +57,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'chartkick'
 gem 'enum_help'
+gem 'pagy'
+gem 'ransack'
 gem 'simple_calendar'
 gem 'simple_form'
-gem 'pagy'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

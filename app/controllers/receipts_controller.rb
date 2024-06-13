@@ -6,7 +6,8 @@ class ReceiptsController < ApplicationController
   before_action :set_total_values_by_genre, only: [:edit, :update]
 
   def index
-    @pagy, @receipts = pagy(policy_scope(Receipt).order(created_at: :desc))
+    @q = policy_scope(Receipt).ransack(params[:q])
+    @pagy, @receipts = pagy(@q.result.order(created_at: :desc))
     @receipt = current_user.receipts.new
   end
 
@@ -15,9 +16,8 @@ class ReceiptsController < ApplicationController
     if @receipt.save
       redirect_to edit_receipt_path(@receipt)
     else
-      @receipts = policy_scope(Receipt)
-      flash.now[:danger] = "#{Receipt.model_name.human}#{t('create_failed')}"
-      render :index, status: :unprocessable_entity
+      flash[:danger] = "#{Receipt.model_name.human}#{t('create_failed')}"
+      redirect_to receipts_path
     end
   end
 

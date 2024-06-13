@@ -22,6 +22,7 @@ ja:
         login_id: ログインID
         password: パスワード
         password_confirmation: パスワード確認
+        tenant_id: 店舗名
       menu:
         category: メニュー名
         genre: ジャンル
@@ -47,3 +48,11 @@ ja:
           attributes:
             password_confirmation:
               confirmation: パスワードが一致しません
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: パスワードが一致しません
+            login_id:
+              login_id_format: は英数字混合である必要があります
+            password:
+              password_format: は英数字混合である必要があります

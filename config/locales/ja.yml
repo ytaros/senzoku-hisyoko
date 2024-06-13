@@ -27,7 +27,16 @@ ja:
   login_success: ログインに成功しました
   login_failed: ログインに失敗しました
   logout_success: ログアウトに成功しました
-
+  select: 選択してください
+  search: 検索
+  partial_match: 部分一致
+  start_day: 開始日
+  end_day: 終了日
+  otukaresama: |
+    %{user}さん、
+    お仕事お疲れ様でした♡
+    今日の収支を記録しましょう！
+  please_login: ログインしてください
   date:
     formats:
       default: "%Y.%m.%d"

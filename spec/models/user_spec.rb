@@ -73,6 +73,26 @@ RSpec.describe User, type: :model do
           it { expect(user.errors.messages[:login_id]).to include('はすでに存在します') }
         end
       end
+
+      describe 'length' do
+        before do
+          user.login_id = 'a' * 7
+          user.valid?
+        end
+        context 'with login_id is 7 characters' do
+          it { expect(user.errors.messages[:login_id]).to include('は8文字以上で入力してください') }
+        end
+      end
+
+      describe 'format' do
+        before do
+          user.login_id = 'sampleid'
+          user.valid?
+        end
+        context 'with login_id is not include alphabet and number' do
+          it { expect(user.errors.messages[:login_id]).to include('は英数字混合である必要があります') }
+        end
+      end
     end
 
     describe 'password' do
@@ -102,20 +122,17 @@ RSpec.describe User, type: :model do
           user.valid?
         end
         context 'with password_confirmation is not match' do
-          it { expect(user.errors.messages[:password_confirmation]).to include('とパスワードの入力が一致しません') }
+          it { expect(user.errors.messages[:password_confirmation]).to include('パスワードが一致しません') }
         end
       end
-      # 正規表現のバリデーションを調べて追加する
-    end
 
-    describe 'tenant_id' do
-      describe 'presence' do
-        let(:user) { build(:user, tenant_id: nil) }
-
-        before { user.valid? }
-
-        context 'with tenant_id is nil' do
-          it { expect(user.errors.messages[:tenant_id]).to include('を入力してください') }
+      describe 'format' do
+        before do
+          user.password = 'password'
+          user.valid?
+        end
+        context 'with password is not include alphabet and number' do
+          it { expect(user.errors.messages[:password]).to include('は英数字混合である必要があります') }
         end
       end
     end

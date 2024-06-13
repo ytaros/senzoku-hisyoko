@@ -28,7 +28,8 @@
               - if policy(menu).create?
                 td
                   = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
-      .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_food)
+      - if @pagy_food
+        .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_food)
 
   .card.mb-3.mt-5
     .card-body
@@ -52,6 +53,8 @@
               - if policy(menu).create?
                 td
                   = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
-      .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_drink)
+      - if @pagy_drink
+        .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_drink)
+
 
   = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'

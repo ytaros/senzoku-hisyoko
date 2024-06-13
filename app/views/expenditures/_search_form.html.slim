@@ -1,0 +1,16 @@
+= search_form_for @q do |f|
+  .row.align-items-center
+    .col-md-3
+      .form-group
+        = f.label :recorded_at_gteq, t('start_day'), class: 'form-label'
+        = f.date_field :recorded_at_gteq, class: 'form-control'
+    .col-md-3
+      .form-group
+        = f.label :recorded_at_lteq, t('end_day'), class: 'form-label'
+        = f.date_field :recorded_at_lteq, class: 'form-control'
+    .col-md-3
+      .form-group
+        = f.label :status, Expenditure.human_attribute_name(:status), class: 'form-label'
+        = f.select :status_eq, Expenditure.statuses.keys.map { |key, value| [Receipt.statuses_i18n[key], value] }, { include_blank: t('select') }, class: 'form-control'
+    .col-md-3.mt-4
+      = f.submit t('search'), class: 'btn btn-primary'

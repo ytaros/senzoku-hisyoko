@@ -1,2 +1,15 @@
 - provide :title, t('.title')
-h1.text-center.mt-5 = t('app_name')
+.container
+  h1.text-center
+    = current_tenant.name
+    br
+    = t('app_name')
+
+  .row.justify-content-center.mt-5
+    .col-md-4
+      .card.text-bg-light.mb-3 style="max-width: 30rem;"
+        .card-header.text-bg-light = l Date.today , format: :long
+        .card-body
+          .mt-3 =  simple_format(t('otukaresama', user: current_user.name))
+
+  = image_tag 'hisyoko.PNG', class: 'hisyoko-image'

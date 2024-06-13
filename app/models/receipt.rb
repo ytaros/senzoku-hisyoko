@@ -40,4 +40,12 @@ class Receipt < ApplicationRecord
   validates :user_id, presence: true, on: :create
 
   scope :for_month, ->(month) { where(recorded_at: month.beginning_of_month..month.end_of_month).where.not(compiled_at: nil) }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[recorded_at status]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[user order_details]
+  end
 end

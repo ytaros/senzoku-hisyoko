@@ -73,3 +73,19 @@ p {
   color: #000066; /* 落ち着いた青色の文字色 */
 }
 
+// ひしょ子
+.hisyoko-image {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+}
+
+@media (max-width: 768px) {
+  .hisyoko-image {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+  }
+}
