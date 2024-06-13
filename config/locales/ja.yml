@@ -32,9 +32,11 @@ ja:
   partial_match: 部分一致
   start_day: 開始日
   end_day: 終了日
-
+  otukaresama: |
+    %{user}さん、
+    お仕事お疲れ様でした♡
+    今日の収支を記録しましょう！
   please_login: ログインしてください
-
   date:
     formats:
       default: "%Y.%m.%d"
