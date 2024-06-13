@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   before_action :user_authorize
 
   def index
-    @pagy, @users = pagy(policy_scope(User))
+    @q = policy_scope(User).ransack(params[:q])
+    @pagy, @users = pagy(@q.result)
   end
 
   def show; end

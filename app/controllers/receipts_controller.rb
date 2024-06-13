@@ -6,7 +6,8 @@ class ReceiptsController < ApplicationController
   before_action :set_total_values_by_genre, only: [:edit, :update]
 
   def index
-    @pagy, @receipts = pagy(policy_scope(Receipt).order(created_at: :desc))
+    @q = policy_scope(Receipt).ransack(params[:q])
+    @pagy, @receipts = pagy(@q.result.order(created_at: :desc))
     @receipt = current_user.receipts.new
   end
 

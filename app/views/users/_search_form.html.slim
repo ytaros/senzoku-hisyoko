@@ -1,0 +1,16 @@
+= search_form_for @q do |f|
+  .row.align-items-center
+    .col-md-3
+      .form-group
+        = f.label :tenant_id, User.human_attribute_name(:tenant_id), class: 'form-label'
+        = f.collection_select :tenant_id_eq, Tenant.select(:id, :name), :id, :name, { include_blank: t('select') }, { class: 'form-select' }
+    .col-md-3
+      .form-group
+        = f.label :name_cont, User.human_attribute_name(:name), class: 'form-label'
+        = f.search_field :name_cont, placeholder: t('partial_match'), class: 'form-control'
+    .col-md-3
+      .form-group
+        = f.label :login_id_cont, User.human_attribute_name(:login_id), class: 'form-label'
+        = f.search_field :login_id_cont, placeholder: t('partial_match'), class: 'form-control'
+    .col-md-3.mt-4
+      = f.submit t('search'), class: 'btn btn-primary'

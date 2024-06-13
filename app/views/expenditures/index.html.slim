@@ -7,6 +7,10 @@
   .card
     .card-body
       = link_to t('new'), new_expenditure_path, class: 'btn btn-primary ms-auto mb-3'
+
+      #search-form.mt-3.mb-5
+        = render 'search_form'
+
       table.table
         thead
           tr

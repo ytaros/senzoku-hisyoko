@@ -1,0 +1,12 @@
+= search_form_for @q do |f|
+  .row.align-items-center
+    .col-md-4
+      .form-group
+        = f.label :industry_eq, Tenant.human_attribute_name(:industry), class: 'form-label'
+        = f.select :industry_eq, Tenant.industries.map { |key, value| [Tenant.industries_i18n[key], value] }, { include_blank: t('select') }, { class: 'form-select' }
+    .col-md-4
+      .form-group
+        = f.label :name_cont, Tenant.human_attribute_name(:name), class: 'form-label'
+        = f.search_field :name_cont, placeholder: t('partial_match'), class: 'form-control'
+    .col-md-4.mt-4
+      = f.submit t('search'), class: 'btn btn-primary'

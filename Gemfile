@@ -60,6 +60,7 @@ gem 'enum_help'
 gem 'simple_calendar'
 gem 'simple_form'
 gem 'pagy'
+gem 'ransack'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

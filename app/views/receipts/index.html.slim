@@ -21,6 +21,8 @@
     .card.mt-5
       .card-body
         h3 = "#{Receipt.model_name.human}#{t('index')}"
+        #search-form.mt-3.mb-5
+          = render 'search_form'
         table.table
           thead
             tr

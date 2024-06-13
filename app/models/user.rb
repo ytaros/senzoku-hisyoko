@@ -75,4 +75,12 @@ class User < ApplicationRecord
 
     update_attribute(:remember_digest, nil)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[id name login_id tenant_id]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[tenant]
+  end
 end
