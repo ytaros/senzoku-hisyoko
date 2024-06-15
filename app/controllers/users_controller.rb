@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = policy_scope(User).find_by(params[:id])
+    @user = User.find_by(params[:id])
   end
 
   def user_authorize
