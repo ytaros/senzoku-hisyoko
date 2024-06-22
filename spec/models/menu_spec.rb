@@ -141,7 +141,7 @@ RSpec.describe Menu, type: :model do
       let(:menu) { create(:menu, hidden_at: nil, tenant:) }
 
       it 'hidden_atに現在時刻が更新される' do
-        expect { menu.hide }.to change { menu.hidden_at }
+        expect { menu.hide }.to(change { menu.hidden_at })
       end
     end
   end
