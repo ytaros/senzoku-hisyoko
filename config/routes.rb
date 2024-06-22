@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :tenants
   resources :users
-  resources :menus
+  resources :menus do
+    patch :hide, on: :member
+  end
   resources :receipts
   resources :expenditures
   resources :order_details, only: [:create, :destroy]
