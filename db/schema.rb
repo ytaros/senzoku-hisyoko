@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 20_240_606_145_413) do
     t.string 'category', null: false
     t.integer 'price', null: false
     t.integer 'genre', null: false
+    t.datetime 'hidden_at'
     t.integer 'tenant_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false

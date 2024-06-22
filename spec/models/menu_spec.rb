@@ -7,6 +7,7 @@
 #  id         :integer          not null, primary key
 #  category   :string           not null
 #  genre      :integer          not null
+#  hidden_at  :datetime
 #  price      :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -133,6 +134,26 @@ RSpec.describe Menu, type: :model do
     describe '#formatted_name' do
       it 'カテゴリと価格を結合した文字列を返す' do
         expect(menu.formatted_name).to eq("#{menu.category}:#{menu.price}""#{I18n.t('yen')}")
+      end
+    end
+
+    describe '#hide' do
+      let(:menu) { create(:menu, hidden_at: nil, tenant:) }
+
+      it 'hidden_atに現在時刻が更新される' do
+        expect { menu.hide }.to(change { menu.hidden_at })
+      end
+    end
+  end
+
+  describe 'Scope' do
+    describe '.active' do
+      let!(:menu) { create(:menu, hidden_at: nil, tenant: tenant) }
+      let!(:hidden_menu) { create(:menu, hidden_at: Time.current, tenant: tenant) }
+
+      it 'hidden_atがnilのmenuを返す' do
+        expect(Menu.active).to include(menu)
+        expect(Menu.active).not_to include(hidden_menu)
       end
     end
   end

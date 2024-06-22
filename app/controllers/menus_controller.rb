@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MenusController < ApplicationController
-  before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_menu, only: [:show, :edit, :update, :hide]
   before_action :authorize_menu
 
   def index
@@ -38,9 +38,9 @@ class MenusController < ApplicationController
     end
   end
 
-  def destroy
-    @menu.destroy
-    flash[:success] = "#{Menu.model_name.human}#{t('delete_success')}"
+  def hide
+    @menu.hide
+    flash[:success] = "#{Menu.model_name.human}#{t('hide_success')}"
     redirect_to menus_path
   end
 

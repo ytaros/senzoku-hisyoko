@@ -71,12 +71,12 @@ RSpec.describe 'Menus', type: :request do
       end
     end
 
-    describe 'DELETE /destroy' do
+    describe 'DELETE /hide' do
       let!(:menu) { create(:menu) }
-      subject(:action) { delete menu_path(menu) }
+      subject(:action) { patch hide_menu_path(menu) }
 
       it 'ホーム画面にリダイレクトする' do
-        expect { action }.not_to change(Menu, :count)
+        expect { action }.not_to(change { menu.reload.hidden_at })
         expect(response).to redirect_to root_path
         expect(flash[:danger]).to include '操作権限がありません'
       end
@@ -170,13 +170,13 @@ RSpec.describe 'Menus', type: :request do
       end
     end
 
-    describe 'DELETE /destroy' do
-      let!(:menu) { create(:menu, tenant: tenant) }
+    describe 'DELETE /hide' do
+      let!(:menu) { create(:menu, tenant: tenant, hidden_at: nil) }
 
-      subject(:action) { delete menu_path(menu) }
+      subject(:action) { patch hide_menu_path(menu) }
 
-      it 'メニューが削除され、一覧に戻る' do
-        expect { action }.to change(Menu, :count).by(-1)
+      it 'メニューが無効化され、一覧に戻る' do
+        expect { action }.to change { menu.reload.hidden_at }.from(nil).to(be_present)
         expect(response).to redirect_to menus_path
         follow_redirect!
         expect(response.body).to include('メニュー一覧')
