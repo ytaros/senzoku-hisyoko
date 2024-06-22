@@ -7,6 +7,7 @@
 #  id         :integer          not null, primary key
 #  category   :string           not null
 #  genre      :integer          not null
+#  hidden_at  :datetime
 #  price      :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
