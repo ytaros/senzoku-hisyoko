@@ -136,5 +136,13 @@ RSpec.describe Menu, type: :model do
         expect(menu.formatted_name).to eq("#{menu.category}:#{menu.price}""#{I18n.t('yen')}")
       end
     end
+
+    describe '#hide' do
+      let(:menu) { create(:menu, hidden_at: nil, tenant:) }
+
+      it 'hidden_atに現在時刻が更新される' do
+        expect { menu.hide }.to change { menu.hidden_at }
+      end
+    end
   end
 end

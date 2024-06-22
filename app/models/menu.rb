@@ -39,4 +39,8 @@ class Menu < ApplicationRecord
   def formatted_name
     "#{category}:#{price}""#{I18n.t('yen')}"
   end
+
+  def hide
+    update(hidden_at: Time.current)
+  end
 end
