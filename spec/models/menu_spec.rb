@@ -145,4 +145,16 @@ RSpec.describe Menu, type: :model do
       end
     end
   end
+
+  describe 'Scope' do
+    describe '.active' do
+      let!(:menu) { create(:menu, hidden_at: nil, tenant: tenant) }
+      let!(:hidden_menu) { create(:menu, hidden_at: Time.current, tenant: tenant) }
+
+      it 'hidden_atがnilのmenuを返す' do
+        expect(Menu.active).to include(menu)
+        expect(Menu.active).not_to include(hidden_menu)
+      end
+    end
+  end
 end

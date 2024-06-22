@@ -22,7 +22,7 @@ RSpec.describe MenuPolicy, type: :policy do
     it { expect(described_class).to permit(user) }
   end
 
-  permissions :show?, :update?, :destroy? do
+  permissions :show?, :update?, :hide? do
     it { expect(described_class).not_to permit(admin, menu) }
     it { expect(described_class).to permit(user, menu) }
     it { expect(described_class).not_to permit(user, menu_a) }
@@ -35,6 +35,7 @@ RSpec.describe MenuPolicy, type: :policy do
 
   permissions :scope do
     let(:menu) { create(:menu, tenant_id: tenant.id) }
+    let(:hidden_menu) { create(:menu, tenant_id: tenant.id, hidden_at: Time.current) }
     let(:menu_a) { create(:menu, tenant_id: tenant_a.id) }
     it { expect(MenuPolicy::Scope.new(admin, Menu).resolve).to contain_exactly(menu, menu_a) }
     it { expect(MenuPolicy::Scope.new(user, Menu).resolve).to contain_exactly(menu) }

@@ -35,6 +35,8 @@ class Menu < ApplicationRecord
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 99_999 }
   validates :tenant_id, presence: true
 
+  scope :active, -> { where(hidden_at: nil) }
+
   # カテゴリと価格を結合した文字列を返す.viewで使用
   def formatted_name
     "#{category}:#{price}""#{I18n.t('yen')}"

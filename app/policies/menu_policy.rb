@@ -17,7 +17,7 @@ class MenuPolicy < ApplicationPolicy
     show?
   end
 
-  def destroy?
+  def hide?
     show?
   end
 
@@ -28,9 +28,9 @@ class MenuPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        scope.all
+        scope.active
       else
-        scope.where(tenant_id: user.tenant_id)
+        scope.where(tenant_id: user.tenant_id).active
       end
     end
   end
