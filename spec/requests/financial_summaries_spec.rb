@@ -37,13 +37,13 @@ RSpec.describe 'FinancialSummaries', type: :request do
 
   context 'with user' do
     let(:user) { create(:user) }
-    let(:month) { Date.new(2024, 6, 1) }
+    let(:month) { Date.today.beginning_of_month }
 
     describe 'GET /index' do
       context 'when summarized records exist' do
         before do
-          create(:receipt, user:, recorded_at: '2024-06-05', compiled_at: '2024-06-05', food_value: 1000, drink_value: 500)
-          create(:expenditure, user:, recorded_at: '2024-06-05', compiled_at: '2024-06-05', expense_value: 500)
+          create(:receipt, user:, recorded_at: month + 5.days, compiled_at: month + 5.days, food_value: 1000, drink_value: 500)
+          create(:expenditure, user:, recorded_at: month + 5.days, compiled_at: month + 5.days, expense_value: 500)
         end
 
         it '月次集計が表示され、集計日のリンクが表示される' do
@@ -53,7 +53,7 @@ RSpec.describe 'FinancialSummaries', type: :request do
           expect(response.body).to include('売上合計:1500円')
           expect(response.body).to include('経費合計:500円')
           expect(response.body).to include('利益合計:1000円')
-          expect(response.body).to include('5</a>')
+          expect(response.body).to include('6</a>')
         end
       end
 
