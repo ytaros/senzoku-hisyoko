@@ -56,6 +56,7 @@ gem 'cssbundling-rails'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'chartkick'
+gem 'dotenv'
 gem 'enum_help'
 gem 'pagy'
 gem 'ransack'
