@@ -6,6 +6,9 @@
 
   .card
     .card-body
+      .d-flex
+        = link_to t('edit'), edit_menu_path(@menu), class: 'btn btn-primary ms-auto me-2'
+        = link_to t('hide'), hide_menu_path(@menu), class: 'btn btn-secondary', data: { turbo_method: :patch, turbo_confirm: t('ask_hide') }
       dl.row
         dt.col-3 = Menu.human_attribute_name(:id)
         dd.col-9 = @menu.id
@@ -15,8 +18,5 @@
         dd.col-9 = @menu.category
         dt.col-3 = Menu.human_attribute_name(:price)
         dd.col-9 = @menu.price
-      .d-flex
-        = link_to t('edit'), edit_menu_path(@menu), class: 'btn btn-primary ms-auto me-2'
-        = link_to t('hide'), hide_menu_path(@menu), class: 'btn btn-secondary', data: { turbo_method: :patch, turbo_confirm: t('ask_hide') }
 
   = link_to t('back_to', action: t('index')), menus_path, class: 'btn btn-outline-secondary mt-2'

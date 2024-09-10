@@ -6,11 +6,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || (user.common? && user.id == record.id)
+    user.admin? || user.id == record.id
   end
 
   def create?
-    user.nil?
+    index?
   end
 
   def update?
@@ -18,7 +18,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    index?
   end
 
   def permitted_attributes_for_create
@@ -31,7 +31,7 @@ class UserPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      user.admin? ? scope.all : scope.where(id: user.id)
+      scope.all
     end
   end
 end
