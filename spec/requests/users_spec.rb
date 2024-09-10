@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :request do
 
     before { login(user) }
 
-    #　ユーザ
+    # 　ユーザ
     # describe 'GET /index' do
     #   it 'ユーザー一覧画面に遷移する' do
     #     get users_path
