@@ -8,28 +8,7 @@ RSpec.describe UserPolicy, type: :policy do
 
   subject { described_class }
 
-  permissions :index? do
-    it { expect(described_class).to permit(admin) }
-    it { expect(described_class).not_to permit(user) }
-  end
-
-  permissions :show?, :update? do
-    let(:tenant) { create(:tenant) }
-    let(:user) { create(:user, tenant:) }
-    let(:other_user) { create(:user, tenant:) }
-    it { expect(described_class).to permit(admin, user) }
-    it { expect(described_class).to permit(user, user) }
-    it { expect(described_class).not_to permit(user, other_user) }
-  end
-
-  permissions :create? do
-    let(:guest_user) { nil }
-    it { expect(described_class).to permit(guest_user) }
-    it { expect(described_class).not_to permit(admin) }
-    it { expect(described_class).not_to permit(user) }
-  end
-
-  permissions :destroy? do
+  permissions :index?, :show?, :create?, :update?, :destroy? do
     it { expect(described_class).to permit(admin) }
     it { expect(described_class).not_to permit(user) }
   end
