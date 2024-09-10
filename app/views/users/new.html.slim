@@ -6,6 +6,6 @@
 
   .card
     .card-body
-      = render 'form', tenant: @user
+      = render 'form', user: @user
 
-  = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
+  = link_to t('back_to', action: t('index')), tenants_path, class: 'btn btn-outline-secondary mt-2'

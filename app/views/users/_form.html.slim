@@ -1,11 +1,12 @@
-= simple_form_for(@user, url: @user.persisted? ? user_path(@user) : users_path, method: @user.persisted? ? :patch : :post) do |f|
+= simple_form_for(user, url: user.persisted? ? user_path(user) : users_path, method: user.persisted? ? :patch : :post) do |f|
   .form-inputs
     .mt-2
       = f.input :name, input_html: { class: 'form-control' }
     .mt-2
       = f.input :login_id, input_html: { class: 'form-control' }
-    .mt-2
-      = f.input :tenant_id, input_html: { class: 'form-control' }, collection: Tenant.all, prompt: t('.select_tenant')
+    - if @user.new_record?
+      .mt-2
+        = f.input :tenant_id, input_html: { class: 'form-control' }, collection: Tenant.all, prompt: t('.select_tenant')
     .mt-2
       = f.input :password, input_html: { class: 'form-control' }
     .mt-2

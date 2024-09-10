@@ -10,7 +10,9 @@ class UsersController < ApplicationController
     @pagy, @users = pagy(@q.result)
   end
 
-  def show; end
+  def show
+    @tenant = @user.tenant
+  end
 
   def new
     @user = User.new
@@ -19,11 +21,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(permitted_attributes(User))
     if @user.save
-      log_in @user
       flash[:success] = "#{User.model_name.human}#{t('create_success')}"
-      redirect_to root_path
+      redirect_to tenants_path
     else
-      Rails.logger.info @user.errors.full_messages.to_s
       flash.now[:danger] = "#{User.model_name.human}#{t('create_failed')}"
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(permitted_attributes(@user))
       flash[:success] = "#{User.model_name.human}#{t('update_success')}"
-      redirect_to current_user&.admin? ? users_path : root_path
+      redirect_to current_user&.admin? ? tenants_path : root_path
     else
       flash.now[:danger] = "#{User.model_name.human}#{t('update_failed')}"
       render :edit, status: :unprocessable_entity
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = "#{User.model_name.human}#{t('delete_success')}"
-    redirect_to users_path
+    redirect_to tenants_path
   end
 
   private

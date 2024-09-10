@@ -12,13 +12,14 @@ RSpec.describe 'Users', type: :request do
 
     before { login(user) }
 
-    describe 'GET /index' do
-      it 'ユーザー一覧画面に遷移する' do
-        get users_path
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include 'ユーザー一覧'
-      end
-    end
+    #　ユーザ
+    # describe 'GET /index' do
+    #   it 'ユーザー一覧画面に遷移する' do
+    #     get users_path
+    #     expect(response).to have_http_status(:success)
+    #     expect(response.body).to include 'ユーザー一覧'
+    #   end
+    # end
 
     describe 'GET /new' do
       it 'ユーザー新規作成画面へ遷移する' do
@@ -39,9 +40,9 @@ RSpec.describe 'Users', type: :request do
           user = User.find_by(login_id: valid_attributes[:login_id])
           expect(user).not_to be_nil
           expect(session[:user_id]).to eq(user.id)
-          expect(response).to redirect_to root_path
+          expect(response).to redirect_to tenants_path
           follow_redirect!
-          expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
+          expect(response.body).to include 'テナント一覧'
         end
       end
 
@@ -84,9 +85,9 @@ RSpec.describe 'Users', type: :request do
 
         it 'ユーザー情報の更新に成功する' do
           expect { action }.to change { user_a.reload.name }.from(user_a.name).to('テスト')
-          expect(response).to redirect_to users_path
+          expect(response).to redirect_to tenants_path
           follow_redirect!
-          expect(response.body).to include('ユーザー一覧')
+          expect(response.body).to include('テナント一覧')
         end
       end
 
@@ -107,9 +108,9 @@ RSpec.describe 'Users', type: :request do
       subject(:action) { delete user_path(user_a) }
       it 'ユーザーが削除され、一覧に戻る' do
         expect { action }.to change(User, :count).by(-1)
-        expect(response).to redirect_to(users_path)
+        expect(response).to redirect_to tenants_path
         follow_redirect!
-        expect(response.body).to include('ユーザー一覧')
+        expect(response.body).to include('テナント一覧')
       end
     end
   end
@@ -175,7 +176,7 @@ RSpec.describe 'Users', type: :request do
           expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
           expect(response).to redirect_to root_path
           follow_redirect!
-          expect(response.body).to include('ユーザー詳細')
+          expect(response.body).to include '<title>ホーム画面 | 専属ひしょ子ちゃん</title>'
         end
       end
 

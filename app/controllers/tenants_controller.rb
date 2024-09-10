@@ -13,7 +13,9 @@ class TenantsController < ApplicationController
     @tenant = Tenant.new
   end
 
-  def show; end
+  def show
+    @users = @tenant.users
+  end
 
   def create
     @tenant = Tenant.new(permitted_attributes(Tenant))

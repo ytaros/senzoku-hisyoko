@@ -7,6 +7,8 @@
   .card
     .card-body
       dl.row
+        dt.col-3 = User.human_attribute_name(:tenant_id)
+        dd.col-9 = @user.tenant.name
         dt.col-3 = User.human_attribute_name(:id)
         dd.col-9 = @user.id
         dt.col-3 = User.human_attribute_name(:name)
@@ -18,6 +20,6 @@
         -  if policy(@user).destroy?
           = link_to t('delete'), user_path(@user), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: t('ask_delete') }
   - if current_user.admin?
-    = link_to t('back_to', action: t('index')), users_path, class: 'btn btn-outline-secondary mt-2'
+    = link_to t('back_to', action: t('show')), tenant_path(@tenant), class: 'btn btn-outline-secondary mt-2'
   - else
     = link_to t('back_to', action: t('home')), root_path, class: 'btn btn-outline-secondary mt-2'
