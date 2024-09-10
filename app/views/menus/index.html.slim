@@ -27,7 +27,7 @@
               td = menu.price
               - if policy(menu).create?
                 td
-                  = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
+                  = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
       - if @pagy_food
         .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_food)
 
@@ -52,7 +52,7 @@
               td = menu.price
               - if policy(menu).create?
                 td
-                  = link_to t('show'), menu_path(menu), class: 'btn btn-primary btn-sm'
+                  = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
       - if @pagy_drink
         .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_drink)
 
