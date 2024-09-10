@@ -6,7 +6,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    index?
+    user.admin? || user.id == record.id
   end
 
   def create?
@@ -14,7 +14,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    index?
+    show?
   end
 
   def destroy?

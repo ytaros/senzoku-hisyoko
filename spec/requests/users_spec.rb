@@ -147,34 +147,46 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-
     describe 'GET /show' do
       let(:user) { create(:user) }
-      it 'ホーム画面にリダイレクトする' do
+      it 'ユーザー詳細画面へ遷移する' do
         get user_path(user)
-        expect(response).to redirect_to root_path
-        expect(flash[:danger]).to include '操作権限がありません'
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('ユーザー詳細')
       end
     end
 
     describe 'GET /edit' do
       let(:user) { create(:user) }
-      it 'ホーム画面にリダイレクトする' do
+      it 'ユーザー編集画面へ遷移する' do
         get edit_user_path(user)
-        expect(response).to redirect_to root_path
-        expect(flash[:danger]).to include '操作権限がありません'
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('ユーザー編集')
       end
     end
 
     describe 'PATCH /update' do
       subject(:action) { patch user_path(user), params: { user: attributes } }
 
-      let(:attributes) { { name: 'テスト', password: 'pass1234', password_confirmation: 'pass1234' } }
+      context 'with valid attribute' do
+        let(:attributes) { { name: 'テスト', password: 'pass1234', password_confirmation: 'pass1234' } }
 
-      it 'ホーム画面にリダイレクトする' do
-        expect { action }.not_to change(User, :name)
-        expect(response).to redirect_to root_path
-        expect(flash[:danger]).to include '操作権限がありません'
+        it 'ユーザー情報の更新に成功する' do
+          expect { action }.to change { user.reload.name }.from(user.name).to('テスト')
+          expect(response).to redirect_to root_path
+          follow_redirect!
+          expect(response.body).to include('ユーザー詳細')
+        end
+      end
+
+      context 'with invalid attribute' do
+        let(:attributes) { { name: '' } }
+
+        it 'ユーザー情報の更新に失敗する' do
+          expect { action }.not_to(change { user.reload.name })
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.body).to include('ユーザーの更新に失敗しました')
+        end
       end
     end
 
