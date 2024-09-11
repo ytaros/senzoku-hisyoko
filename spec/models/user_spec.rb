@@ -150,7 +150,7 @@ RSpec.describe User, type: :model do
 
   describe 'Class methods' do
     describe '.create_guest' do
-      let!(:tenant) {create(:tenant, name: 'ゲスト居酒屋')}
+      let!(:tenant) { create(:tenant, name: 'ゲスト居酒屋') }
       let!(:user) { User.create_guest }
 
       it 'ゲスト居酒屋に所属するユーザが作成される' do
