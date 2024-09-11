@@ -1,10 +1,10 @@
 .container
   h3 = t('.title')
-  #form
+  #compile-form
     .row
       .col-6
         = simple_form_for :compile, url: compile_financial_summaries_path, method: :post, html: {class: "form-inline" } do |f|
-          .form-group.mb-2.
+          .form-group.mb-2
             = f.input :date, as: :date, label: t('.select_date_to_compile'), input_html: { class: "form-control" }, html5: true
           .form-group.mb-2
             = f.button :submit, t('.compile'), class: "btn btn-primary"
@@ -17,7 +17,7 @@
 
   #monthly-summary
     .row
-      .col-md-6.mt-2
+      .col-lg-6.mt-2
         .card
           .card-header.bg-transparent
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
@@ -38,7 +38,7 @@
               .col-6.mb-1
                 = pie_chart @formatted_drink_for_month
 
-      #calender.col-md-6.mt-2
+      #calender.col-lg-6.mt-2
         .card
           .card-header.bg-transparent
             h4.text-center = l @month, format: :calender

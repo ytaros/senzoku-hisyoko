@@ -10,27 +10,28 @@
     .card-body
       .mb-5
         h3 = t('.food_menu')
-      table.table
-        thead
-          tr
-            - if current_user.admin?
-              th(scope="col") = Menu.human_attribute_name(:tenant_id)
-            th(scope="col") = Menu.human_attribute_name(:genre)
-            th(scope="col") = Menu.human_attribute_name(:category)
-            th(scope="col") = Menu.human_attribute_name(:price)
-            - if current_user.common?
-              th(scope="col") = t('action')
-        tbody
-          - @food_menus.each do |menu|
+      .table-responsive
+        table.table
+          thead
             tr
               - if current_user.admin?
-                td = menu.tenant.name
-              td = menu.genre_i18n
-              td = menu.category
-              td = menu.price
-              - if policy(menu).create?
-                td
-                  = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
+                th(scope="col") = Menu.human_attribute_name(:tenant_id)
+              th(scope="col") = Menu.human_attribute_name(:genre)
+              th(scope="col") = Menu.human_attribute_name(:category)
+              th(scope="col") = Menu.human_attribute_name(:price)
+              - if current_user.common?
+                th(scope="col") = t('action')
+          tbody
+            - @food_menus.each do |menu|
+              tr
+                - if current_user.admin?
+                  td = menu.tenant.name
+                td = menu.genre_i18n
+                td = menu.category
+                td = menu.price
+                - if policy(menu).create?
+                  td
+                    = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
       - if @pagy_food
         .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_food)
 
@@ -38,27 +39,28 @@
     .card-body
       .mb-5
         h3 = t('.drink_menu')
-      table.table
-        thead
-          tr
-            - if current_user.admin?
-              th(scope="col") = Menu.human_attribute_name(:tenant_id)
-            th(scope="col") = Menu.human_attribute_name(:genre)
-            th(scope="col") = Menu.human_attribute_name(:category)
-            th(scope="col") = Menu.human_attribute_name(:price)
-            - if current_user.common?
-              th(scope="col") = t('action')
-        tbody
-          - @drink_menus.each do |menu|
+      .table-responsive
+        table.table
+          thead
             tr
               - if current_user.admin?
-                td = menu.tenant.name
-              td = menu.genre_i18n
-              td = menu.category
-              td = menu.price
-              - if policy(menu).create?
-                td
-                  = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
+                th(scope="col") = Menu.human_attribute_name(:tenant_id)
+              th(scope="col") = Menu.human_attribute_name(:genre)
+              th(scope="col") = Menu.human_attribute_name(:category)
+              th(scope="col") = Menu.human_attribute_name(:price)
+              - if current_user.common?
+                th(scope="col") = t('action')
+          tbody
+            - @drink_menus.each do |menu|
+              tr
+                - if current_user.admin?
+                  td = menu.tenant.name
+                td = menu.genre_i18n
+                td = menu.category
+                td = menu.price
+                - if policy(menu).create?
+                  td
+                    = link_to t('show'), menu_path(menu), class: 'btn btn-outline-primary btn-sm'
       - if @pagy_drink
         .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy_drink)
 

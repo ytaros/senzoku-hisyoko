@@ -2,11 +2,10 @@
   = f.hidden_field :receipt_id, value: @receipt.id
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  .form-inputs
-    .row.justify-content-center
-      .col-md-4.form-group
-        = f.input :menu_id, collection: menus.map { |menu| [menu.formatted_name, menu.id] }, prompt: t('.select'), input_html: { class: 'form-control' }, label: false
-      .col-md-2.form-group
-        = f.input :quantity, input_html: { class: 'form-control', min: 1, max: 100 }, label: false
-      .col-md-2.form-group
-        = f.button :submit, t('.entry'), class: 'btn btn-primary'
+  .row.justify-content-center
+    .col-md-7.col-lg-8
+      = f.input :menu_id, collection: menus.map { |menu| [menu.formatted_name, menu.id] }, prompt: t('.select'), input_html: { class: 'form-control' }, label: false
+    .col-md-3.col-lg-2
+      = f.input :quantity, input_html: { class: 'form-control', min: 1, max: 100 }, label: false
+    .col-md-2.col-lg-2
+      = f.button :submit, t('.entry'), class: 'btn btn-primary'

@@ -23,8 +23,18 @@ main {
   padding: 0 100px;
 }
 
+#form{
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
 @media (max-width: 768px) {
   .container {
+    padding: 0 5px;
+  }
+
+  #form{
     padding: 0 5px;
   }
 }
