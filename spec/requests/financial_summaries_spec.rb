@@ -50,9 +50,9 @@ RSpec.describe 'FinancialSummaries', type: :request do
           get financial_summaries_path
           expect(response).to have_http_status(:success)
           expect(response.body).to include('収支情報')
-          expect(response.body).to include('売上合計:1500円')
-          expect(response.body).to include('経費合計:500円')
-          expect(response.body).to include('利益合計:1000円')
+          expect(response.body).to include('売上: 1500円')
+          expect(response.body).to include('経費: 500円')
+          expect(response.body).to include('利益: 1000円')
           expect(response.body).to include('6</a>')
         end
       end
@@ -62,9 +62,9 @@ RSpec.describe 'FinancialSummaries', type: :request do
           get financial_summaries_path
           expect(response).to have_http_status(:success)
           expect(response.body).to include('収支情報')
-          expect(response.body).to include('売上合計:0円')
-          expect(response.body).to include('経費合計:0円')
-          expect(response.body).to include('利益合計:0円')
+          expect(response.body).to include('売上: 0円')
+          expect(response.body).to include('経費: 0円')
+          expect(response.body).to include('利益: 0円')
         end
       end
     end
@@ -79,9 +79,9 @@ RSpec.describe 'FinancialSummaries', type: :request do
         get date_financial_summaries_path('2024-06-05')
         expect(response).to have_http_status(:success)
         expect(response.body).to include('収支情報')
-        expect(response.body).to include('売上合計:1500円')
-        expect(response.body).to include('経費合計:500円')
-        expect(response.body).to include('利益合計:1000円')
+        expect(response.body).to include('売上:1500円')
+        expect(response.body).to include('経費:500円')
+        expect(response.body).to include('利益:1000円')
       end
     end
 
