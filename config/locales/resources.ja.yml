@@ -18,6 +18,8 @@ ja:
       login_id: LOGIN ID
       password: PASSWORD
       remember_me: ログイン状態を保持する
+    guest_login:
+      guest_login_success: ゲストユーザとしてログインしました
   menus:
     index:
       menu_register: MENU登録

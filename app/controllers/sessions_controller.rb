@@ -26,4 +26,11 @@ class SessionsController < ApplicationController
     flash[:success] = t('logout_success')
     redirect_to login_path, status: :see_other
   end
+
+  def guest_login
+    user = User.create_guest
+    log_in(user)
+    flash[:success] = t('.guest_login_success')
+    redirect_to root_path
+  end
 end

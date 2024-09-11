@@ -13,6 +13,7 @@ ja:
   management: 管理
   data_entry: 入力
   login: ログイン
+  guest_login: ゲストログイン
   logout: ログアウト
   yen: 円
 

@@ -147,4 +147,28 @@ RSpec.describe User, type: :model do
       it { expect(user.common?).to be_truthy }
     end
   end
+
+  describe 'Class methods' do
+    describe '.create_guest' do
+      let!(:tenant) {create(:tenant, name: 'ゲスト居酒屋')}
+      let!(:user) { User.create_guest }
+
+      it 'ゲスト居酒屋に所属するユーザが作成される' do
+        expect(user.tenant_id).to eq tenant.id
+        expect(user.name).to eq 'ゲストユーザー'
+        expect(user.login_id).to match(/\A[a-zA-Z0-9]{8}\z/)
+        expect(user.password).to match(/\A[a-zA-Z0-9]{8}\z/)
+      end
+    end
+
+    describe '.generate_secure_alphanumeric' do
+      subject { User.generate_secure_alphanumeric }
+
+      it '必ず英字と数字が混ざったランダム文字列を生成する' do
+        expect(subject.length).to eq(8)
+        expect(subject).to match(/[a-zA-Z]/)
+        expect(subject).to match(/[0-9]/)
+      end
+    end
+  end
 end

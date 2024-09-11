@@ -12,7 +12,8 @@
 #
 class Tenant < ApplicationRecord
   enum industry: {
-    standing_bar: 1
+    standing_bar: 1,
+    tavern: 2
   }
   has_many :users, dependent: :destroy
   has_many :menus, dependent: :destroy
