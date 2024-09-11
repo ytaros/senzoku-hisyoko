@@ -2,17 +2,20 @@
 
 .container
   .text-center
-    h1 = "#{Receipt.model_name.human}#{t('management')}"
-
-
+    .mb-4
+      h1 = "#{Receipt.model_name.human}#{t('management')}"
   .form
     .card
       .card-body
-        h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
+        .mb-4
+          h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
         = simple_form_for(@receipt, url: receipts_path, method: :post) do |f|
           .form-inputs
-            .mt-2
-              = f.input :recorded_at, label: t('.select_record_date'), input_html: { class: 'form-control' }, html5: true
+            .mt-2.col-md-9.date-select
+              = raw (sprintf(f.date_select(:recorded_at,
+                                            {use_month_numbers: true, date_separator: '%s' },
+                                            {class: 'form-select', style: 'display: inline-block; width: auto;'}),
+                                            '年 ', '月 ') + '日')
           .form-actions
             .text-end.mt-3
               = f.button :submit, t('.receipt_entry'), class: 'btn btn-primary'
@@ -20,7 +23,8 @@
   .index
     .card.mt-5
       .card-body
-        h3 = "#{Receipt.model_name.human}#{t('index')}"
+        .mb-4
+          h3 = "#{Receipt.model_name.human}#{t('index')}"
         #search-form.mt-3.mb-5
           = render 'search_form'
         table.table

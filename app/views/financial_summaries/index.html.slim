@@ -18,8 +18,8 @@
   #monthly-summary
     .row
       .col-md-6.mt-2
-        .card.border-primary
-          .card-header.bg-transparent.border-primary
+        .card
+          .card-header.bg-transparent
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
           .card-body
             .row.mb-3
@@ -39,8 +39,8 @@
                 = pie_chart @formatted_drink_for_month
 
       #calender.col-md-6.mt-2
-        .card.border-primary
-          .card-header.bg-transparent.border-primary
+        .card
+          .card-header.bg-transparent
             h4.text-center = l @month, format: :calender
           .card-body
             = month_calendar(events: @summaries, start_date: @month) do |date, events|

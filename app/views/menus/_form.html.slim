@@ -1,7 +1,7 @@
 = simple_form_for(@menu, url: @menu.persisted? ? menu_path(@menu) : menus_path, method: @menu.persisted? ? :patch : :post) do |f|
   .form-inputs
     .mt-2
-      = f.input :genre, input_html: { class: 'form-control' }
+      = f.input :genre, prompt: t('select'), input_html: { class: 'form-control'}
     .mt-2
       = f.input :category, input_html: { class: 'form-control' }
     .mt-2

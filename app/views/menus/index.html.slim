@@ -1,4 +1,4 @@
-- provide :title, "#{Menu.model_name.human}#{t('index')}"
+- provide :title, "#{Menu.model_name.human}#{t('management')}"
 
 .container
   .text-center
@@ -8,11 +8,13 @@
 
   .card.mb-3
     .card-body
-      h3 = t('.food_menu')
+      .mb-5
+        h3 = t('.food_menu')
       table.table
         thead
           tr
-            th(scope="col") = Menu.human_attribute_name(:tenant_id)
+            - if current_user.admin?
+              th(scope="col") = Menu.human_attribute_name(:tenant_id)
             th(scope="col") = Menu.human_attribute_name(:genre)
             th(scope="col") = Menu.human_attribute_name(:category)
             th(scope="col") = Menu.human_attribute_name(:price)
@@ -21,7 +23,8 @@
         tbody
           - @food_menus.each do |menu|
             tr
-              td = menu.tenant.name
+              - if current_user.admin?
+                td = menu.tenant.name
               td = menu.genre_i18n
               td = menu.category
               td = menu.price
@@ -33,11 +36,13 @@
 
   .card.mb-3.mt-5
     .card-body
-      h3 = t('.drink_menu')
+      .mb-5
+        h3 = t('.drink_menu')
       table.table
         thead
           tr
-            th(scope="col") = Menu.human_attribute_name(:tenant_id)
+            - if current_user.admin?
+              th(scope="col") = Menu.human_attribute_name(:tenant_id)
             th(scope="col") = Menu.human_attribute_name(:genre)
             th(scope="col") = Menu.human_attribute_name(:category)
             th(scope="col") = Menu.human_attribute_name(:price)
@@ -46,7 +51,8 @@
         tbody
           - @drink_menus.each do |menu|
             tr
-              td = menu.tenant.name
+              - if current_user.admin?
+                td = menu.tenant.name
               td = menu.genre_i18n
               td = menu.category
               td = menu.price
