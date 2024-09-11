@@ -15,9 +15,8 @@
           .form-group.mb-2
             = f.button :submit, t('.change_to_month'), class: 'btn btn-primary'
 
-  #monthly-summary
     .row
-      .col-lg-6.mt-2
+      #monthly-summary.col-12.col-lg-6.mt-2
         .card
           .card-header.bg-transparent
             h4 = "#{t('.monthly_summary', month: l(@month, format: :calender))}"
@@ -38,7 +37,7 @@
               .col-6.mb-1
                 = pie_chart @formatted_drink_for_month
 
-      #calender.col-lg-6.mt-2
+      #calender.col-12.col-lg-6.mt-2
         .card
           .card-header.bg-transparent
             h4.text-center = l @month, format: :calender
