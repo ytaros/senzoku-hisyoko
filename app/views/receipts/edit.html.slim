@@ -12,10 +12,10 @@
         - @order_details.each do |order_detail|
           = render 'order_details', order_detail: order_detail
 
-        .d-flex.justify-content-between
-          h5= "#{t('.food_total')}: #{@food_value}"
-          h5= "#{t('.drink_total')}: #{@drink_value}"
-          h5= "#{t('.total')}: #{@food_value + @drink_value}"
+        .d-flex.justify-content-between.mt-2
+          p = "#{t('.food_total')}: #{@food_value}#{t('yen')}"
+          p = "#{t('.drink_total')}: #{@drink_value}#{t('yen')}"
+          p = "#{t('.total')}: #{@food_value + @drink_value}#{t('yen')}"
 
     .col-md-8.text-center.mt-5
       = simple_form_for(@receipt, url: receipt_path, method: :patch) do |f|

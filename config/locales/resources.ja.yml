@@ -31,8 +31,8 @@ ja:
       select_record_date: 売上記録日を選択してください
     edit:
       order_entry: オーダー入力
-      food_total: フード合計
-      drink_total: ドリンク合計
+      food_total: フード
+      drink_total: ドリンク
       total: 合計
       update_receipt: 伝票を登録する
     order_detail_form:
@@ -47,14 +47,14 @@ ja:
       compile: 集計する
       summary: 集計
       monthly_summary: "%{month}収支状況"
-      total_revenue: 売上合計
-      total_expense: 経費合計
-      total_profit: 利益合計
+      total_revenue: 売上
+      total_expense: 経費
+      total_profit: 利益
     show:
       daily_summary: "%{date}収支状況"
-      total_revenue: 売上合計
-      total_expense: 経費合計
-      total_profit: 利益合計
+      total_revenue: 売上
+      total_expense: 経費
+      total_profit: 利益
     compile:
       success: "%{summary_date}の収支情報を集計しました"
       records_not_found: "%{summary_date}の収支情報の入力漏れがあります"
