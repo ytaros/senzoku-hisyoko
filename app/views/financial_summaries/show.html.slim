@@ -1,16 +1,16 @@
 .container
   .card
-    .card-header
-      h1 = "#{t('.daily_summary', date: l(@daily_summary[:date], format: :long))}"
+    .card-header.mb-4
+      h1 = "#{t('.daily_summary', date: l(@daily_summary[:date], format: :short))}"
     .card-body
       .row.mb-3
-        .col-4
+        .col-md-4
           .mb-1
             = "#{t('.total_revenue')}:#{@daily_summary[:total_revenue]}#{t('yen')}"
-        .col-4
+        .col-md-4
           .mb-1
             = "#{t('.total_expense')}:#{@daily_summary[:total_expense]}#{t('yen')}"
-        .col-4
+        .col-md-4
           .mb-1
             = "#{t('.total_profit')}:#{@daily_summary[:profit]}#{t('yen')}"
       .row.mb-3

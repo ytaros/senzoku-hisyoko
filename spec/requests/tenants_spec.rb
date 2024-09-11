@@ -30,10 +30,10 @@ RSpec.describe 'Tenants', type: :request do
     end
 
     describe 'GET /new' do
-      it 'テナント新規登録画面に遷移する' do
+      it 'テナント登録画面に遷移する' do
         get new_tenant_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('テナント新規登録')
+        expect(response.body).to include('テナント登録')
       end
     end
 

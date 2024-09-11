@@ -1,0 +1,14 @@
+#flash {
+  z-index: $zindex-tooltip;
+  position: fixed;
+  top: 62px;
+  right: 20px;
+  @include media-breakpoint-down(sm) {
+    margin-left: 6px;
+    right: 6px;
+  }
+  .alert {
+    margin-bottom: 6px;
+    padding-right: 40px;
+  }
+}

@@ -2,46 +2,51 @@
 
 .container
   .text-center
-    h1 = "#{Receipt.model_name.human}#{t('management')}"
-
-
-  .form
+    .mb-4
+      h1 = "#{Receipt.model_name.human}#{t('management')}"
+  #form
     .card
       .card-body
-        h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
+        .mb-4
+          h3 = "#{Receipt.model_name.human}#{t('data_entry')}"
         = simple_form_for(@receipt, url: receipts_path, method: :post) do |f|
           .form-inputs
-            .mt-2
-              = f.input :recorded_at, label: t('.select_record_date'), input_html: { class: 'form-control' }, html5: true
+            .mt-2.col-md-9.date-select
+              = raw (sprintf(f.date_select(:recorded_at,
+                                            {use_month_numbers: true, date_separator: '%s' },
+                                            {class: 'form-select', style: 'display: inline-block; width: auto;'}),
+                                            '年 ', '月 ') + '日')
           .form-actions
-            .text-end.mt-3
+            .text-end.mt-4
               = f.button :submit, t('.receipt_entry'), class: 'btn btn-primary'
 
   .index
     .card.mt-5
       .card-body
-        h3 = "#{Receipt.model_name.human}#{t('index')}"
+        .mb-4
+          h3 = "#{Receipt.model_name.human}#{t('index')}"
         #search-form.mt-3.mb-5
           = render 'search_form'
-        table.table
-          thead
-            tr
-              th(scope="col") = Receipt.human_attribute_name(:recorded_at)
-              th(scope="col") = Receipt.human_attribute_name(:food_value)
-              th(scope="col") = Receipt.human_attribute_name(:drink_value)
-              th(scope="col") = Receipt.human_attribute_name(:status)
-              th(scope="col") = t('action')
-          tbody
-            - @receipts&.each do |receipt|
+        .table-responsive
+          table.table
+            thead
               tr
-                td = l receipt.recorded_at, format: :long
-                td = "#{receipt.food_value}#{t('yen')}"
-                td = "#{receipt.drink_value}#{t('yen')}"
-                td = receipt.status_i18n
-                td
-                  - if receipt.unrecorded?
-                    = link_to t('edit'), edit_receipt_path(receipt), class: 'btn btn-primary'
-                    = link_to t('delete'), receipt_path(receipt),class: 'btn btn-danger ms-2', data: { turbo_method: :delete, turbo_confirm: t('ask_delete') }
+                th(scope="col") = Receipt.human_attribute_name(:recorded_at)
+                th(scope="col") = Receipt.human_attribute_name(:food_value)
+                th(scope="col") = Receipt.human_attribute_name(:drink_value)
+                th(scope="col") = Receipt.human_attribute_name(:status)
+                th(scope="col") = t('action')
+            tbody
+              - @receipts&.each do |receipt|
+                tr
+                  td = l receipt.recorded_at, format: :long
+                  td = "#{receipt.food_value}#{t('yen')}"
+                  td = "#{receipt.drink_value}#{t('yen')}"
+                  td = receipt.status_i18n
+                  td.text-nowrap
+                    - if receipt.unrecorded?
+                      = link_to t('edit'), edit_receipt_path(receipt), class: 'btn btn-primary'
+                      = link_to t('delete'), receipt_path(receipt),class: 'btn btn-danger ms-2', data: { turbo_method: :delete, turbo_confirm: t('ask_delete') }
         - if @pagy
           .mt-4.d-flex.justify-content-center == pagy_bootstrap_nav(@pagy)
 

@@ -31,4 +31,15 @@ RSpec.describe 'Sessions', type: :request do
       expect(response.body).to include('ログイン')
     end
   end
+
+  describe 'GET /guest_login' do
+    before { create(:tenant, name: 'ゲスト居酒屋') } # ゲスト用テナント作成
+    it 'ゲストログインに成功し、ホーム画面へリダイレクトされる' do
+      get guest_login_path
+      expect(response).to redirect_to root_path
+      follow_redirect!
+      expect(response.body).to include('ホーム画面')
+      expect(response.body).to include('ゲストユーザー')
+    end
+  end
 end

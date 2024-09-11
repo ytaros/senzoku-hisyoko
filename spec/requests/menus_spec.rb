@@ -95,10 +95,10 @@ RSpec.describe 'Menus', type: :request do
     end
 
     describe 'GET /new' do
-      it 'メニュー新規登録画面に遷移する' do
+      it 'メニュー登録画面に遷移する' do
         get new_menu_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('メニュー新規登録')
+        expect(response.body).to include('メニュー登録')
       end
     end
 

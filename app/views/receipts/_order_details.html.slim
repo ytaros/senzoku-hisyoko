@@ -1,13 +1,14 @@
-.card.mb-3
-  .card-body
-    .row
-      .col-md-4
-        p = order_detail.menu.formatted_name
-      .col-md-2
-        p = order_detail.quantity
-      .col-md-2
-        p = order_detail.menu.price
-      .col-md-2
-        p = order_detail.order_price
-      .col-md-2.text-end
-        = link_to t('delete'), order_detail_path(order_detail), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') }
+ul.list-group
+    li.list-group-item
+      .row
+        .col-5.col-md-4
+          p = order_detail.menu.formatted_name
+        .col-2.col-md-3
+          p
+            i.fa-solid.fa-xmark
+            | &nbsp;#{order_detail.quantity}
+        .col-3.col-md-3
+          p = "#{order_detail.order_price}#{t('yen')}"
+        .col-2.col-md-2
+          = link_to order_detail_path(order_detail), class: 'btn btn-danger', data: { turbo_method: :delete, confirm: t('ask_delete') } do
+            i.fa-solid.fa-trash

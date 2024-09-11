@@ -1,6 +1,6 @@
 .simple-calendar {
   background-color: #ffffff;
-  color: #000066;
+  color: #9c9cd1;
 
   table {
     width: 100%;
@@ -12,14 +12,14 @@
     text-align: center;
     color: #ffffff;
     font-weight: bold;
-    background-color: rgb(4, 25, 103);
+    background-color: rgba(146, 107, 180, 0.551);
   }
 
   td {
     padding: 10px;
     text-align: center;
     transition: background-color 0.3s ease;
-    border: 1px solid #cbebff;
+    border: 1px solid #d6cde7b1;
     vertical-align: top;
   }
 

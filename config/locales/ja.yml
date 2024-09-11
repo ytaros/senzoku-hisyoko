@@ -3,7 +3,7 @@ ja:
 
   action: アクション
   index: 一覧
-  new: 新規登録
+  new: 登録
   create: 登録
   edit: 編集
   update: 更新
@@ -13,6 +13,7 @@ ja:
   management: 管理
   data_entry: 入力
   login: ログイン
+  guest_login: ゲストログイン
   logout: ログアウト
   yen: 円
 

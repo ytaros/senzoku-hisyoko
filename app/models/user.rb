@@ -83,4 +83,14 @@ class User < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[tenant]
   end
+
+  def self.create_guest
+    create!(name: 'ゲストユーザー', login_id: generate_secure_alphanumeric, password: generate_secure_alphanumeric, tenant_id: Tenant.find_by(name: 'ゲスト居酒屋').id)
+  end
+
+  def self.generate_secure_alphanumeric
+    letters = ('a'..'z').to_a + ('A'..'Z').to_a
+    digits = ('0'..'9').to_a
+    (letters.sample(4) + digits.sample(4)).shuffle.join
+  end
 end

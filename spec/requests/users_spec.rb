@@ -22,10 +22,10 @@ RSpec.describe 'Users', type: :request do
     # end
 
     describe 'GET /new' do
-      it 'ユーザー新規作成画面へ遷移する' do
+      it 'ユーザー作成画面へ遷移する' do
         get new_user_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('ユーザー新規登録')
+        expect(response.body).to include('ユーザー登録')
       end
     end
 
