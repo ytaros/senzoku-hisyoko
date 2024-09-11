@@ -1,7 +1,7 @@
 // フォント
 h1, h2, h3 {
   font-weight: 500;
-  color: rgb(0, 24, 88);
+  color: rgb(43, 2, 113);
 }
 
 p {
@@ -11,7 +11,7 @@ p {
 
 // ボタン
 .btn {
-  border-radius: 12px;
+  border-radius: 5px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -32,7 +32,7 @@ p {
 }
 
 .btn-primary {
-  background-color: lighten($primary, 10%);
+  background-color: lighten($primary, 20%);
   color: #fff;
 
   &:hover {
@@ -41,7 +41,7 @@ p {
 }
 
 .btn-danger {
-  background-color: lighten($danger, 10%);
+  background-color: lighten($danger, 20%);
   color: #fff;
 
   &:hover {
@@ -53,8 +53,8 @@ p {
 .card {
   background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* 柔らかい影 */
-  border: 1px solid #cce7ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  border: 3px solid #be7ef358;
   padding: 20px;
 }
 
@@ -63,14 +63,14 @@ p {
   border-radius: 10px 10px 0 0;
   padding: 10px 20px;
   font-weight: bold;
-  color: #000066;
+  color: #530066;
   text-align: center;
 }
 
 .card-body {
-  padding: 20px; /* ボディ部分の内側の余白 */
-  font-size: 1em; /* 通常の文字サイズ */
-  color: #000066; /* 落ち着いた青色の文字色 */
+  padding: 20px;
+  font-size: 1em;
+  color: #520088;
 }
 
 // ひしょ子
@@ -86,6 +86,6 @@ p {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 200px;
+    width: 150px;
   }
 }

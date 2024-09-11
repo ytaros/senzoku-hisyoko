@@ -3,14 +3,14 @@ body {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-optical-sizing: auto;
-  background-color:#e7f6ff;
+  background-color:#fefcff;
 }
 
 header {
   height: 50px;
   position: relative;
   z-index: 1;
-  background-color:#000066;
+  background-color:#44138483;
   color: white;
 }
 
@@ -19,7 +19,17 @@ main {
   min-height: calc(100vh - 50px);
 }
 
+.container {
+  padding: 0 100px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 5px;
+  }
+}
+
 .offcanvas {
-  background-color: rgba(3, 28, 104, 0.845);
+  background-color: #44138483;
   color: white;
 }
