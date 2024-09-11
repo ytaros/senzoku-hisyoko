@@ -2,14 +2,26 @@
 
 - Ruby version: 3.2.2
 - Rails version: 7.1.3
+- Hotwire/Stimulus フレームワーク使用
 - Database: PostgreSQL
+- PaaS: Render
+- Design：CSS、BootStrap5
+- Test:Rspec
+- Lint:Rubocop
+
+## URL
+
+- [https://senzoku-hisyoko.onrender.com/](https://senzoku-hisyoko.onrender.com/)
 
 ## 概要
 
-- 毎日の収支管理アプリ。
-- フードとドリンクのジャンルと価格を登録。Menu のジャンル：値段のオーダー数から、ジャンル、価格帯の商品の売れ行きを自店分析ができる。
-- 毎月の売上と経費、利益をカレンダー表示。
-- スマホで使用することを想定して PWA 化。
+- 飲食業界の個人経営者を対象とした日々の収支管理アプリ
+  - フードとドリンクのジャンルと価格を予め登録
+  - １枚の伝票ごとにジャンル：値段の注文数を入力し、毎日の売上をスマホで簡単に入力
+  - 毎月/日の売上と経費、利益をグラフで表示
+  - カレンダーで記録の振り返りも可能
+  - スマホで使用することを想定して PWA 化
+  - ゲストログイン機能
 
 ## 画面遷移図
 
