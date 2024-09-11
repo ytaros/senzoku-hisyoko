@@ -11,6 +11,6 @@
     .col-md-3
       .form-group
         = f.label :status, Expenditure.human_attribute_name(:status), class: 'form-label'
-        = f.select :status_eq, Expenditure.statuses.keys.map { |key, value| [Receipt.statuses_i18n[key], value] }, { include_blank: t('select') }, class: 'form-control'
+        = f.select :status_eq, Expenditure.statuses.map { |key, value| [Receipt.statuses_i18n[key], value] }, { include_blank: t('select') }, class: 'form-control'
     .col-md-3.mt-4
       = f.submit t('search'), class: 'btn btn-primary'
