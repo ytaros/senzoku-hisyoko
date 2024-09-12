@@ -26,6 +26,7 @@ class Expenditure < ApplicationRecord
   validates :recorded_at, presence: true
 
   scope :for_month, ->(month) { where(recorded_at: month.beginning_of_month..month.end_of_month).where.not(compiled_at: nil) }
+  scope :for_user, ->(user) { where(user: user) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[recorded_at status]
