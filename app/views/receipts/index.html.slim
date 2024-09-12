@@ -23,10 +23,13 @@
   .index
     .card.mt-5
       .card-body
-        .mb-4
-          h3 = "#{Receipt.model_name.human}#{t('index')}"
-        #search-form.mt-3.mb-5
-          = render 'search_form'
+        .d-flex.mb-4
+          h3.me-3 = "#{Receipt.model_name.human}#{t('index')}"
+          a[data-bs-toggle="collapse" data-controller="collapse" data-action="click->collapse#toggleIcon" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"]
+            i.fa.fa-magnifying-glass-plus.fa-2x style="color: #B197FC;" data-collapse-target="icon"
+        .collapse#collapseExample      
+          #search-form.mt-3.mb-5
+            = render 'search_form'
         .table-responsive
           table.table
             thead

@@ -29,10 +29,10 @@ class OrderDetail < ApplicationRecord
   validates :menu_id, presence: true
   validates :receipt_id, presence: true
 
-  scope :food_for_day, ->(date) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day }) }
-  scope :drink_for_day, ->(date) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day }) }
-  scope :food_for_month, ->(month) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month }) }
-  scope :drink_for_month, ->(month) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month }) }
+  scope :food_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id }) }
+  scope :drink_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id }) }
+  scope :food_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id }) }
+  scope :drink_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id }) }
 
   # 特定の注文の合計金額を返す
   def order_price
@@ -45,8 +45,8 @@ class OrderDetail < ApplicationRecord
   end
 
   # 　 円グラフで使用
-  def self.format_data_for_period(scope_name, period)
-    order_details = send(scope_name, period).includes(:menu)
+  def self.format_data_for_period(scope_name, period, user)
+    order_details = send(scope_name, period, user).includes(:menu)
     # menu_idごとにorder_detailsをグループ化して各グループの数量を合計
     grouped_details = order_details.group_by(&:menu_id).transform_values { |details| details.sum(&:quantity) }
     # メニュー情報をmenu_idをキーとして事前に取得し、検索用のハッシュを作成

@@ -12,10 +12,10 @@ class FinancialSummaryService
     date
   end
 
-  def self.summarize(month)
+  def self.summarize(month, user)
     # 既に計上された月の伝票と経費を取得
-    receipts = Receipt.for_month(month)
-    expenditures = Expenditure.for_month(month)
+    receipts = Receipt.for_month(month).for_user(user)
+    expenditures = Expenditure.for_month(month).for_user(user)
 
     # 一意の日付リスト（配列）を作成
     summary_dates = (receipts.pluck(:recorded_at) + expenditures.pluck(:recorded_at)).uniq
@@ -27,19 +27,19 @@ class FinancialSummaryService
   end
 
   # 日次集計
-  def self.daily_summary(date)
-    summarize_by_period(date, :daily)
+  def self.daily_summary(date, user)
+    summarize_by_period(date, :daily, user)
   end
 
   # 月次集計
-  def self.monthly_summary(month)
-    summarize_by_period(month, :monthly)
+  def self.monthly_summary(month, user)
+    summarize_by_period(month, :monthly, user)
   end
 
   # 受け取るタイプによって、日次または月次の集計を行う
-  def self.summarize_by_period(period, type)
-    receipts = type == :daily ? Receipt.where(recorded_at: period) : Receipt.for_month(period)
-    expenditures = type == :daily ? Expenditure.where(recorded_at: period) : Expenditure.for_month(period)
+  def self.summarize_by_period(period, type, user)
+    receipts = type == :daily ? Receipt.where(recorded_at: period, user: user) : Receipt.for_month(period).for_user(user)
+    expenditures = type == :daily ? Expenditure.where(recorded_at: period, user: user) : Expenditure.for_month(period).for_user(user)
 
     total_revenue = receipts.sum { |receipt| (receipt.food_value || 0) + (receipt.drink_value || 0) }
     total_expense = expenditures.sum(&:expense_value)
@@ -62,9 +62,9 @@ class FinancialSummaryService
   end
 
   # 日次集計の計上
-  def self.compile_for_date(date)
-    receipts = Receipt.where(recorded_at: date, compiled_at: nil)
-    expenditures = Expenditure.where(recorded_at: date, compiled_at: nil)
+  def self.compile_for_date(date, user)
+    receipts = Receipt.where(recorded_at: date, compiled_at: nil, user: user)
+    expenditures = Expenditure.where(recorded_at: date, compiled_at: nil, user: user)
 
     return false if receipts.empty? || expenditures.empty?
 
