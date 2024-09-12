@@ -38,6 +38,9 @@ ja:
     order_detail_form:
       select: 選択してください
       entry: 追加する
+  expenditures:
+    index:
+      expenditure_entry: 経費入力フォームへ進む
   financial_summaries:
     index:
       title: 収支情報

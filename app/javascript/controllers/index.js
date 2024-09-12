@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CollapseController from "./collapse_controller"
+application.register("collapse", CollapseController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
