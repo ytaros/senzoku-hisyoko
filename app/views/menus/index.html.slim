@@ -2,7 +2,7 @@
 
 .container
   .text-center
-    h1 = "#{Menu.model_name.human}#{t('index')}"
+    h1 = "#{Menu.model_name.human}#{t('management')}"
   - if policy(Menu).create?
     = link_to t('.menu_register'), new_menu_path, class: 'btn btn-primary btn-lg mb-3 mt-4 mt-md-0'
 

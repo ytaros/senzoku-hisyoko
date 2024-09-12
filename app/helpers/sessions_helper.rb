@@ -19,7 +19,7 @@ module SessionsHelper
     @current_user
   end
 
-  # ユーザーとトークンを紐づけ（remember_digestカラムにトークンをハッシュ化して保存）CookieにユーザーIDとトークンを入れる
+  # ユーザとトークンを紐づけ（remember_digestカラムにトークンをハッシュ化して保存）CookieにユーザIDとトークンを入れる
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
@@ -35,7 +35,7 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  # ユーザーがログインしていればtrue、その他ならfalse
+  # ユーザがログインしていればtrue、その他ならfalse
   def logged_in?
     !current_user.nil?
   end

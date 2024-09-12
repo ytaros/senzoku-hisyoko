@@ -64,12 +64,12 @@ class User < ApplicationRecord
     remember_digest
   end
 
-  # 引数として受け取ったトークンとDBのユーザーの記憶ダイジェストと比較、同一ならtrueを返す。
+  # 引数として受け取ったトークンとDBのユーザの記憶ダイジェストと比較、同一ならtrueを返す。
   def authenticated?(remember_token)
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
-  # ユーザーの記憶ダイジェストをnilにする
+  # ユーザの記憶ダイジェストをnilにする
   def forget
     return unless remember_digest
 
@@ -85,7 +85,7 @@ class User < ApplicationRecord
   end
 
   def self.create_guest
-    create!(name: 'ゲストユーザー', login_id: generate_secure_alphanumeric, password: generate_secure_alphanumeric, tenant_id: Tenant.find_by(name: 'ゲスト居酒屋').id)
+    create!(name: 'ゲストユーザ', login_id: generate_secure_alphanumeric, password: generate_secure_alphanumeric, tenant_id: Tenant.find_by(name: 'ゲスト居酒屋').id)
   end
 
   def self.generate_secure_alphanumeric
