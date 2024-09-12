@@ -155,7 +155,7 @@ RSpec.describe User, type: :model do
 
       it 'ゲスト居酒屋に所属するユーザが作成される' do
         expect(user.tenant_id).to eq tenant.id
-        expect(user.name).to eq 'ゲストユーザー'
+        expect(user.name).to eq 'ゲストユーザ'
         expect(user.login_id).to match(/\A[a-zA-Z0-9]{8}\z/)
         expect(user.password).to match(/\A[a-zA-Z0-9]{8}\z/)
       end
