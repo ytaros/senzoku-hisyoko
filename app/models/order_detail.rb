@@ -29,10 +29,10 @@ class OrderDetail < ApplicationRecord
   validates :menu_id, presence: true
   validates :receipt_id, presence: true
 
-  scope :food_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id  }) }
-  scope :drink_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id  }) }
-  scope :food_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id  }) }
-  scope :drink_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id  }) }
+  scope :food_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id }) }
+  scope :drink_for_day, ->(date, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { recorded_at: date.beginning_of_day..date.end_of_day, user_id: user.id }) }
+  scope :food_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :food }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id }) }
+  scope :drink_for_month, ->(month, user) { joins(:menu, :receipt).where(menus: { genre: :drink }, receipts: { compiled_at: month.beginning_of_month..month.end_of_month, user_id: user.id }) }
 
   # 特定の注文の合計金額を返す
   def order_price
