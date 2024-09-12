@@ -39,7 +39,7 @@ RSpec.describe 'Sessions', type: :request do
       expect(response).to redirect_to root_path
       follow_redirect!
       expect(response.body).to include('ホーム画面')
-      expect(response.body).to include('ゲストユーザー')
+      expect(response.body).to include('ゲストユーザ')
     end
   end
 end

@@ -3,7 +3,7 @@ ja:
     models:
       admin: 管理者
       tenant: テナント
-      user: ユーザー
+      user: ユーザ
       menu: メニュー
       receipt: 伝票
       order_detail: オーダー
