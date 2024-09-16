@@ -87,10 +87,10 @@ RSpec.describe 'Menus', type: :request do
     let(:user) { create(:user, tenant: tenant) }
 
     describe 'GET /index' do
-      it 'メニュー一覧画面に遷移する' do
+      it 'メニュー管理画面に遷移する' do
         get menus_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('メニュー一覧')
+        expect(response.body).to include('メニュー管理')
       end
     end
 
@@ -122,7 +122,7 @@ RSpec.describe 'Menus', type: :request do
           expect { action }.to change(Menu, :count).by(1)
           expect(response).to redirect_to menus_path
           follow_redirect!
-          expect(response.body).to include('メニュー一覧')
+          expect(response.body).to include('メニュー管理')
         end
       end
 
@@ -175,11 +175,11 @@ RSpec.describe 'Menus', type: :request do
 
       subject(:action) { patch hide_menu_path(menu) }
 
-      it 'メニューが無効化され、一覧に戻る' do
+      it 'メニューが無効化され、管理画面に戻る' do
         expect { action }.to change { menu.reload.hidden_at }.from(nil).to(be_present)
         expect(response).to redirect_to menus_path
         follow_redirect!
-        expect(response.body).to include('メニュー一覧')
+        expect(response.body).to include('メニュー管理')
       end
     end
   end

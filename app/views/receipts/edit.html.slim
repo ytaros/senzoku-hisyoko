@@ -1,25 +1,25 @@
-#form
-  .row.justify-content-center
-    .col-md-8.text-center.mb-4
-      h3 = "#{l @receipt.recorded_at, format: :long} #{t('.order_entry')}"
+div data-controller="unload" data-unload-receipt-id="#{@receipt.id}"
+  #form
+    .row.justify-content-center
+      .col-md-8.text-center.mb-4
+        h3 = "#{l @receipt.recorded_at, format: :long} #{t('.order_entry')}"
 
-    .col-md-8
-      = turbo_frame_tag 'order_form' do
-        = render 'order_detail_form', order_detail: @order_detail, menus: @menus, receipt: @receipt
+      .col-md-8
+        = turbo_frame_tag 'order_form' do
+          = render 'order_detail_form', order_detail: @order_detail, menus: @menus, receipt: @receipt
 
-    .col-md-8.mt-4
-      = turbo_frame_tag 'order_details' do
-        - @order_details.each do |order_detail|
-          = render 'order_details', order_detail: order_detail
+      .col-md-8.mt-4
+        = turbo_frame_tag 'order_details' do
+          - @order_details.each do |order_detail|
+            = render 'order_details', order_detail: order_detail
 
-        .d-flex.justify-content-between.mt-2
-          p = "#{t('.food_total')}: #{@food_value}#{t('yen')}"
-          p = "#{t('.drink_total')}: #{@drink_value}#{t('yen')}"
-          p = "#{t('.total')}: #{@food_value + @drink_value}#{t('yen')}"
+          .d-flex.justify-content-between.mt-2
+            p = "#{t('.food_total')}: #{@food_value}#{t('yen')}"
+            p = "#{t('.drink_total')}: #{@drink_value}#{t('yen')}"
+            p = "#{t('.total')}: #{@food_value + @drink_value}#{t('yen')}"
 
-    .col-md-8.text-center.mt-5
-      = simple_form_for(@receipt, url: receipt_path, method: :patch) do |f|
-        = f.hidden_field :food_value, value: @food_value
-        = f.hidden_field :drink_value, value: @drink_value
-        = f.submit t('.update_receipt'), class: 'btn btn-primary'
-
+      .col-md-8.text-center.mt-5
+        = simple_form_for(@receipt, url: receipt_path, method: :patch) do |f|
+          = f.hidden_field :food_value, value: @food_value
+          = f.hidden_field :drink_value, value: @drink_value
+          = f.submit t('.update_receipt'), class: 'btn btn-primary'

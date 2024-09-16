@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReceiptsController < ApplicationController
-  before_action :set_receipt, only: [:edit, :update, :destroy]
+  before_action :set_receipt, only: [:edit, :update, :destroy, :destroy_unload]
   before_action :authorize_receipt
   before_action :set_total_values_by_genre, only: [:edit, :update]
 
@@ -44,6 +44,11 @@ class ReceiptsController < ApplicationController
     @receipt.destroy
     flash[:success] = "#{Receipt.model_name.human}#{t('delete_success')}"
     redirect_to receipts_path
+  end
+
+  def destroy_unload
+    @receipt.destroy
+    head :no_content
   end
 
   private

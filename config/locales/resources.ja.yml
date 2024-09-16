@@ -37,10 +37,12 @@ ja:
       update_receipt: 伝票を登録する
     order_detail_form:
       select: 選択してください
-      entry: 追加する
+      entry: 追加
   expenditures:
     index:
       expenditure_entry: 経費入力フォームへ進む
+    form:
+      update_expenditure: 経費を登録する
   financial_summaries:
     index:
       title: 収支情報

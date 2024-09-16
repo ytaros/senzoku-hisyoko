@@ -8,7 +8,7 @@ RSpec.describe ReceiptPolicy, type: :policy do
 
   subject { described_class }
 
-  permissions :update?, :destroy? do
+  permissions :update?, :destroy?, :destroy_unload? do
     let(:user) { create(:user) }
     let(:user_a) { create(:user) }
     let(:receipt) { create(:receipt, :update_to_record, user: user) }

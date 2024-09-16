@@ -62,6 +62,18 @@ RSpec.describe 'Receipts', type: :request do
         expect(flash[:danger]).to include '操作権限がありません'
       end
     end
+
+    describe 'DELETE /destroy_unload' do
+      let!(:receipt) { create(:receipt, user: owner) }
+
+      subject(:action) { delete destroy_unload_receipt_path(receipt) }
+
+      it 'ホーム画面にリダイレクトされる' do
+        expect { action }.not_to change(Receipt, :count)
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to include '操作権限がありません'
+      end
+    end
   end
 
   describe 'with user' do
@@ -130,6 +142,16 @@ RSpec.describe 'Receipts', type: :request do
       it 'オブジェクトが削除される' do
         expect { action }.to change(Receipt, :count).by(-1)
         expect(response).to redirect_to receipts_path
+      end
+    end
+
+    describe 'DELETE /destroy_unload' do
+      let!(:receipt) { create(:receipt, user:) }
+
+      subject(:action) { delete destroy_unload_receipt_path(receipt) }
+
+      it 'オブジェクトが削除される' do
+        expect { action }.to change(Receipt, :count).by(-1)
       end
     end
   end
