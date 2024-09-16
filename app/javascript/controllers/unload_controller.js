@@ -43,7 +43,7 @@ export default class extends Controller {
     }).then((response) => {
       if (response.ok) {
         // ページ全体をリロード
-        Turbo.visit(window.location.href, { action: "replace" });
+        window.location.reload();
       } else {
         console.error("伝票の削除に失敗");
       }
