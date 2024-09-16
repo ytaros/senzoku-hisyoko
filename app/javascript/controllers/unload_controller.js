@@ -4,11 +4,13 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   connect() {
     this.formSubmitting = false;
+    this.dialogShown = false;
 
     this.element.addEventListener("submit", () => {
       this.formSubmitting = true;
     });
 
+    this.confirmNavigation = this.confirmNavigation.bind(this);
     document.addEventListener("turbo:before-visit", this.confirmNavigation);
   }
 
@@ -17,13 +19,14 @@ export default class extends Controller {
   }
 
   confirmNavigation = (event) => {
-    if (this.formSubmitting) {
+    if (this.formSubmitting || this.dialogShown) {
       return;
     }
 
     if (!confirm("入力内容は失われます。ページを離れますか？")) {
       event.preventDefault();
     } else {
+      this.dialogShown = true;
       this.deleteReceipt();
     }
   };
