@@ -17,6 +17,10 @@ class ReceiptPolicy < ApplicationPolicy
     update?
   end
 
+  def destroy_unload?
+    update?
+  end
+
   def permitted_attributes_for_create
     [:user_id, :status, :recorded_at]
   end
