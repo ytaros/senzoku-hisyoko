@@ -14,10 +14,17 @@ Rails.application.routes.draw do
 
   resources :tenants
   resources :users
+
   resources :menus do
     patch :hide, on: :member
   end
-  resources :receipts
+
+  resources :receipts do
+    member do
+      delete :destroy_unload
+    end
+  end
+
   resources :expenditures
   resources :order_details, only: [:create, :destroy]
   resources :financial_summaries, only: [:index, :show] do

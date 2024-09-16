@@ -12,3 +12,6 @@ application.register("flash", FlashController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import UnloadController from "./unload_controller"
+application.register("unload", UnloadController)
