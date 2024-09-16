@@ -46,12 +46,6 @@ class ReceiptsController < ApplicationController
     redirect_to receipts_path
   end
 
-  def destroy
-    @receipt.destroy
-    flash[:success] = "#{Receipt.model_name.human}#{t('delete_success')}"
-    redirect_to receipts_path
-  end
-
   def destroy_unload
     @receipt.destroy
     head :no_content
