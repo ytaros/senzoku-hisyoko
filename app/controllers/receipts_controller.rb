@@ -30,7 +30,7 @@ class ReceiptsController < ApplicationController
   def update
     @order_details = @receipt.order_details.includes(:menu)
 
-    if @receipt.update(food_value: @food_value, drink_value: @drink_value)
+    if @receipt.update(food_value: @food_value, drink_value: @drink_value, status: :unrecorded)
       flash[:success] = "#{Receipt.model_name.human}#{t('update_success')}"
       redirect_to receipts_path
     else
@@ -47,6 +47,8 @@ class ReceiptsController < ApplicationController
   end
 
   def destroy_unload
+    return if @receipt.unrecorded? || @receipt.recorded?
+
     @receipt.destroy
     head :no_content
   end

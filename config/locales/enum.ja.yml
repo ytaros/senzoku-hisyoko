@@ -9,6 +9,7 @@ ja:
         drink: ドリンク
     receipt:
       status:
+        in_progress: 処理中
         unrecorded: 未計上
         recorded: 計上済
     expenditure:

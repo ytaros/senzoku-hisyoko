@@ -69,7 +69,7 @@ class FinancialSummaryService
     return false if receipts.empty? || expenditures.empty?
 
     ActiveRecord::Base.transaction do
-      receipts.update_all(compiled_at: Time.zone.now, status: 1)
+      receipts.update_all(compiled_at: Time.zone.now, status: 2)
       expenditures.update_all(compiled_at: Time.zone.now, status: 1)
     end
 

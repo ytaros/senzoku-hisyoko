@@ -9,7 +9,7 @@
 #  drink_value :integer
 #  food_value  :integer
 #  recorded_at :date             not null
-#  status      :integer          default("unrecorded"), not null
+#  status      :integer          default("in_progress"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
@@ -29,8 +29,9 @@ class Receipt < ApplicationRecord
   has_many :order_details, dependent: :destroy
 
   enum status: {
-    unrecorded: 0, # 未計上
-    recorded: 1 # 計上済
+    in_progress: 0, # 処理中
+    unrecorded: 1, # 未計上
+    recorded: 2 # 計上済
   }
 
   validates :food_value, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99_999 }, on: :update

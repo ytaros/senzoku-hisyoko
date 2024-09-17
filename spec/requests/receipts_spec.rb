@@ -64,7 +64,7 @@ RSpec.describe 'Receipts', type: :request do
     end
 
     describe 'DELETE /destroy_unload' do
-      let!(:receipt) { create(:receipt, user: owner) }
+      let!(:receipt) { create(:receipt, status: 'in_progress', user: owner) }
 
       subject(:action) { delete destroy_unload_receipt_path(receipt) }
 
@@ -146,7 +146,7 @@ RSpec.describe 'Receipts', type: :request do
     end
 
     describe 'DELETE /destroy_unload' do
-      let!(:receipt) { create(:receipt, user:) }
+      let!(:receipt) { create(:receipt, status: 'in_progress', user:) }
 
       subject(:action) { delete destroy_unload_receipt_path(receipt) }
 
