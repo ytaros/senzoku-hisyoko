@@ -10,7 +10,6 @@ export default class extends Controller {
       this.formSubmitting = true;
     });
 
-    this.confirmNavigation = this.confirmNavigation.bind(this);
     document.addEventListener("turbo:before-visit", this.confirmNavigation);
   }
 
@@ -23,7 +22,17 @@ export default class extends Controller {
       return;
     }
 
-    if (!confirm("入力内容は失われます。ページを離れますか？")) {
+    const status = this.data.get("status");
+    let confirmMessage = "";
+
+    if (status === "in_progress") {
+      confirmMessage = "入力中の内容は全て失われます。ページを離れますか？";
+    } else {
+      confirmMessage =
+        "入力中の内容が伝票に反映されません。ページを離れますか？";
+    }
+
+    if (!confirm(confirmMessage)) {
       event.preventDefault();
     } else {
       this.dialogShown = true;
