@@ -9,7 +9,7 @@
 #  drink_value :integer
 #  food_value  :integer
 #  recorded_at :date             not null
-#  status      :integer          default("unrecorded"), not null
+#  status      :integer          default("in_progress"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
